@@ -19,7 +19,7 @@ public class Main {
 
 
 
-    public static Player player = new Player("Adam", 100,15,20,"true", 0, 0);
+    public static Player player = new Player("Adam", 100,15,20,"true", 100, 0);
     public static Player enemy = new Player("Ork", 80,10,10,"true", 0 , 0 );
 
     public static Game game = new Game(player, enemy);
