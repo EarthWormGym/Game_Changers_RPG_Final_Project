@@ -62,17 +62,16 @@ position:absolute;
 #health{
 position:absolute;
   left: 32%;
-  top: 33%;
-  width: 16%;
+  top: 32%;
+
   text-align: center;
   font-size: 18px;
 
 }
 #damage{
 position:absolute;
-  left: 33%;
-  top: 56%;
-  width: 30%;
+  left: 32%;
+  top: 45%;
   text-align: center;
   font-size: 18px;
 
@@ -81,8 +80,7 @@ position:absolute;
 #defence{
 position:absolute;
   left: 33%;
-  top: 74%;
-  width: 30%;
+  top: 62%;
   text-align: center;
   font-size: 18px;
 
@@ -91,17 +89,38 @@ position:absolute;
 #healthpotion{
 position:absolute;
    left: 60 %;
-   top: 33%;
+   top: 30%;
    text-align: center;
    font-size: 18px;
 
 }
 
 .hpotiontext {
+       position: absolute;
+       font-size: 18px;
+       left: 56%;
+       top: 33%;
+       color: #ffffff;
+ }
+ .healthtext {
+         position: absolute;
+         font-size: 18px;
+         left: 38%;
+         top: 33%;
+         color: #ffffff;
+   }
+.damagetext {
       position: absolute;
       font-size: 18px;
-      left: 56%;
-      top: 33%;
+      left: 40%;
+      top: 49%;
+      color: #ffffff;
+}
+.defencetext {
+      position: absolute;
+      font-size: 18px;
+      left: 44%;
+      top: 64%;
       color: #ffffff;
 }
 
