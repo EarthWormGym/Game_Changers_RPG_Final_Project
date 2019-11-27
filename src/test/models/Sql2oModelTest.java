@@ -137,6 +137,7 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void shopDefence() {
+        player.defence = player.defence * 100;
         player.increase_defence();
         assertEquals(25, player.defence);
     }
