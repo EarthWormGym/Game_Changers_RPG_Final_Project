@@ -39,9 +39,11 @@
                     <p>HP: $player.health </p>
                     <p>Damage: $player.damage_limit </p>
                     <p>Defence: $player.defence</p>
-                    <form action="/attack" method="POST">
-                         <input class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack">
-                    </form>
+                    #if($enemy.is_alive.equals("true"))
+                        <form action="/attack" method="POST">
+                             <input class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack">
+                        </form>
+                    #end
                 </ul>
             #end
           </p2>

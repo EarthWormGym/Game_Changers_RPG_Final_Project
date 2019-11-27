@@ -125,7 +125,7 @@ public class Main {
 
             req.session().attribute("user",username);
             req.session().attribute("Signed_In?","true");
-
+            player.username = username;
             return null;
         });
 
