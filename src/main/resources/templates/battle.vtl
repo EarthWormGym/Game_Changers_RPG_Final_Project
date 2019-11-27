@@ -33,17 +33,17 @@
             #if($player.is_alive.equals("false"))
                 <p>Player Defeated</p>
             #else
-            <div class="knight">
-              <img class="pull-right" alt="knight_image" width="200" height="200" src="knight.jpg"/>
-              </div>
+              <img class="pull-right" alt="knight_image" width="300" height="200" src="Knight_idle.gif"/>
                 <ul>
                     <p>Player: $player.username</p>
                     <p>HP: $player.health </p>
                     <p>Damage: $player.damage_limit </p>
                     <p>Defence: $player.defence</p>
-                    <form action="/attack" method="POST">
-                         <input class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack">
-                    </form>
+                    #if($enemy.is_alive.equals("true"))
+                        <form action="/attack" method="POST">
+                             <input class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack">
+                        </form>
+                    #end
                 </ul>
             #end
           </p2>
@@ -57,7 +57,7 @@
                 #if($enemy.is_alive.equals("false"))
                     <p>Player Won</p>
                 #else
-                  <img class="pull-right" alt="ork_image" width="200" height="200" src="enemy_ork.jpg"/>
+                  <img class="pull-right" alt="ork_image" width="300" height="200" src="orc.gif"/>
                     <ul>
                         <p>Enemy: $enemy.username</p>
                         <p>HP: $enemy.health </p>

@@ -19,8 +19,8 @@ public class Main {
 
 
 
-    public static Player player = new Player("Adam", 100,10,20,"true", 100, 0);
-    public static Player enemy = new Player("Ork", 80,20,10,"true", 0 , 0 );
+    public static Player player = new Player("Adam", 100,15,20,"true", 0, 0);
+    public static Player enemy = new Player("Ork", 80,10,10,"true", 0 , 0 );
 
     public static Game game = new Game(player, enemy);
 
@@ -41,7 +41,10 @@ public class Main {
         Model model = new Sql2oModel(sql2o);
 
 
-        get("/", (req, res) -> "Hello World");
+        get("/", (req, res) -> {
+          res.redirect("/home");
+          return null;
+        });
 
 
         get("/home", (req, res) -> {
@@ -122,7 +125,7 @@ public class Main {
 
             req.session().attribute("user",username);
             req.session().attribute("Signed_In?","true");
-
+            player.username = username;
             return null;
         });
 
