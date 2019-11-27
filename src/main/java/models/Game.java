@@ -22,6 +22,9 @@ public class Game {
 
         public void attack(Player player, Player enemy){
             enemy.recieve_damage(Math.round(Math.floor(this.random_damage(player))));
+            if(enemy.is_alive.equals("false")) {
+                player.coins += 15;
+            }
         }
 
         public void enemy_attack(Player player, Player enemy){
