@@ -18,6 +18,8 @@
         h2 {
             color: white;
         }
+
+
     </style>
 
   </head>
@@ -39,10 +41,16 @@
                     <p>HP: $player.health </p>
                     <p>Damage: $player.damage_limit </p>
                     <p>Defence: $player.defence</p>
+                    <p>Health Potions: $player.healthPotions</p>
                     #if($enemy.is_alive.equals("true"))
                         <form action="/attack" method="POST">
                              <input class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack">
                         </form>
+                        #if($player.healthPotions > 0)
+                            <form action="/usehealthpotion" method="POST">
+                                 <input class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Use a Healing potion">
+                            </form>
+                        #end
                     #end
                 </ul>
             #end
