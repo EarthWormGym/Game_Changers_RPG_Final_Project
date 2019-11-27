@@ -16,7 +16,7 @@
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
-
+require_relative '../truncate_database'
 require "selenium/webdriver"
 
 require "hooks"
@@ -45,6 +45,9 @@ end
 Capybara.app_host = 'http://localhost:4567'
 
 RSpec.configure do |config|
+  config.before(:suite) do
+     clear_database
+  end
 
     config.before(:suite) do
        start_application
