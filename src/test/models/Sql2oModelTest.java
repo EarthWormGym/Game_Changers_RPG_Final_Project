@@ -94,7 +94,7 @@ class Sql2oModelTest {
         assertEquals("AdamR", player.username);
         assertEquals(100, player.health);
         assertEquals(10, player.damage_limit);
-        assertEquals(20, player.defence);
+        assertEquals(0.2, player.defence);
         assertEquals("true", player.is_alive);
         assertEquals(100, player.coins);
         assertEquals(0, player.healthPotions);
@@ -111,6 +111,7 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void attackingPlayer() {
+        Player enemy = new Player("Ork", 80, 20, 0, "true", 0, 0);
         Game game = new Game(player , enemy);
         game.attack(enemy, player);
         assertNotEquals(100 , player.health);
@@ -144,7 +145,7 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void enemyDropsCoinsOnDeath() {
-        Player enemy = new Player("Ork", 0, 20, 10, "false", 0, 0);
+        Player enemy = new Player("Ork", 0, 20, 0, "false", 0, 0);
         game.attack(player, enemy);
         assertEquals(115, player.coins);
     }
