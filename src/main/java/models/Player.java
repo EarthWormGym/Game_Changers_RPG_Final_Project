@@ -15,7 +15,7 @@ public class Player {
     public int poisonPotions;
 
 
-    public Player(String username, int health, int damage_limit, float defence, String is_alive, int coins, int healthPotions, int poisonPotions) {
+    public Player(String username, int health, int damage_limit, double defence, String is_alive, int coins, int healthPotions, int poisonPotions) {
 
         this.username = username;
         this.health = health;
@@ -25,7 +25,6 @@ public class Player {
         this.coins = coins;
         this.healthPotions = healthPotions;
         this.poisonPotions = poisonPotions;
-        this.defence = this.defence / 100;
 
     }
 
