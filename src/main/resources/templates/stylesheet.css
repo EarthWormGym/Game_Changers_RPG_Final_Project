@@ -193,3 +193,9 @@ background-image: url("Battle_Background.png");
 background-repeat: no-repeat;
 background-size: 1500px 850px;
 }
+
+.knightgif{
+    position: absolute;
+    left: 20%;
+    top: 50%;
+}

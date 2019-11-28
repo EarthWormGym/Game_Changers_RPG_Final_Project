@@ -13,9 +13,10 @@ public class Player {
     public int coins;
     public int healthPotions;
     public int poisonPotions;
+    public String gif;
 
 
-    public Player(String username, int health, int damage_limit, double defence, String is_alive, int coins, int healthPotions, int poisonPotions) {
+    public Player(String username, int health, int damage_limit, double defence, String is_alive, int coins, int healthPotions, int poisonPotions, String gif) {
 
         this.username = username;
         this.health = health;
@@ -25,11 +26,15 @@ public class Player {
         this.coins = coins;
         this.healthPotions = healthPotions;
         this.poisonPotions = poisonPotions;
+        this.gif = gif;
 
     }
 
     public void recieve_damage(double damage){
         health -= damage;
+        if(health <= 0){
+            health = 0;
+        }
         is_character_alive();
     }
 

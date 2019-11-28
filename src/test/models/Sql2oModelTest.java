@@ -28,8 +28,8 @@ class Sql2oModelTest {
     });
 
     UUID id = UUID.fromString("49921d6e-e210-4f68-ad7a-afac266278cb");
-    Player player = new Player("AdamR", 100, 10, 20, "true", 100, 0, 1);
-    Player enemy = new Player("Ork", 80, 20, 10, "true", 0, 0, 0);
+    Player player = new Player("AdamR", 100, 10, 20, "true", 100, 0, 1, "");
+    Player enemy = new Player("Ork", 80, 20, 10, "true", 0, 0, 0, "");
     public Game game = new Game(player, enemy);
 
     @BeforeAll
@@ -111,7 +111,7 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void attackingPlayer() {
-        Player player = new Player("AdamR", 100, 10, 0, "true", 100, 0, 1);
+        Player player = new Player("AdamR", 100, 10, 0, "true", 100, 0, 1, "");
         Game game = new Game(player , enemy);
         game.attack(enemy, player);
         assertNotEquals(100 , player.health);
@@ -119,7 +119,7 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void attackingEnemy() {
-        Player enemy = new Player("Ork", 80, 20, 0, "true", 0, 0, 0);
+        Player enemy = new Player("Ork", 80, 20, 0, "true", 0, 0, 0, "");
         Game game = new Game(player , enemy);
         game.attack(player, enemy);
         assertNotEquals(100 , enemy.health);
@@ -146,7 +146,7 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void enemyDropsCoinsOnDeath() {
-        Player enemy = new Player("Ork", 0, 20, 0, "false", 0, 0, 0);
+        Player enemy = new Player("Ork", 0, 20, 0, "false", 0, 0, 0, "");
         game.attack(player, enemy);
         assertEquals(115, player.coins);
     }

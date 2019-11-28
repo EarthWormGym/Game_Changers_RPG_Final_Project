@@ -40,5 +40,4 @@ public class Game {
             int random = (int)(Math.random() * character.damage_limit + 1);
             return (random);
         }
-
 }
