@@ -34,7 +34,7 @@ public class Player {
     }
 
     public boolean block_attack(){
-        System.out.println(defence);
+        System.out.println(Math.random());
         if(Math.random() >= (1 - defence))
         {
             return true;

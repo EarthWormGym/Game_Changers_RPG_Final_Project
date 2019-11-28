@@ -22,7 +22,7 @@ public class Main {
 
 
 
-    public static Player player = new Player("Adam", 100,15,20,"true", 100, 3, 1);
+    public static Player player = new Player("Adam", 100,15,100,"true", 100, 3, 1);
     
     public static Player enemy = new Player("Ork", 80,10,10,"true", 0 , 0 , 0);
 
@@ -85,7 +85,7 @@ public class Main {
 
 
         post("/attack", (req, res) ->{
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(2);
             res.redirect("/battle");
             return null;
         });
