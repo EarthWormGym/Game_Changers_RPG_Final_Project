@@ -67,8 +67,8 @@ position:absolute;
 
 #health{
 position:absolute;
-  left: 32%;
-  top: 32%;
+  left: 13%;
+  top: 8%;
 
   text-align: center;
   font-size: 18px;
@@ -76,8 +76,8 @@ position:absolute;
 }
 #damage{
 position:absolute;
-  left: 32%;
-  top: 45%;
+  left: 11%;
+  top: 21%;
   text-align: center;
   font-size: 18px;
 
@@ -85,8 +85,8 @@ position:absolute;
 
 #defence{
 position:absolute;
-  left: 33%;
-  top: 62%;
+  left: 13%;
+  top: 40%;
   text-align: center;
   font-size: 18px;
 
@@ -94,8 +94,17 @@ position:absolute;
 
 #healthpotion{
 position:absolute;
-   left: 60 %;
-   top: 30%;
+   left: 45%;
+      top: 6%;
+   text-align: center;
+   font-size: 18px;
+
+}
+
+#poisonPotion{
+position:absolute;
+   left: 45%;
+   top: 22%;
    text-align: center;
    font-size: 18px;
 
@@ -103,42 +112,77 @@ position:absolute;
 
 .hpotiontext {
        position: absolute;
-       font-size: 18px;
-       left: 56%;
-       top: 33%;
+       font-size: 15px;
+      left: 90%;
+      top: 250%;
        color: #ffffff;
+       width: 120px;
  }
  .healthtext {
          position: absolute;
-         font-size: 18px;
-         left: 38%;
-         top: 33%;
+         font-size: 15px;
+         left: 65%;
+           top: 250%;
          color: #ffffff;
    }
 .damagetext {
       position: absolute;
-      font-size: 18px;
-      left: 40%;
-      top: 49%;
+      font-size: 15px;
+      left: 65%;
+                 top: 315%;
       color: #ffffff;
 }
+
+.ppotiontext {
+       position: absolute;
+       font-size: 15px;
+       left: 90%;
+          top: 315%;
+          width: 120px;
+       color: #ffffff;
+ }
 .defencetext {
       position: absolute;
-      font-size: 18px;
-      left: 44%;
-      top: 64%;
+      font-size: 15px;
+     left: 69%;
+                      top: 380%;
       color: #ffffff;
 }
 
 .shelf {
-       margin: auto;
+       position: absolute;
        background-image: url("shelf.png");
        background-repeat: no-repeat;
-       background-size: 700px 500px;
+       background-size: 630px 430px;
        border-radius: 20px;
        padding: 365px;
        width: 200px;
        height: 100px;
+       left: 42%;
+       top: 210%;
 
 }
 
+knight{
+position: absolute;
+left: 100%;
+top: 310%;
+}
+
+.shop{
+position: fixed;
+background-image: url("BackgroundShop.png");
+background-repeat: no-repeat;
+background-size: 1600px 850px;
+}
+
+shopText{
+color: #ffffff;
+letter-spacing: -2px;
+}
+
+toBattle{
+position: absolute;
+left: 133%;
+top: 47%;
+}

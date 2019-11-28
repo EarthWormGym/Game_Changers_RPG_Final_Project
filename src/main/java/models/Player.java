@@ -12,8 +12,9 @@ public class Player {
     public String is_alive;
     public int coins;
     public int healthPotions;
+    public int poisonPotions;
 
-    public Player(String username, int health, int damage_limit, float defence, String is_alive, int coins, int healthPotions) {
+    public Player(String username, int health, int damage_limit, float defence, String is_alive, int coins, int healthPotions, int poisonPotions) {
         this.username = username;
         this.health = health;
         this.damage_limit = damage_limit;
@@ -21,6 +22,7 @@ public class Player {
         this.is_alive = is_alive;
         this.coins = coins;
         this.healthPotions = healthPotions;
+        this.poisonPotions = poisonPotions;
         this.defence = this.defence / 100;
     }
 
@@ -71,6 +73,13 @@ public class Player {
         if (coins >= 10){
             damage_limit = damage_limit + 5;
             coins = coins - 10;
+        }
+    }
+
+    public void AddPosionPotion(){
+        if (coins >= 20){
+            poisonPotions = poisonPotions + 1;
+            coins = coins - 20;
         }
     }
 
