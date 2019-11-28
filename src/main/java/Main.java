@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Game;
 import models.Model;
 import models.Player;
@@ -11,6 +12,7 @@ import spark.ModelAndView;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import static spark.Spark.*;
 import static spark.Spark.post;
@@ -28,7 +30,10 @@ public class Main {
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
+//        staticFileLocation("/main");
         staticFileLocation("/templates");
+//        staticFileLocation("/main/JavaScript/jquery.js");
+//        externalStaticFileLocation("../../JavaScript/jquery.js");
 
         Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://localhost:5432/makersandmortals", null, null).load();
         flyway.migrate();
@@ -58,26 +63,49 @@ public class Main {
                 req.session().attribute("user", "Prepare for carnage");
                 username = req.session().attribute("user");
             }
-            HashMap players = new HashMap();
-            players.put("username", username);
+            HashMap battle = new HashMap();
+            battle.put("player", player);
+            battle.put("enemy", enemy);
+            battle.put("username", username);
 
-            return new ModelAndView(players, "templates/home.vtl");
+            return new ModelAndView(battle, "templates/home.vtl");
         }, new VelocityTemplateEngine());
 
         get("/battle", (req, res) ->{
             HashMap battle = new HashMap();
             battle.put("player", player);
             battle.put("enemy", enemy);
+//            if(player.is_alive == "false"){
+//                res.redirect("/home");
+//            } else if(enemy.is_alive == "false") {
+//                res.redirect("/enemy_dead");
+//            }
             return new ModelAndView(battle, "templates/battle.vtl");
         }, new VelocityTemplateEngine());
 
 
         post("/attack", (req, res) ->{
-            game.attack(player, enemy);
-            game.enemy_attack(player, enemy);
+            TimeUnit.SECONDS.sleep(5);
             res.redirect("/battle");
             return null;
         });
+
+        get("/battleJson", (req, res) -> {
+            res.type("application/json");
+            game.attack(player, enemy);
+            game.enemy_attack(player, enemy);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(game);
+            return json;
+        });
+
+        get("/enemy_dead", (req, res) -> {
+            res.redirect("/shop");
+         return null;
+        });
+
+
+
 
         post("/usehealthpotion", (req, res) ->{
             player.UseHealthPotion();
