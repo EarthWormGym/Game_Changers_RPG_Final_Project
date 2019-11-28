@@ -21,14 +21,18 @@ public class Game {
         }
 
         public void attack(Player player, Player enemy){
-            enemy.recieve_damage(Math.round(Math.floor(this.random_damage(player))));
-            if(enemy.is_alive.equals("false")) {
-                player.coins += 15;
+            if(enemy.block_attack() == false){
+                enemy.recieve_damage(Math.round(Math.floor(this.random_damage(player))));
+                if(enemy.is_alive.equals("false")) {
+                    player.coins += 15;
+                }
             }
         }
 
         public void enemy_attack(Player player, Player enemy){
-            player.recieve_damage(Math.round(Math.floor(this.random_damage(enemy))));
+            if(player.block_attack() == false) {
+                player.recieve_damage(Math.round(Math.floor(this.random_damage(enemy))));
+            }
         }
 
         public double random_damage(Player character){

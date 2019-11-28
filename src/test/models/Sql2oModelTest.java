@@ -30,6 +30,7 @@ class Sql2oModelTest {
     UUID id = UUID.fromString("49921d6e-e210-4f68-ad7a-afac266278cb");
     Player player = new Player("AdamR", 100, 10, 20, "true", 100, 0);
     Player enemy = new Player("Ork", 80, 20, 10, "true", 0, 0);
+    public Game game = new Game(player, enemy);
 
     @BeforeAll
     static void setUpClass() {
@@ -136,13 +137,16 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void shopDefence() {
+        player.defence = player.defence * 100;
         player.increase_defence();
         assertEquals(25, player.defence);
     }
 
     @org.junit.jupiter.api.Test
-    void playerWin() {
-
+    void enemyDropsCoinsOnDeath() {
+        Player enemy = new Player("Ork", 0, 20, 10, "false", 0, 0);
+        game.attack(player, enemy);
+        assertEquals(115, player.coins);
     }
 
 }

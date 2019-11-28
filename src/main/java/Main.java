@@ -19,7 +19,12 @@ public class Main {
 
 
 
+<<<<<<< HEAD
     public static Player player = new Player("Adam", 100,15,20,"true", 100, 3);
+=======
+
+    public static Player player = new Player("Adam", 100,15,20,"true", 100, 0);
+>>>>>>> 3428f6ba4bfce0abd3463663be47048a825bb7ad
     public static Player enemy = new Player("Ork", 80,10,10,"true", 0 , 0 );
 
     public static Game game = new Game(player, enemy);
@@ -183,7 +188,9 @@ public class Main {
         });
 
         post("/defence", (req, res) ->{
+            player.defence = player.defence * 100;
             player.increase_defence();
+            player.defence = player.defence / 100;
             res.redirect("/shop");
             return null;
         });
