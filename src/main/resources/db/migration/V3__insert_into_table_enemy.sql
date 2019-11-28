@@ -12,4 +12,4 @@ insert into enemies(enemy_id, enemy_name, health, damage_limit, defence, difficu
     ('10', 'Infernal Drake', 160, 30, 20, 'hard', 'drake_enemy.gif'),
     ('11', 'Tree ent', 165, 25, 15, 'hard', 'treeent_enemy.gif'),
     ('12', 'Lich King', 250, 45, 25, 'boss', 'Lich_King.gif'),
-    ('13', 'Hydra', 300, 35, 20, 'boss', 'hydra_enemy.gif')
+    ('13', 'Titan', 300, 35, 20, 'boss', 'Titan_enemy.gif')
