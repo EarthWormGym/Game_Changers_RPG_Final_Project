@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Game;
 import models.Model;
 import models.Player;
@@ -28,7 +29,10 @@ public class Main {
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
+//        staticFileLocation("/main");
         staticFileLocation("/templates");
+//        staticFileLocation("/main/JavaScript/jquery.js");
+//        externalStaticFileLocation("../../JavaScript/jquery.js");
 
         Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://localhost:5432/makersandmortals", null, null).load();
         flyway.migrate();
@@ -78,6 +82,18 @@ public class Main {
             res.redirect("/battle");
             return null;
         });
+
+        get("/battleJson", (req, res) -> {
+            res.type("application/json");
+            game.attack(player, enemy);
+            game.enemy_attack(player, enemy);
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            String json = objectMapper.writeValueAsString(game);
+
+            return json;
+        });
+
 
         post("/usehealthpotion", (req, res) ->{
             player.UseHealthPotion();

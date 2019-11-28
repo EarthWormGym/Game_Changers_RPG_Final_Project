@@ -3,7 +3,8 @@
   <head>
 
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="JavaScript/jquery.js"></script>
     <style>
         body {
             background-image: url("MossyStoneBrick.jpg");
@@ -30,25 +31,24 @@
       <div class="container">
        <div class="clearfix">
         <h2><u>Player</u><h2>
-        <p> Coins: $player.coins </p>
+        <p id="coins"> Coins: $player.coins </p>
           <p2>
             #if($player.is_alive.equals("false"))
                 <p>Player Defeated</p>
             #else
               <img class="pull-right" alt="knight_image" width="300" height="200" src="Knight_idle.gif"/>
                 <ul>
-                    <p>Player: $player.username</p>
-                    <p>HP: $player.health </p>
-                    <p>Damage: $player.damage_limit </p>
-                    <p>Defence: $player.defence</p>
-                    <p>Health Potions: $player.healthPotions</p>
+                    <p id="player_name">$player.username</p>
+                    <p>HP: <b id="player_hp">$player.health</b> </p>
+                    <p>Damage: <b id="player_damage_limit">$player.damage_limit</b> </p>
+                    <p>Defence: <b id="player_defence">$player.defence</b></p>
+                    <p>Health Potions: <b id="player_hpotions">$player.healthPotions</b></p>
+
                     #if($enemy.is_alive.equals("true"))
-                        <form action="/attack" method="POST">
-                             <input class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack">
-                        </form>
+                             <button class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack"> Attack </button>
                         #if($player.healthPotions > 0)
                             <form action="/usehealthpotion" method="POST">
-                                 <input class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Use a Healing potion">
+                                 <button class="btn btn-danger btn-lg" type="submit" id="healing_potion" value="Use a Healing potion">Use a Healing potion</button>
                             </form>
                         #end
                     #end
@@ -67,10 +67,10 @@
                 #else
                   <img class="pull-right" alt="ork_image" width="300" height="200" src="orc.gif"/>
                     <ul>
-                        <p>Enemy: $enemy.username</p>
-                        <p>HP: $enemy.health </p>
-                        <p>Damage: $enemy.damage_limit </p>
-                        <p>Defence: $enemy.defence</p>
+                        <p id="enemy_name">Enemy: $enemy.username</p>
+                        <p>HP: <b id="enemy_hp">$enemy.health</b> </p>
+                        <p>Damage: <b id="enemy_damage_limit">$enemy.damage_limit</b> </p>
+                        <p>Defence: <b id="enemy_defence">$enemy.defence</b></p>
                     </ul>
                 #end
               </p2>
