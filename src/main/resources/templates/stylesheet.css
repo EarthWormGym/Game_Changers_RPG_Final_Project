@@ -59,6 +59,12 @@ position:absolute;
 
     }
 
+    .wood img {
+ position: absolute;
+    top: 150px;
+    left: 485px;
+    }
+
 #health{
 position:absolute;
   left: 32%;

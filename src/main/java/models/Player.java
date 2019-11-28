@@ -58,6 +58,15 @@ public class Player {
         }
     }
 
+    public void UseHealthPotion(){
+        if (healthPotions > 0){
+            healthPotions = healthPotions - 1;
+            health = health + 15;
+        }
+    }
+
+
+
     public void increase_damage(){
         if (coins >= 10){
             damage_limit = damage_limit + 5;
