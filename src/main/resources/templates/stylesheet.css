@@ -186,3 +186,10 @@ position: absolute;
 left: 133%;
 top: 47%;
 }
+
+.battleBackground{
+position: fixed;
+background-image: url("Battle_Background.png");
+background-repeat: no-repeat;
+background-size: 1500px 850px;
+}
