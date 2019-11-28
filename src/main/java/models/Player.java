@@ -8,22 +8,25 @@ public class Player {
     public String username;
     public int health;
     public int damage_limit;
-    public float defence;
+    public double defence;
     public String is_alive;
     public int coins;
     public int healthPotions;
     public int poisonPotions;
 
+
     public Player(String username, int health, int damage_limit, float defence, String is_alive, int coins, int healthPotions, int poisonPotions) {
+
         this.username = username;
         this.health = health;
         this.damage_limit = damage_limit;
-        this.defence = defence;
+        this.defence = defence/100;
         this.is_alive = is_alive;
         this.coins = coins;
         this.healthPotions = healthPotions;
         this.poisonPotions = poisonPotions;
         this.defence = this.defence / 100;
+
     }
 
     public void recieve_damage(double damage){

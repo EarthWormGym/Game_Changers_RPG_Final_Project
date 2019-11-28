@@ -12,14 +12,9 @@
       <link rel="stylesheet" href="/stylesheet.css" >
   </head>
   <body>
-  <b id="player_hp"></b>
-  <b id="enemy_hp"></b>
-    <h1>Welcome to Makers and Mortals, $username</h1>
+    <h1>You died</h1>
 <div class="wood">
 <img src="logo.gif" alt="logo" width="500" height="100">
-                    #if($enemy.is_alive.equals("true") && $player.is_alive.equals("false"))
-                             <h2id="player_dead"> You died </h2>
-                    #end
                    <form action="/home" method="POST">
                      <input class="btn btn-secondary" type="submit" id="home" value="Home">
                    </form>
