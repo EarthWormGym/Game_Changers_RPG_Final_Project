@@ -11,16 +11,22 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="/stylesheet.css" >
   </head>
-  <body>
+  <body class="shop">
   <style>
 
-
-
+@font-face {
+   font-family: myFirstFont;
+   src: url(slkscr.ttf);
+}
+* {
+   font-family: myFirstFont;
+}
   </style>
+  <shopText>
     <h1>Welcome to the Shop, $username</h1>
         <h2>What would you like to increase?</h2>
-        <h3>Your Balance: $player.coins | Health: $player.health HP | Damage: $player.damage_limit | Defence: $player.defence</h3>
-        <h3>Your inventory: Health Potions: $player.healthPotions</h3>
+        <h3>Your Coins: $player.coins | Health: $player.health HP | Damage: $player.damage_limit | Defence: $player.defence</h3>
+        <h3>Your inventory: Health Potions: $player.healthPotions | Poison Potions: $player.poisonPotions</h3>
 
 <div class="shelf">
                    <form action="/health" method="POST">
@@ -31,18 +37,35 @@
                      <input type="image" src="bubblingpotion.gif" alt="Submit" width="90" height="100" id="healthpotion">
                    </form>
 
+                   <form action="/poisonPotion" method="POST">
+                     <input type="image" src="bubblingpotionpoison.gif" alt="Submit" width="90" height="100" id="poisonPotion">
+                   </form>
+
                    <form action="/damage" method="POST">
                      <input type="image"  src ="Sword.gif" alt="Submit" width="120" height="120" id="damage">
                    </form>
 
                     <form action="/defence" method="POST">
-                      <input type="image" src="Sheild1-2.gif" alt="Submit"  width="140" height="100" id="defence">
+                      <input type="image" src="Sheild1-2.gif" alt="Submit"  width="120" height="80" id="defence">
                     </form>
 </div>
-<div class="hpotiontext">Health Potion <br> Costs: 20 coins</div>
-<div class="healthtext">Instant Health <br> Costs: 10 coins</div>
-<div class="damagetext">Increase Damage <br> Costs: 10 coins</div>
-<div class="defencetext">Increase Defence <br> Costs: 10 coins</div>
+
+<p class="hpotiontext">Health Potion <br> Costs: 20 coins</p>
+<p class="ppotiontext">Poison Potion <br> Costs: 20 coins</p>
+<p class="healthtext">Instant Health <br> Costs: 10 coins</p>
+<p class="damagetext">Increase Damage <br> Costs: 10 coins</p>
+<p class="defencetext">Increase Defence <br> Costs: 10 coins</p>
+
+    <knight>
+        <img src="Store_Knight.gif" alt="Knight" width="240" height="230">
+    </knight>
+    
+    <toBattle>
+        <form action="/battle" method="GET">
+            <input type="image" src="ToBattle.gif" alt="Submit"  width="150" height="150" id="toBattle">
+        </form>
+    </toBattle>
+    </shopText>
   </body>
 
 </html>
