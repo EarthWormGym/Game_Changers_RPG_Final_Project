@@ -33,9 +33,6 @@
         <h2><u>Player</u><h2>
         <p id="coins"> Coins: $player.coins </p>
           <p2>
-            #if($player.is_alive.equals("false"))
-                <p>Player Defeated</p>
-            #else
               <img class="pull-right" alt="knight_image" width="300" height="200" src="Knight_idle.gif"/>
                 <ul>
                     <p id="player_name">$player.username</p>
@@ -43,17 +40,15 @@
                     <p>Damage: <b id="player_damage_limit">$player.damage_limit</b> </p>
                     <p>Defence: <b id="player_defence">$player.defence</b></p>
                     <p>Health Potions: <b id="player_hpotions">$player.healthPotions</b></p>
-
-                    #if($enemy.is_alive.equals("true"))
+                    <form action="/attack" method="POST">
                              <button class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack"> Attack </button>
+                    </form>
                         #if($player.healthPotions > 0)
                             <form action="/usehealthpotion" method="POST">
                                  <button class="btn btn-danger btn-lg" type="submit" id="healing_potion" value="Use a Healing potion">Use a Healing potion</button>
                             </form>
                         #end
-                    #end
                 </ul>
-            #end
           </p2>
        </div>
       </div>
@@ -62,9 +57,6 @@
         <div class="clearfix">
             <h2><u>Enemy</u><h2>
               <p2>
-                #if($enemy.is_alive.equals("false"))
-                    <p>Player Won</p>
-                #else
                   <img class="pull-right" alt="ork_image" width="300" height="200" src="orc.gif"/>
                     <ul>
                         <p id="enemy_name">Enemy: $enemy.username</p>
@@ -72,7 +64,6 @@
                         <p>Damage: <b id="enemy_damage_limit">$enemy.damage_limit</b> </p>
                         <p>Defence: <b id="enemy_defence">$enemy.defence</b></p>
                     </ul>
-                #end
               </p2>
         </div>
       </div>
