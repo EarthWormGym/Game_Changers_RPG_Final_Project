@@ -49,12 +49,11 @@ public class Main {
         int max = 3;
 
         int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+        Player player = new Player("Adam", 100,100,20,"true", 100, 3, 1, "");
 
-        List<Enemy> enemies = model.newEnemy(1);
+        List<Enemy> enemies = model.newEnemy(player.battles_won);
         Enemy enemy1 = enemies.get(randomNum);
         System.out.println(enemy1.enemy_name);
-
-        Player player = new Player("Adam", 100,15,20,"true", 100, 3, 1, "");
 
         Player enemy = new Player(enemy1.enemy_name, enemy1.health,enemy1.damage_limit,enemy1.defence,"true", 0 , 0 , 0, enemy1.gif);
 
@@ -86,9 +85,12 @@ public class Main {
         }, new VelocityTemplateEngine());
 
         get("/battle", (req, res) ->{
+            List<Enemy> enemies2 = model.newEnemy(player.battles_won);
+            Enemy next_enemy = enemies.get(randomNum);
+            Player next_enemy1 = new Player(next_enemy.enemy_name, next_enemy.health,next_enemy.damage_limit,next_enemy.defence,"true", 0 , 0 , 0, next_enemy.gif);
             HashMap battle = new HashMap();
             battle.put("player", player);
-            battle.put("enemy", enemy);
+            battle.put("enemy", next_enemy1);
 //            if(player.is_alive == "false"){
 //                res.redirect("/home");
 //            } else if(enemy.is_alive == "false") {
@@ -97,10 +99,12 @@ public class Main {
             return new ModelAndView(battle, "templates/battle.vtl");
         }, new VelocityTemplateEngine());
 
-//        get("/newbattle", ((req, res) -> {
-//            List<Enemy> enemies = model.newEnemy(1);
-//            return null;
-//        }));
+        get("/newbattle", ((req, res) -> {
+            player.battles_won += 1;
+            System.out.println(player.battles_won);
+            res.redirect("/battle");
+            return null;
+        }));
 
 
         post("/attack", (req, res) ->{
