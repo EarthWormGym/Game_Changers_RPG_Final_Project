@@ -84,22 +84,22 @@ public class Main {
 
         get("/battle", (req, res) ->{
             HashMap battle = new HashMap();
-            int min1 = 0;
-            int max1 = 3;
-            int randomNum1 = ThreadLocalRandom.current().nextInt(min1, max1 + 1);
-            List<Enemy> enemiesBattle = model.newEnemy(player.battles_won);
-            Enemy randomEnemy2 = enemiesBattle.get(randomNum1);
-            Player randomEnemyobj = new Player(randomEnemy2.enemy_name, randomEnemy2.health,randomEnemy2.damage_limit,randomEnemy2.defence,"true", 0 , 0 , 0, randomEnemy2.gif);
             battle.put("player", player);
-            battle.put("enemy", randomEnemyobj);
+            battle.put("enemy", enemy);
             return new ModelAndView(battle, "templates/battle.vtl");
         }, new VelocityTemplateEngine());
 
         get("/newbattle", ((req, res) -> {
             player.battles_won += 1;
             System.out.println(player.battles_won);
+            int min1 = 0;
+            int max1 = 3;
+            int randomNum1 = ThreadLocalRandom.current().nextInt(min1, max1 + 1);
+            List<Enemy> enemiesBattle = model.newEnemy(player.battles_won);
+            Enemy randomEnemy2 = enemiesBattle.get(randomNum1);
+            Player randomEnemyobj = new Player(randomEnemy2.enemy_name, randomEnemy2.health,randomEnemy2.damage_limit,randomEnemy2.defence,"true", 0 , 0 , 0, randomEnemy2.gif);
             res.redirect("/battle");
-            return null;
+            return randomEnemyobj;
         }));
 
 
@@ -111,8 +111,7 @@ public class Main {
 
         get("/battleJson", (req, res) -> {
             res.type("application/json");
-
-            game.attack(player, req.queryParams(enemy));
+            game.attack(player, enemy);
             game.enemy_attack(player, enemy);
             ObjectMapper objectMapper = new ObjectMapper();
             String json = objectMapper.writeValueAsString(game);
