@@ -38,13 +38,13 @@ public class Player {
         is_character_alive();
     }
 
-    public boolean block_attack(){
-        System.out.println(Math.random());
+    public String block_attack(){
+        System.out.println(username + Math.random());
         if(Math.random() >= (1 - defence))
         {
-            return true;
+            return "true";
         }
-        return false;
+        return "false";
     }
 
     public void is_character_alive() {
