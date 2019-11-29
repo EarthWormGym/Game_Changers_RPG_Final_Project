@@ -21,18 +21,17 @@ public class Game {
         }
 
         public void attack(AtomicReference<Player> player, AtomicReference<Player> enemy){
-            if(enemy.get().block_attack() == false){
+            if(enemy.get().block_attack().equals("false")){
                 enemy.get().recieve_damage(Math.round(Math.floor(this.random_damage(player))));
                 if(enemy.get().is_alive.equals("false")) {
                     player.get().coins += 15;
                 }
             }else{
-                System.out.println("enemy blocked");
             }
         }
 
         public void enemy_attack(AtomicReference<Player> player, AtomicReference<Player> enemy){
-            if(player.get().block_attack() == false) {
+            if(player.get().block_attack().equals("false")) {
                 player.get().recieve_damage(Math.round(Math.floor(this.random_damage(enemy))));
             }
         }

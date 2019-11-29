@@ -64,8 +64,10 @@ public class Player {
 
     public void AddHealthPotion(){
         if (coins >= 20){
-            healthPotions = healthPotions + 1;
-            coins = coins - 20;
+            if(healthPotions < 3) {
+                healthPotions= healthPotions + 1;
+                coins = coins - 20;
+            }
         }
     }
 
@@ -87,17 +89,21 @@ public class Player {
 
     public void AddPosionPotion(){
         if (coins >= 20){
-            poisonPotions = poisonPotions + 1;
-            coins = coins - 20;
+            if(poisonPotions < 3){
+                poisonPotions = poisonPotions + 1;
+                coins = coins - 20;
+            }
         }
     }
 
     public void increase_defence(){
         if (coins >= 10){
-            defence = defence * 100;
-            defence = defence + 5;
-            defence = defence / 100;
-            coins = coins - 10;
+            if(defence < 0.5){
+                defence = defence * 100;
+                defence = defence + 5;
+                defence = defence / 100;
+                coins = coins - 10;
+            }
         }
     }
 
