@@ -50,7 +50,7 @@ public class Main {
         int max = 3;
         int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 
-        AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 100, 20, "true", 100, 3, 1, ""));
+        AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 100, 3, 1, ""));
 
         List<Enemy> enemies = model.newEnemy(player.get().battles_won);
         Enemy randomEnemy = enemies.get(randomNum);
