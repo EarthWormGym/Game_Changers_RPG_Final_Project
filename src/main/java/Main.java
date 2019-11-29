@@ -45,18 +45,15 @@ public class Main {
 
         Model model = new Sql2oModel(sql2o);
 
-        int min = 1;
+        int min = 0;
         int max = 3;
-
         int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 
-        List<Enemy> enemies = model.newEnemy(1);
-        Enemy enemy1 = enemies.get(randomNum);
-        System.out.println(enemy1.enemy_name);
+        Player player = new Player("Adam", 100,100,20,"true", 100, 3, 1, "");
 
-        Player player = new Player("Adam", 100,15,20,"true", 100, 3, 1, "");
-
-        Player enemy = new Player(enemy1.enemy_name, enemy1.health,enemy1.damage_limit,enemy1.defence,"true", 0 , 0 , 0, enemy1.gif);
+        List<Enemy> enemies = model.newEnemy(player.battles_won);
+        Enemy randomEnemy = enemies.get(randomNum);
+        Player enemy = new Player(randomEnemy.enemy_name, randomEnemy.health,randomEnemy.damage_limit,randomEnemy.defence,"true", 0 , 0 , 0, randomEnemy.gif);
 
         System.out.println(enemy.gif);
         Game game = new Game(player, enemy);
@@ -89,18 +86,21 @@ public class Main {
             HashMap battle = new HashMap();
             battle.put("player", player);
             battle.put("enemy", enemy);
-//            if(player.is_alive == "false"){
-//                res.redirect("/home");
-//            } else if(enemy.is_alive == "false") {
-//                res.redirect("/enemy_dead");
-//            }
             return new ModelAndView(battle, "templates/battle.vtl");
         }, new VelocityTemplateEngine());
 
-//        get("/newbattle", ((req, res) -> {
-//            List<Enemy> enemies = model.newEnemy(1);
-//            return null;
-//        }));
+        get("/newbattle", ((req, res) -> {
+            player.battles_won += 1;
+            System.out.println(player.battles_won);
+            int min1 = 0;
+            int max1 = 3;
+            int randomNum1 = ThreadLocalRandom.current().nextInt(min1, max1 + 1);
+            List<Enemy> enemiesBattle = model.newEnemy(player.battles_won);
+            Enemy randomEnemy2 = enemiesBattle.get(randomNum1);
+            Player randomEnemyobj = new Player(randomEnemy2.enemy_name, randomEnemy2.health,randomEnemy2.damage_limit,randomEnemy2.defence,"true", 0 , 0 , 0, randomEnemy2.gif);
+            res.redirect("/battle");
+            return randomEnemyobj;
+        }));
 
 
         post("/attack", (req, res) ->{
