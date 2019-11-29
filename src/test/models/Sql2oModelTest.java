@@ -5,7 +5,6 @@ import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.converters.UUIDConverter;
@@ -14,6 +13,7 @@ import org.sql2o.quirks.PostgresQuirks;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,8 +28,8 @@ class Sql2oModelTest {
     });
 
     UUID id = UUID.fromString("49921d6e-e210-4f68-ad7a-afac266278cb");
-    Player player = new Player("AdamR", 100, 10, 20, "true", 100, 0, 1, "");
-    Player enemy = new Player("Ork", 80, 20, 10, "true", 0, 0, 0, "");
+    AtomicReference<Player> player = new AtomicReference<>(new Player("AdamR", 100, 10, 20, "true", 100, 0, 1, ""));
+    AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 80, 20, 10, "true", 0, 0, 0, ""));
     public Game game = new Game(player, enemy);
 
     @BeforeAll
@@ -91,18 +91,18 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void CreatePlayer() {
-        assertEquals("AdamR", player.username);
-        assertEquals(100, player.health);
-        assertEquals(10, player.damage_limit);
-        assertEquals(0.2, player.defence);
-        assertEquals("true", player.is_alive);
-        assertEquals(100, player.coins);
-        assertEquals(0, player.healthPotions);
+        assertEquals("AdamR", player.get().username);
+        assertEquals(100, player.get().health);
+        assertEquals(10, player.get().damage_limit);
+        assertEquals(0.2, player.get().defence);
+        assertEquals("true", player.get().is_alive);
+        assertEquals(100, player.get().coins);
+        assertEquals(0, player.get().healthPotions);
     }
 
     @org.junit.jupiter.api.Test
     void testPlayerAndEnemyCreated() {
-        List<Player> testarray = new ArrayList<Player>();
+        List<AtomicReference<Player>> testarray = new ArrayList<>();
         testarray.add(player);
         testarray.add(enemy);
         Game game = new Game(player , enemy);
@@ -111,44 +111,43 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void attackingPlayer() {
-        Player player = new Player("AdamR", 100, 10, 0, "true", 100, 0, 1, "");
+        AtomicReference<Player> player = new AtomicReference<>(new Player("AdamR", 100, 10, 0, "true", 100, 0, 1, ""));
         Game game = new Game(player , enemy);
         game.attack(enemy, player);
-        assertNotEquals(100 , player.health);
+        assertNotEquals(100 , player.get().health);
     }
 
     @org.junit.jupiter.api.Test
     void attackingEnemy() {
-        Player enemy = new Player("Ork", 80, 20, 0, "true", 0, 0, 0, "");
+        AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 80, 20, 0, "true", 0, 0, 0, ""));
         Game game = new Game(player , enemy);
         game.attack(player, enemy);
-        assertNotEquals(100 , enemy.health);
+        assertNotEquals(100 , enemy.get().health);
     }
 
     @org.junit.jupiter.api.Test
     void shopHealth() {
-        player.Heal();
-        assertEquals(110, player.health);
+        player.get().Heal();
+        assertEquals(110, player.get().health);
     }
 
     @org.junit.jupiter.api.Test
     void shopDamage() {
-        player.increase_damage();
-        assertEquals(15, player.damage_limit);
+        player.get().increase_damage();
+        assertEquals(15, player.get().damage_limit);
     }
 
     @org.junit.jupiter.api.Test
     void shopDefence() {
-        player.defence = player.defence * 100;
-        player.increase_defence();
-        assertEquals(25, player.defence);
+        player.get().increase_defence();
+        assertEquals(25, player.get().defence);
     }
 
     @org.junit.jupiter.api.Test
     void enemyDropsCoinsOnDeath() {
-        Player enemy = new Player("Ork", 0, 20, 0, "false", 0, 0, 0, "");
+        AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 0, 20, 0, "false", 0, 0, 0, ""));
         game.attack(player, enemy);
-        assertEquals(115, player.coins);
+        assertEquals(115, player.get().coins);
     }
 
 }
