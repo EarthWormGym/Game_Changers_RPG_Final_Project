@@ -1,10 +1,5 @@
 require "spec_helper"
 feature "homepage buttons" do
-  scenario "I should be able to visit the homepage" do
-    visit '/home'
-    click_button("Home")
-    expect(page).to have_content 'Welcome to Makers and Mortals, Prepare for carnage'
-  end
   scenario "I should be able to go to sign in page" do
       visit '/home'
       click_button("Sign in")
@@ -13,7 +8,7 @@ feature "homepage buttons" do
     scenario "I should be able to go to battle page" do
         visit '/home'
         click_button("Battle")
-        expect(page).to have_content 'Welcome to the Makers and Mortals'
+        expect(page).to have_content 'Enemy'
      end
      scenario "I should be able to go to sign up page" do
          visit '/home'
