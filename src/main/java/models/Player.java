@@ -28,6 +28,7 @@ public class Player {
         this.healthPotions = healthPotions;
         this.poisonPotions = poisonPotions;
         this.gif = gif;
+        this.battles_won = 0;
 
     }
 
@@ -93,7 +94,9 @@ public class Player {
 
     public void increase_defence(){
         if (coins >= 10){
+            defence = defence * 100;
             defence = defence + 5;
+            defence = defence / 100;
             coins = coins - 10;
         }
     }

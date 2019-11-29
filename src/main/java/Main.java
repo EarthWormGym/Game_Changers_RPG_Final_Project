@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static spark.Spark.*;
 import static spark.Spark.post;
@@ -49,13 +50,12 @@ public class Main {
         int max = 3;
         int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 
-        Player player = new Player("Adam", 100,100,20,"true", 100, 3, 1, "");
+        AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 100, 20, "true", 100, 3, 1, ""));
 
-        List<Enemy> enemies = model.newEnemy(player.battles_won);
+        List<Enemy> enemies = model.newEnemy(player.get().battles_won);
         Enemy randomEnemy = enemies.get(randomNum);
-        Player enemy = new Player(randomEnemy.enemy_name, randomEnemy.health,randomEnemy.damage_limit,randomEnemy.defence,"true", 0 , 0 , 0, randomEnemy.gif);
+        AtomicReference<Player> enemy = new AtomicReference<>(new Player(randomEnemy.enemy_name, randomEnemy.health, randomEnemy.damage_limit, randomEnemy.defence, "true", 0, 0, 0, randomEnemy.gif));
 
-        System.out.println(enemy.gif);
         Game game = new Game(player, enemy);
 
 
@@ -90,16 +90,15 @@ public class Main {
         }, new VelocityTemplateEngine());
 
         get("/newbattle", ((req, res) -> {
-            player.battles_won += 1;
-            System.out.println(player.battles_won);
+            player.get().battles_won += 1;
             int min1 = 0;
             int max1 = 3;
             int randomNum1 = ThreadLocalRandom.current().nextInt(min1, max1 + 1);
-            List<Enemy> enemiesBattle = model.newEnemy(player.battles_won);
+            List<Enemy> enemiesBattle = model.newEnemy(player.get().battles_won);
             Enemy randomEnemy2 = enemiesBattle.get(randomNum1);
-            Player randomEnemyobj = new Player(randomEnemy2.enemy_name, randomEnemy2.health,randomEnemy2.damage_limit,randomEnemy2.defence,"true", 0 , 0 , 0, randomEnemy2.gif);
+            enemy.set(new Player(randomEnemy2.enemy_name, randomEnemy2.health, randomEnemy2.damage_limit, randomEnemy2.defence, "true", 0, 0, 0, randomEnemy2.gif));
             res.redirect("/battle");
-            return randomEnemyobj;
+            return null;
         }));
 
 
@@ -124,7 +123,7 @@ public class Main {
         });
 
         post("/usehealthpotion", (req, res) ->{
-            player.UseHealthPotion();
+            player.get().UseHealthPotion();
             res.redirect("/battle");
             return null;
         });
@@ -177,7 +176,7 @@ public class Main {
 
             req.session().attribute("user",username);
             req.session().attribute("Signed_In?","true");
-            player.username = username;
+            player.get().username = username;
             return null;
         });
 
@@ -211,33 +210,31 @@ public class Main {
         }, new VelocityTemplateEngine());
 
         post("/health", (req, res) ->{
-            player.Heal();
+            player.get().Heal();
            res.redirect("/shop");
            return null;
         });
 
         post("/healthPotion", (req, res) ->{
-            player.AddHealthPotion();
+            player.get().AddHealthPotion();
             res.redirect("/shop");
             return null;
         });
 
         post("/poisonPotion", (req, res) ->{
-            player.AddPosionPotion();
+            player.get().AddPosionPotion();
             res.redirect("/shop");
             return null;
         });
 
         post("/damage", (req, res) ->{
-            player.increase_damage();
+            player.get().increase_damage();
             res.redirect("/shop");
             return null;
         });
 
         post("/defence", (req, res) ->{
-            player.defence = player.defence * 100;
-            player.increase_defence();
-            player.defence = player.defence / 100;
+            player.get().increase_defence();
             res.redirect("/shop");
             return null;
         });
