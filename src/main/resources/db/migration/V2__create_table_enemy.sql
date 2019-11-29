@@ -5,5 +5,6 @@ create table enemies(
  damage_limit INTEGER,
  defence INTEGER,
  difficulty VARCHAR,
- gif VARCHAR
+ gif VARCHAR,
+ already_killed VARCHAR
 )

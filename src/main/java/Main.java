@@ -21,18 +21,12 @@ public class Main {
 
 
 
-//    public static Player player = new Player("Adam", 100,15,20,"true", 100, 3, 1);
-//
-//    public static Player enemy = new Player("Ork", 10,10,10,"true", 0 , 0 , 0);
-//
-//    public static Game game = new Game(player, enemy);
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
-//        staticFileLocation("/main");
+
         staticFileLocation("/templates");
-//        staticFileLocation("/main/JavaScript/jquery.js");
-//        externalStaticFileLocation("../../JavaScript/jquery.js");
+
 
         Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://localhost:5432/makersandmortals", null, null).load();
         flyway.migrate();
@@ -49,6 +43,8 @@ public class Main {
         int min = 0;
         int max = 3;
         int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+
+        model.revivingEnemies();
 
         AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 100, 3, 1, ""));
 
@@ -86,11 +82,18 @@ public class Main {
             HashMap battle = new HashMap();
             battle.put("player", player);
             battle.put("enemy", enemy);
-            return new ModelAndView(battle, "templates/battle.vtl");
+            if(player.get().is_alive.equals("true")) {
+                return new ModelAndView(battle, "templates/battle.vtl");
+            }
+            else {
+                res.redirect("/home");
+                return null;
+            }
         }, new VelocityTemplateEngine());
 
         get("/newbattle", ((req, res) -> {
             player.get().battles_won += 1;
+            model.killedEnemy(enemy.get().username);
             int min1 = 0;
             int max1 = 3;
             int randomNum1 = ThreadLocalRandom.current().nextInt(min1, max1 + 1);
