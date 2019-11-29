@@ -112,40 +112,41 @@ position:absolute;
 
 .hpotiontext {
        position: absolute;
-       font-size: 15px;
-      left: 90%;
-      top: 250%;
+       font-size: 13px;
+       top: 10%;
+       left: 55%;
+
        color: #ffffff;
-       width: 120px;
+
  }
  .healthtext {
          position: absolute;
-         font-size: 15px;
-         left: 65%;
-           top: 250%;
+         font-size: 13px;
+         top: 10%;
+         left: 25%;
          color: #ffffff;
    }
 .damagetext {
       position: absolute;
-      font-size: 15px;
-      left: 65%;
-                 top: 315%;
+      font-size: 13px;
+         top: 27%;
+         left: 25%;
+
       color: #ffffff;
 }
 
 .ppotiontext {
        position: absolute;
-       font-size: 15px;
-       left: 90%;
-          top: 315%;
-          width: 120px;
+       font-size: 13px;
+        top: 27%;
+        left: 55%;
        color: #ffffff;
  }
 .defencetext {
       position: absolute;
-      font-size: 15px;
-     left: 69%;
-                      top: 380%;
+      font-size: 13px;
+      top: 44%;
+      left: 30%;
       color: #ffffff;
 }
 
@@ -158,15 +159,17 @@ position:absolute;
        padding: 365px;
        width: 200px;
        height: 100px;
-       left: 42%;
-       top: 210%;
+       left: 53%;
+       top: 150%;
 
 }
 
 knight{
 position: absolute;
-left: 100%;
-top: 310%;
+
+top: 30%;
+left: 69%;
+
 }
 
 .shop{
@@ -183,9 +186,12 @@ letter-spacing: -2px;
 
 toBattle{
 position: absolute;
-left: 133%;
-top: 47%;
+top:-45%;
+left: 104%;
+
 }
+
+
 
 .battleBackground{
 position: fixed;
@@ -198,4 +204,21 @@ background-size: 1500px 850px;
     position: absolute;
     left: 20%;
     top: 50%;
+}
+
+.shopInfo {
+       background-image: url("woodPlank.png");
+       width: 750px;
+       height: 250px;
+       background-repeat: no-repeat;
+       font-size: 22px;
+       text-align: center;
+       vertical-align: middle;
+       line-height: 50px;
+       font-color: black;
+}
+
+infoText{
+color: black;
+letter-spacing: -2px;
 }

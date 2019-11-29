@@ -11,7 +11,18 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="/stylesheet.css" >
   </head>
+  <style>
+          @font-face {
+             font-family: myFirstFont;
+             src: url(slkscr.ttf);
+          }
+          * {
+             font-family: myFirstFont;
+          }
+
+  </style>
   <body>
+  <shopText>
     <h1>Welcome to Makers and Mortals, $username</h1>
     #if($enemy.is_alive.equals("true") && $player.is_alive.equals("false"))
         <h1>You died</h1>
@@ -38,5 +49,6 @@
                       <input class="btn btn-secondary" type="submit" id="battle" value="Battle">
                     </form>
                     </div>
+     </shopText>
   </body>
 </html>
