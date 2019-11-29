@@ -26,6 +26,8 @@ public class Game {
                 if(enemy.get().is_alive.equals("false")) {
                     player.get().coins += 15;
                 }
+            }else{
+                System.out.println("enemy blocked");
             }
         }
 
