@@ -3,6 +3,7 @@ package models;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,5 +59,29 @@ public class Sql2oModel implements Model {
                     .executeUpdate();
             conn.commit();
         }
+    }
+
+    @Override
+    public List<Enemy> newEnemy(Integer counter) {
+        try (Connection conn = sql2o.open()) {
+            if (counter <= 3) {
+                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'easy'")
+                        .executeAndFetch(Enemy.class);
+                return enemies;
+            } else if (counter > 3 && counter <= 6) {
+                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'medium'")
+                        .executeAndFetch(Enemy.class);
+                return enemies;
+            } else if (counter > 6 && counter <= 9) {
+                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'hard'")
+                        .executeAndFetch(Enemy.class);
+                return enemies;
+            } else if (counter > 9) {
+                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'boss'")
+                        .executeAndFetch(Enemy.class);
+                return enemies;
+            }
+        }
+        return null;
     }
 }

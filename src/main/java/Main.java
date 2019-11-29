@@ -1,8 +1,5 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
-import models.Game;
-import models.Model;
-import models.Player;
-import models.Sql2oModel;
+import models.*;
 import org.apache.log4j.BasicConfigurator;
 import org.flywaydb.core.Flyway;
 import org.sql2o.Sql2o;
@@ -11,7 +8,9 @@ import org.sql2o.quirks.PostgresQuirks;
 import spark.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 import static spark.Spark.*;
@@ -21,12 +20,11 @@ public class Main {
 
 
 
-
-    public static Player player = new Player("Adam", 100,15,100,"true", 100, 3, 1);
-    
-    public static Player enemy = new Player("Ork", 80,10,10,"true", 0 , 0 , 0);
-
-    public static Game game = new Game(player, enemy);
+//    public static Player player = new Player("Adam", 100,15,20,"true", 100, 3, 1);
+//
+//    public static Player enemy = new Player("Ork", 10,10,10,"true", 0 , 0 , 0);
+//
+//    public static Game game = new Game(player, enemy);
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
@@ -46,6 +44,22 @@ public class Main {
         });
 
         Model model = new Sql2oModel(sql2o);
+
+        int min = 1;
+        int max = 3;
+
+        int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+
+        List<Enemy> enemies = model.newEnemy(1);
+        Enemy enemy1 = enemies.get(randomNum);
+        System.out.println(enemy1.enemy_name);
+
+        Player player = new Player("Adam", 100,15,20,"true", 100, 3, 1, "");
+
+        Player enemy = new Player(enemy1.enemy_name, enemy1.health,enemy1.damage_limit,enemy1.defence,"true", 0 , 0 , 0, enemy1.gif);
+
+        System.out.println(enemy.gif);
+        Game game = new Game(player, enemy);
 
 
         get("/", (req, res) -> {
@@ -83,6 +97,11 @@ public class Main {
             return new ModelAndView(battle, "templates/battle.vtl");
         }, new VelocityTemplateEngine());
 
+//        get("/newbattle", ((req, res) -> {
+//            List<Enemy> enemies = model.newEnemy(1);
+//            return null;
+//        }));
+
 
         post("/attack", (req, res) ->{
             TimeUnit.SECONDS.sleep(2);
@@ -103,9 +122,6 @@ public class Main {
             res.redirect("/shop");
          return null;
         });
-
-
-
 
         post("/usehealthpotion", (req, res) ->{
             player.UseHealthPotion();

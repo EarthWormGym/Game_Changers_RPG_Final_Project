@@ -26,48 +26,61 @@
 
   </head>
   <body class="battleBackground">
-      <div class="container">
-       <div class="clearfix">
-        <h2><u>Player</u><h2>
-        <p id="coins"> Coins: $player.coins </p>
-          <p2>
-              <img class="pull-right" alt="knight_image" width="300" height="200" src="Knight_idle.gif"/>
-                <ul>
-                    <p id="player_name">$player.username</p>
-                    <p>HP: <b id="player_hp">$player.health</b> </p>
-                    <p>Damage: <b id="player_damage_limit">$player.damage_limit</b> </p>
-                    <p>Defence: <b id="player_defence">$player.defence</b></p>
-                    <p>Health Potions: <b id="player_hpotions">$player.healthPotions</b></p>
-                    <form action="/attack" method="POST">
-                             <button class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack"> Attack </button>
-                    </form>
-                        #if($player.healthPotions > 0)
-                            <form action="/usehealthpotion" method="POST">
-                                 <button class="btn btn-danger btn-lg" type="submit" id="healing_potion" value="Use a Healing potion">Use a Healing potion</button>
-                            </form>
-                        #end
-                </ul>
-          </p2>
-       </div>
-      </div>
 
       <div class="container">
         <div class="clearfix">
             <h2><u>Enemy</u><h2>
-              <p2>
-                  <img class="pull-right" alt="ork_image" width="300" height="200" src="orc.gif"/>
-                    <ul>
-                        <p id="enemy_name">Enemy: $enemy.username</p>
-                        <p>HP: <b id="enemy_hp">$enemy.health</b> </p>
-                        <p>Damage: <b id="enemy_damage_limit">$enemy.damage_limit</b> </p>
-                        <p>Defence: <b id="enemy_defence">$enemy.defence</b></p>
-                    </ul>
-              </p2>
+                  <img class="pull-right" alt="ork_image" width="400" height="300" src="$enemy.gif"/>
+                  <ul>
+                  <p class="enemyname" id="enemy_name">Enemy: $enemy.username</p>
+                  <p class="enemyhealth">HP: <b id="enemy_hp">$enemy.health</b> </p>
+                  <p class="enemydamagelimit">Damage: <b id="enemy_damage_limit">$enemy.damage_limit</b> </p>
+                  <p class="enemydefence">Defence: <b id="enemy_defence">$enemy.defence</b></p>
+                  </ul>
         </div>
       </div>
 
-     <form action="/shop" method="GET">
-        <input class="btn btn-secondary" type="submit" id="shop" value="Shop">
-     </form>
+      <div class="container">
+             <div class="clearfix">
+              <h2><u>Player</u>
+              <form align="left" action="/shop" method="GET">
+                <input class="btn btn-secondary" type="submit" id="shop" value="Shop">
+             </form>
+              <h2>
+              <p id="coins"> Coins: $player.coins </p>
+                <p2>
+                    <img class="knightgif" alt="knight_image" width="400" height="300" src="Knight_idle.gif"/>
+                      <ul>
+                          <p id="player_name">$player.username</p>
+                          <p>HP: <b id="player_hp">$player.health</b> </p>
+                          <p>Damage: <b id="player_damage_limit">$player.damage_limit</b> </p>
+                          <p>Defence: <b id="player_defence">$player.defence</b></p>
+                          <p>Health Potions: <b id="player_hpotions">$player.healthPotions</b></p>
+                          #if($enemy.is_alive.equals("true") && $player.is_alive.equals("true"))
+                              <form action="/attack" method="POST">
+                                       <button class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack"> Attack </button>
+                              </form>
+                                  #if($player.healthPotions > 0)
+                                      <form action="/usehealthpotion" method="POST">
+                                           <button class="btn btn-danger btn-lg" type="submit" id="healing_potion" value="Use a Healing potion">Use a Healing potion</button>
+                                      </form>
+                                  #end
+                          #end
+                          #if($enemy.is_alive.equals("false"))
+                              <p>You have defeated the enemy!</p>
+                              <form action="/newbattle" method="GET">
+                                  <input class="btn btn-danger btn-lg" type="submit" id="nextEnemy" value="Next Enemy">
+                              </form>
+                          #end
+                          #if($player.is_alive.equals("false"))
+                              <p>You lost!</p>
+                              <form action="/home" method="GET">
+                                  <input class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Home">
+                              </form>
+                          #end
+                      </ul>
+                </p2>
+             </div>
+      </div>
   </body>
 </html>
