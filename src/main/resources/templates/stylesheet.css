@@ -29,6 +29,28 @@ position:absolute;
   font-size: 18px;
 
 }
+
+#new_game{
+
+position:absolute;
+  left: 25%;
+  top: 40%;
+  width: 50%;
+  text-align: center;
+  font-size: 18px;
+
+}
+
+#new_game2{
+
+position:absolute;
+  left: 25%;
+  top: 90%;
+  width: 50%;
+  text-align: center;
+  font-size: 18px;
+
+}
 #sign_out{
 position:absolute;
   left: 25%;

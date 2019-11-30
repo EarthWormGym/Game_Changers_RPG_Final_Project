@@ -41,7 +41,6 @@ public class Player {
     }
 
     public String block_attack(){
-        System.out.println(username + Math.random());
         if(Math.random() >= (1 - defence))
         {
             return "true";

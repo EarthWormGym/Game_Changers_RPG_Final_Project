@@ -23,33 +23,18 @@
   </style>
   <body>
   <shopText>
-    <h1>Welcome to Makers and Mortals, $username</h1>
-    #if($enemy.is_alive.equals("true") && $player.is_alive.equals("false"))
-        <h1>You died</h1>
-    #end
+    <h1>Congratulations $username, you won!</h1>
 <div class="wood">
 <img src="logo.gif" alt="logo" width="500" height="100">
 
-                   #if($player.get().is_alive.equals("false"))
-                     <form action="/newGame" method="GET">
-                       <input class="btn btn-secondary" type="submit" id="new_game2" value="New Game">
-                     </form>
-                   #end
-                   <form action="/sign_in" method="POST">
-                     <input class="btn btn-secondary" type="submit" id="sign_in" value="Sign in">
+                   <form action="/newGame" method="GET">
+                     <input class="btn btn-secondary" type="submit" id="new_game" value="New Game">
                    </form>
-
-                    <form action="/sign_up" method="POST">
-                      <input class="btn btn-secondary" type="submit" id="sign_up" value="Sign up">
-                    </form>
 
                     <form action="/sign_out" method="POST">
                       <input class="btn btn-secondary" type="submit" id="sign_out" value="Sign out">
                     </form>
 
-                    <form action="/battle" method="GET">
-                      <input class="btn btn-secondary" type="submit" id="battle" value="Battle">
-                    </form>
                     </div>
      </shopText>
   </body>

@@ -25,6 +25,7 @@ public class Game {
                 enemy.get().recieve_damage(Math.round(Math.floor(this.random_damage(player))));
                 if(enemy.get().is_alive.equals("false")) {
                     player.get().coins += 15;
+                    player.get().battles_won += 1;
                 }
             }else{
             }
