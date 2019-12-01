@@ -86,7 +86,7 @@ public class Player {
         }
     }
 
-    public void AddPosionPotion(){
+    public void AddPoisonPotion(){
         if (coins >= 20){
             if(poisonPotions < 3){
                 poisonPotions = poisonPotions + 1;

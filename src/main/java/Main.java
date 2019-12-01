@@ -240,7 +240,7 @@ public class Main {
         });
 
         post("/poisonPotion", (req, res) ->{
-            player.get().AddPosionPotion();
+            player.get().AddPoisonPotion();
             res.redirect("/shop");
             return null;
         });
