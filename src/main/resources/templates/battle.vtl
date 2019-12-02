@@ -36,6 +36,11 @@
       <div class="container">
         <div class="clearfix">
             <h2><u>Enemy</u><h2>
+            #if($player.get().poisonPotions > 0)
+                                                  <form action="/usepoisonpotion" method="POST">
+                                                       <button class="btn btn-danger btn-lg" type="submit" id="poison_potion" value="Use a Poison potion">Use a Poison Potion</button>
+                                                  </form>
+                                              #end
                   <img class="pull-right" alt="ork_image" width="400" height="300" src="$enemy.get().gif"/>
                   <ul>
                   <p class="enemyname" id="enemy_name">Enemy: $enemy.get().username</p>
@@ -62,6 +67,7 @@
                           <p>Damage: <b id="player_damage_limit">$player.get().damage_limit</b> </p>
                           <p>Defence: <b id="player_defence">$player.get().defence</b></p>
                           <p>Health Potions: <b id="player_hpotions">$player.get().healthPotions</b></p>
+                          <p>Poison Potions: <b id="player_ppotions">$player.get().poisonPotions</b></p>
                           #if($enemy.get().is_alive.equals("true") && $player.get().is_alive.equals("true"))
                               <form action="/attack" method="POST">
                                        <button class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack"> Attack </button>
@@ -71,6 +77,7 @@
                                            <button class="btn btn-danger btn-lg" type="submit" id="healing_potion" value="Use a Healing potion">Use a Healing potion</button>
                                       </form>
                                   #end
+
                           #end
                           #if($enemy.get().is_alive.equals("false") && $player.get().battles_won < 11)
                               <p>You have defeated the enemy!</p>

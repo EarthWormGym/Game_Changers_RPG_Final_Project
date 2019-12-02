@@ -146,6 +146,13 @@ public class Main {
             return null;
         });
 
+        post("/usepoisonpotion", (req, res) ->{
+            game.get().poisonAttack(player, enemy);
+            player.get().poisonPotions = player.get().poisonPotions - 1;
+            res.redirect("/battle");
+            return null;
+        });
+
         post("/sign_out", (req, res) ->{
             req.session().attribute("Signed_In?", "false");
             res.redirect("/home");

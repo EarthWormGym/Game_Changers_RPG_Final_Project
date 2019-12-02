@@ -31,6 +31,17 @@ public class Game {
             }
         }
 
+    public void poisonAttack(AtomicReference<Player> player, AtomicReference<Player> enemy){
+        if(enemy.get().block_attack().equals("false")){
+            enemy.get().recieve_damage(30.0);
+            if(enemy.get().is_alive.equals("false")) {
+                player.get().coins += 15;
+                player.get().battles_won += 1;
+            }
+        }else{
+        }
+    }
+
         public void enemy_attack(AtomicReference<Player> player, AtomicReference<Player> enemy){
             if(player.get().block_attack().equals("false")) {
                 player.get().recieve_damage(Math.round(Math.floor(this.random_damage(enemy))));
