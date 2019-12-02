@@ -25,6 +25,11 @@ public class Game {
         public void attack(AtomicReference<Player> player, AtomicReference<Player> enemy){
             if(enemy.get().block_attack().equals("false")){
                 double damage = this.random_damage(player);
+                if(enemy.get().poisoned > 0) {
+                    enemy.get().poisoned -= 1;
+                    enemy.get().health -= 10;
+                    log.add(enemy.get().username + " was damaged for 10 by the lingering poison");
+                }
                 if(damage == player.get().damage_limit){
                     log.add(player.get().username + " CRITICALLY hit " + enemy.get().username);
                 }else{
@@ -43,8 +48,9 @@ public class Game {
 
     public void poisonAttack(AtomicReference<Player> player, AtomicReference<Player> enemy){
         if(enemy.get().block_attack().equals("false")){
-            enemy.get().recieve_damage(30.0, log);
-            log.add(player.get().username + " poisoned " + enemy.get().username);
+            enemy.get().recieve_damage(20.0, log);
+            enemy.get().poisoned += 2;
+            log.add(player.get().username + " poisoned " + enemy.get().username + " for 20 damage and it seems to have left an effect");
             if(enemy.get().is_alive.equals("false")) {
                 player.get().coins += 15;
                 player.get().battles_won += 1;
