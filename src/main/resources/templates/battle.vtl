@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="/stylesheet.css" >
     <style>
         body {
-            background-image: url("MossyStoneBrick.jpg");
+            background-image: url("/backgroundsMossyStoneBrick.jpg");
             color: white;
         }
         .jumbotron {
-            background-image: url("wood2.jpg");
+            background-image: url("images/wood2.jpg");
         }
         h1 {
             color: white;
@@ -35,7 +35,11 @@
     <shopText>
       <div class="container">
         <div class="clearfix">
+        #if($enemy.get().health == 0)
+            <img class="enemygif" alt="ork_image" width="400" height="250" src="enemies/deathAnimation.gif"/>
+        #else
           <img class="enemygif" alt="ork_image" width="400" height="250" src="$enemy.get().gif"/>
+        #end
             <h2>
               <div class="enemyInfo">
                 <p><u>Enemy</u> : $enemy.get().username</p>
