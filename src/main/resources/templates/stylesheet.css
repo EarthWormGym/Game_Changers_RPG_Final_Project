@@ -322,3 +322,119 @@ top: 70%;
 left: 140%;
 
 }
+
+signtitle{
+font-size: 60px;
+position: absolute;
+top: 100px;
+left: 402px;
+text-decoration: underline;
+}
+
+signtitledone{
+font-size: 60px;
+position: absolute;
+top: 100px;
+left: 270px;
+text-decoration: underline;
+}
+
+homebutton{
+position: absolute;
+top: 60px;
+left: 15px;
+font-size: 25px;
+color: black;
+
+}
+
+signinbutton{
+position: absolute;
+top: 60px;
+left: 115px;
+font-size: 25px;
+color: black;
+}
+
+signupbutton{
+position: absolute;
+top: 60px;
+left: 251px;
+font-size: 25px;
+color: black;
+}
+signoutbutton{
+position: absolute;
+top: 60px;
+left: 395px;
+font-size: 25px;
+color: black;
+}
+
+fillindetails{
+position: absolute;
+top: 160px;
+left: 130px;
+}
+
+.buttons{
+position: absolute;
+top: 130px;
+left: 425px;
+}
+
+usernameinput{
+font-size: 24px;
+position: absolute;
+left: 54px;
+top: -8px;
+}
+
+passwordinput{
+font-size: 24px;
+position: absolute;
+left: 54px;
+top: 56px;
+}
+
+passwordinputup{
+font-size: 24px;
+position: absolute;
+left: 54px;
+top: 122px;
+}
+
+fullnameinput{
+font-size: 24px;
+position: absolute;
+left: 54px;
+top: 56px;
+}
+
+signsubmit{
+position: absolute;
+font-size: 24px;
+top: 120px;
+left: 65px;
+color: black;
+}
+
+signsubmitup{
+position: absolute;
+font-size: 24px;
+top: 190px;
+left: 65px;
+color: black;
+}
+.fillindetails{
+position: absolute;
+
+top: 140px;
+left: 155px;
+}
+
+.filloutsignup{
+position: absolute;
+top: 140px;
+left: 160px;
+}
