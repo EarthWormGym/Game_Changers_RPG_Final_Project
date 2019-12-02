@@ -25,7 +25,12 @@ public class Game {
         public void attack(AtomicReference<Player> player, AtomicReference<Player> enemy){
             if(enemy.get().block_attack().equals("false")){
                 double damage = this.random_damage(player);
-                log.add(player.get().username + " attacked " + enemy.get().username + " for " + damage);
+                if(damage == player.get().damage_limit){
+                    log.add(player.get().username + " CRITICALLY hit " + enemy.get().username);
+                }else{
+                    log.add(player.get().username + " attacked " + enemy.get().username + " for " + damage);
+
+                }
                 enemy.get().recieve_damage(Math.round(Math.floor(damage)), log);
                 if(enemy.get().is_alive.equals("false")) {
                     player.get().coins += 15;
@@ -51,7 +56,11 @@ public class Game {
         public void enemy_attack(AtomicReference<Player> player, AtomicReference<Player> enemy){
             if(player.get().block_attack().equals("false")) {
                 double damage = this.random_damage(enemy);
-                log.add(enemy.get().username + " attacked " + player.get().username + " for " + damage);
+                if(damage == player.get().damage_limit){
+                    log.add(enemy.get().username + " CRITICALLY hit " + player.get().username);
+                }else{
+                    log.add(enemy.get().username + " attacked " + player.get().username + " for " + damage);
+                }
                 player.get().recieve_damage(Math.round(Math.floor(damage)), log);
             }else{
                 log.add(player.get().username + " blocked the attack");
