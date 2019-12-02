@@ -56,7 +56,7 @@
              </form>
               <h2>
                 <p2>
-                    <img class="knightgif" alt="knight_image" width="400" height="300" src="Knight_idle.gif"/>
+                    <img class="playergif" alt="player_image" width="400" height="300" src="$player.get().gif"/>
                       <ul>
                       <div class="playerInfo">
                       <h2><u>Player</u>
@@ -79,12 +79,18 @@
                                   #end
                           #end
                           </attack_button>
-                          #if($enemy.get().is_alive.equals("false"))
+                          #if($enemy.get().is_alive.equals("false") && $player.get().battles_won < 11)
                               <p>You have defeated the enemy!</p>
                               <form action="/newbattle" method="GET">
                                   <input class="btn btn-danger btn-lg" type="submit" id="nextEnemy" value="Next Enemy">
                               </form>
                           #end
+                           #if($enemy.get().is_alive.equals("false") && $player.get().battles_won == 11)
+                               <p>You have defeated the $enemy.get().username!</p>
+                               <form action="/newbattle" method="GET">
+                                   <input class="btn btn-danger btn-lg" type="submit" id="nextEnemy" value="Return a victor!">
+                               </form>
+                           #end
                           #if($player.get().is_alive.equals("false"))
                               <p>You lost!</p>
                               <form action="/home" method="GET">
