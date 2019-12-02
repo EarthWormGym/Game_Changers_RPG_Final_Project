@@ -55,7 +55,6 @@
               <h2>
                 <p2>
                     <img class="playergif" alt="player_image" width="400" height="300" src="$player.get().gif"/>
-
                       <div class="playerInfo">
                       <p><u>Player</u> : $player.get().username | Coins : $player.get().coins</p>
                       <p>HP : $player.get().health| Health Potions : $player.get().healthPotions</p>
@@ -71,6 +70,12 @@
                                            <button class="btn btn-danger btn-lg" type="submit" id="healing_potion" value="Use a Healing potion">Use a Healing potion</button>
                                       </form>
                                   #end
+                                  #if($player.get().poisonPotions > 0)
+                                                  <form action="/usepoisonpotion" method="POST">
+                                                       <button class="btn btn-danger btn-lg" type="submit" id="poison_potion" value="Use a Poison potion">Use a Poison Potion</button>
+                                                  </form>
+                                              #end
+
                           #end
                           </div>
                           #if($enemy.get().is_alive.equals("false") && $player.get().battles_won < 11)
