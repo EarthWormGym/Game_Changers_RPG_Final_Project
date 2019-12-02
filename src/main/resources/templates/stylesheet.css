@@ -1,5 +1,5 @@
 body {
-background-image: url("MossyStoneBrick.jpg");
+background-image: url("backgrounds/MossyStoneBrick.jpg");
 }
 
 #home {
@@ -72,7 +72,7 @@ position:absolute;
 
     .wood {
       margin: auto;
-      background-image: url("wood2.jpg");
+      background-image: url("images/wood2.jpg");
       border-radius: 20px;
       padding: 365px;
       width: 200px;
@@ -174,7 +174,7 @@ position:absolute;
 
 .shelf {
        position: absolute;
-       background-image: url("shelf.png");
+       background-image: url("images/shelf.png");
        background-repeat: no-repeat;
        background-size: 630px 430px;
        border-radius: 20px;
@@ -196,7 +196,7 @@ left: 69%;
 
 .shop{
 position: fixed;
-background-image: url("BackgroundShop.png");
+background-image: url("backgrounds/BackgroundShop.png");
 background-repeat: no-repeat;
 background-size: 1600px 850px;
 }
@@ -217,7 +217,7 @@ left: 104%;
 
 .battleBackground{
 position: fixed;
-background-image: url("Battle_Background.png");
+background-image: url("backgrounds/Battle_Background.png");
 background-repeat: no-repeat;
 background-size: 1500px 850px;
 }
@@ -235,7 +235,7 @@ background-size: 1500px 850px;
 }
 
 .shopInfo {
-       background-image: url("woodPlank.png");
+       background-image: url("images/woodPlank.png");
        width: 750px;
        height: 250px;
        background-repeat: no-repeat;
@@ -272,11 +272,11 @@ letter-spacing: -2px;
     top: 1700%;
 }
 
-.class{
+.selectClassBackground{
 position: fixed;
-background-image: url("Choose_your_class.png");
+background-image: url("backgrounds/Choose_your_class.png");
 background-repeat: no-repeat;
-background-size: 1453px 850px;
+background-size:1500px 850px;
 }
 
 #wizzardclass{
