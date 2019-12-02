@@ -42,7 +42,7 @@ public class Main {
 
         model.revivingEnemies();
 
-        AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 30, 20, "true", 50, 3, 1, ""));
+        AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 50, 3, 1, ""));
 
         List<Enemy> enemies = model.newEnemy(player.get().battles_won);
         int min = 0;
