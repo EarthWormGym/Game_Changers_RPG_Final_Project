@@ -38,7 +38,7 @@ position:absolute;
   font-size: 18px;
 
 }
-#battle{
+#class{
 position:absolute;
   left: 25%;
   top: 80%;
@@ -200,7 +200,7 @@ background-repeat: no-repeat;
 background-size: 1500px 850px;
 }
 
-.knightgif{
+.playergif{
     position: absolute;
     left: 20%;
     top: 50%;
@@ -221,4 +221,82 @@ background-size: 1500px 850px;
 infoText{
 color: black;
 letter-spacing: -2px;
+}
+
+.class{
+position: fixed;
+background-image: url("Choose_your_class.png");
+background-repeat: no-repeat;
+background-size: 1453px 850px;
+}
+
+#wizzardclass{
+position:absolute;
+  left: 575%;
+  top: 750%;
+
+  text-align: center;
+  font-size: 18px;
+}
+
+#archerclass{
+position:absolute;
+  left: 275%;
+  top: 750%;
+
+  text-align: center;
+  font-size: 18px;
+}
+
+#knightclass{
+position:absolute;
+  left: 25%;
+  top: 750%;
+
+  text-align: center;
+  font-size: 18px;
+}
+
+classpagetext{
+color: ffffff;
+letter-spacing: -2px;
+}
+
+knighttext{
+position: absolute;
+top: 2800%;
+left: 55%;
+font-size: 25px;
+width: 400px;
+color: white;
+}
+
+archertext{
+position: absolute;
+top: 2800%;
+left: 350%;
+font-size: 25px;
+width: 400px;
+color: white;
+}
+
+wizzardtext{
+position: absolute;
+top: 2800%;
+left: 625%;
+font-size: 25px;
+width: 400px;
+color: white;
+}
+
+placeholder{
+color: transparent;
+}
+
+classtitle{
+position: absolute;
+
+top: 70%;
+left: 140%;
+
 }
