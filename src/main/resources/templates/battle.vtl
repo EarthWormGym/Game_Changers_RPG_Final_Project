@@ -57,6 +57,7 @@
               <p>Damage : $player.get().damage_limit | Defence : $player.get().defence</p>
             </div>
       </h3>
+      <nav> test </nav>
             <div class="attack_button">
                   #if($enemy.get().is_alive.equals("true") && $player.get().is_alive.equals("true"))
                       <form action="/attack" method="POST">
@@ -74,7 +75,8 @@
                       #end
                   #end
                   #if($enemy.get().is_alive.equals("false") && $player.get().battles_won < 11)
-                      <h3>You have defeated the enemy! Go to the shop to upgrade and recover.</h3>
+                      <h3>You have defeated the enemy!</h3>
+                      <h3>Go to the shop to upgrade and recover.</h3>
                       <form action="/shop" method="GET">
                           <input class="btn btn-danger btn-lg" type="submit" id="nextEnemy" value="Shop">
                       </form>
