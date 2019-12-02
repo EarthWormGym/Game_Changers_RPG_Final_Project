@@ -17,40 +17,51 @@
     </style>
     <body>
     <shopText>
-        <h1>Sign In to Battle!</h1>
-         <ul>
-                          <li>
+        <signtitle>Sign In to Battle!</signtitle>
+<div class="buttons">
+<homebutton>
                            <form action="/home" method="POST">
                              <input class="navigation" type="submit" name="timeline" value="Home">
                            </form>
-                          </li>
-                         <li>
+</homebutton>
+<signinbutton>
                            <form action="/sign_in" method="POST">
                              <input class="navigation" type="submit" name="sign_in" value="Sign in">
                            </form>
-                          </li>
-                          <li>
+</signinbutton>
+<signupbutton>
                             <form action="/sign_up" method="POST">
                               <input class="navigation" type="submit" name="sign_up" value="Sign Up">
                             </form>
-                          </li>
-                          <li>
+</signupbutton>
+<signoutbutton>
                             <form action="/sign_out" method="POST">
                               <input class="navigation" type="submit" name="sign_out" value="Sign out">
                             </form>
-                          </li>
-                         </ul>
+</signoutbutton>
+
+<div class="fillindetails">
+
         <form action="/signed_in" method="POST">
-            <em>Username:</em>
+        <usernameinput>
+            <em>Username</em>
+        </usernameinput>
             <br>
             <input type="text" name="username">
             <br>
-            <em>Password:</em>
+            <br>
+        <passwordinput>
+            <em>Password</em>
+        </passwordinput>
             <br>
             <input type="password" name="password">
             <br>
+        <signsubmit>
             <input type="submit" value="Submit">
+        </signsubmit>
         </form>
+</div>
+</div>
         </shopText>
     </body>
 </html>
