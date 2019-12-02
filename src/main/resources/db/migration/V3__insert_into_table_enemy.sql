@@ -1,7 +1,7 @@
 insert into enemies(enemy_id, enemy_name, health, damage_limit, defence, difficulty, gif, already_killed) values
     ('0', 'Goblin', 50, 10, 10, 'easy', 'Goblin_enemy.gif', 'false'),
     ('1', 'Sewer Rat', 60, 10, 5, 'easy', 'rat_enemy.gif', 'false'),
-    ('2', 'Giant Spider', 80, 12, 10, 'easy', 'spider_enemy.gif', 'false'),
+    ('2', 'Giant Spider', 80, 12, 10, 'easy', 'spider_enemy2.gif', 'false'),
     ('3', 'Orc', 100, 10, 5, 'easy', 'orc.gif', 'false'),
     ('4', 'Blade Smith', 120, 15, 15, 'medium', 'Samurai_enemy.gif', 'false'),
     ('5', 'Forest Bear', 140, 20, 10, 'medium', 'bear_enemy.gif', 'false'),
