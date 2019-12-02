@@ -46,6 +46,7 @@ public class Main {
         model.revivingEnemies();
 
         AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 50, 3, 1, ""));
+        AtomicReference<Players> players = new AtomicReference<>(new Players("playerUuid.toString()", "username", "fullname", "password", 0));
 
         List<Enemy> enemies = model.newEnemy(player.get().battles_won);
         int min = 0;
@@ -76,7 +77,9 @@ public class Main {
             battle.put("player", player);
             battle.put("enemy", enemy);
             battle.put("username", username);
-
+            if(player.get().is_alive.equals("false")){
+                model.updateHighscore(player.get().battles_won * 150, players.get().user_ID);
+            }
             return new ModelAndView(battle, "templates/home.vtl");
         }, new VelocityTemplateEngine());
 
@@ -185,6 +188,7 @@ public class Main {
             String fullname = req.queryParams("full_name");
             String password = req.queryParams("password");
             UUID playerUuid = UUID.randomUUID();
+            players.set(new Players(playerUuid.toString(), username, fullname, password, 0));
             model.createPlayer(playerUuid.toString(), username, fullname, password, 0);
             res.redirect("/signed_up");
             return null;
@@ -232,7 +236,6 @@ public class Main {
         });
 
         get("/shop", (req, res) ->{
-            //Player player = new Player("Adam", 100,10,20,"true", 0 );
             String username = req.session().attribute("user");
             HashMap battle = new HashMap();
             battle.put("player", player);

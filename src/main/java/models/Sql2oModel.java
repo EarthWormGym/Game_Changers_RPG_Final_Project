@@ -101,4 +101,15 @@ public class Sql2oModel implements Model {
                     .executeUpdate();
         }
     }
+
+    @Override
+    public void updateHighscore(int playersHighscore, String playerID) {
+        try (Connection conn = sql2o.open()) {
+            conn.createQuery("UPDATE players SET high_score = :playersHighscore WHERE user_id = :playerID")
+                    .addParameter("playersHighscore", playersHighscore)
+                    .addParameter("playerID", playerID)
+                    .executeUpdate();
+        }
+    }
+
 }
