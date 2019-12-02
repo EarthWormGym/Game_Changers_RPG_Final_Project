@@ -72,12 +72,18 @@
                                       </form>
                                   #end
                           #end
-                          #if($enemy.get().is_alive.equals("false"))
+                          #if($enemy.get().is_alive.equals("false") && $player.get().battles_won < 11)
                               <p>You have defeated the enemy!</p>
                               <form action="/newbattle" method="GET">
                                   <input class="btn btn-danger btn-lg" type="submit" id="nextEnemy" value="Next Enemy">
                               </form>
                           #end
+                           #if($enemy.get().is_alive.equals("false") && $player.get().battles_won == 11)
+                               <p>You have defeated the $enemy.get().username!</p>
+                               <form action="/newbattle" method="GET">
+                                   <input class="btn btn-danger btn-lg" type="submit" id="nextEnemy" value="Return a victor!">
+                               </form>
+                           #end
                           #if($player.get().is_alive.equals("false"))
                               <p>You lost!</p>
                               <form action="/home" method="GET">

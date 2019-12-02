@@ -41,7 +41,6 @@ public class Player {
     }
 
     public String block_attack(){
-        System.out.println(username + Math.random());
         if(Math.random() >= (1 - defence))
         {
             return "true";
@@ -87,7 +86,7 @@ public class Player {
         }
     }
 
-    public void AddPosionPotion(){
+    public void AddPoisonPotion(){
         if (coins >= 20){
             if(poisonPotions < 3){
                 poisonPotions = poisonPotions + 1;

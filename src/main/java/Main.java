@@ -21,18 +21,12 @@ public class Main {
 
 
 
-//    public static Player player = new Player("Adam", 100,15,20,"true", 100, 3, 1);
-//
-//    public static Player enemy = new Player("Ork", 10,10,10,"true", 0 , 0 , 0);
-//
-//    public static Game game = new Game(player, enemy);
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
-//        staticFileLocation("/main");
+
         staticFileLocation("/templates");
-//        staticFileLocation("/main/JavaScript/jquery.js");
-//        externalStaticFileLocation("../../JavaScript/jquery.js");
+
 
         Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://localhost:5432/makersandmortals", null, null).load();
         flyway.migrate();
@@ -46,17 +40,18 @@ public class Main {
 
         Model model = new Sql2oModel(sql2o);
 
-        int min = 0;
-        int max = 3;
-        int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+        model.revivingEnemies();
 
-        AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 100, 3, 1, ""));
+        AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 50, 3, 1, ""));
 
         List<Enemy> enemies = model.newEnemy(player.get().battles_won);
+        int min = 0;
+        int max = enemies.size() - 1;
+        int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
         Enemy randomEnemy = enemies.get(randomNum);
         AtomicReference<Player> enemy = new AtomicReference<>(new Player(randomEnemy.enemy_name, randomEnemy.health, randomEnemy.damage_limit, randomEnemy.defence, "true", 0, 0, 0, randomEnemy.gif));
 
-        Game game = new Game(player, enemy);
+        AtomicReference<Game> game = new AtomicReference<>(new Game(player, enemy));
 
 
         get("/", (req, res) -> {
@@ -86,21 +81,42 @@ public class Main {
             HashMap battle = new HashMap();
             battle.put("player", player);
             battle.put("enemy", enemy);
-            return new ModelAndView(battle, "templates/battle.vtl");
+            String username = req.session().attribute("user");
+            battle.put("username", username);
+            if(player.get().battles_won < 11) {
+                return new ModelAndView(battle, "templates/battle.vtl");
+            }
+            else if(player.get().battles_won == 11){
+                return new ModelAndView(battle, "templates/victory.vtl");
+            }
+            return null;
         }, new VelocityTemplateEngine());
 
         get("/newbattle", ((req, res) -> {
-            player.get().battles_won += 1;
-            int min1 = 0;
-            int max1 = 3;
-            int randomNum1 = ThreadLocalRandom.current().nextInt(min1, max1 + 1);
+            model.killedEnemy(enemy.get().username);
             List<Enemy> enemiesBattle = model.newEnemy(player.get().battles_won);
+            int min1 = 0;
+            int max1 = enemiesBattle.size() - 1;
+            int randomNum1 = ThreadLocalRandom.current().nextInt(min1, max1 + 1);
             Enemy randomEnemy2 = enemiesBattle.get(randomNum1);
             enemy.set(new Player(randomEnemy2.enemy_name, randomEnemy2.health, randomEnemy2.damage_limit, randomEnemy2.defence, "true", 0, 0, 0, randomEnemy2.gif));
             res.redirect("/battle");
             return null;
         }));
 
+        get("/newGame", ((request, response) -> {
+            player.set(new Player("Adam", 100, 30, 20, "true", 50, 3, 1, ""));
+            model.revivingEnemies();
+            List<Enemy> new_game_enemies = model.newEnemy(player.get().battles_won);
+            int new_game_min = 0;
+            int new_game_max = new_game_enemies.size() - 1;
+            int new_game_randomNum = ThreadLocalRandom.current().nextInt(new_game_min, new_game_max + 1);
+            Enemy new_game_randomEnemy = new_game_enemies.get(new_game_randomNum);
+            enemy.set(new Player(new_game_randomEnemy.enemy_name, new_game_randomEnemy.health, new_game_randomEnemy.damage_limit, new_game_randomEnemy.defence, "true", 0, 0, 0, new_game_randomEnemy.gif));
+            game.set(new Game(player, enemy));
+            response.redirect("/battle");
+            return null;
+        }));
 
         post("/attack", (req, res) ->{
             TimeUnit.SECONDS.sleep(2);
@@ -110,8 +126,10 @@ public class Main {
 
         get("/battleJson", (req, res) -> {
             res.type("application/json");
-            game.attack(player, enemy);
-            game.enemy_attack(player, enemy);
+            game.get().attack(player, enemy);
+            if(enemy.get().is_alive.equals("true")){
+                game.get().enemy_attack(player, enemy);
+            }
             ObjectMapper objectMapper = new ObjectMapper();
             String json = objectMapper.writeValueAsString(game);
             return json;
@@ -222,7 +240,7 @@ public class Main {
         });
 
         post("/poisonPotion", (req, res) ->{
-            player.get().AddPosionPotion();
+            player.get().AddPoisonPotion();
             res.redirect("/shop");
             return null;
         });

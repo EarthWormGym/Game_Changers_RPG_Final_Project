@@ -65,23 +65,40 @@ public class Sql2oModel implements Model {
     public List<Enemy> newEnemy(Integer counter) {
         try (Connection conn = sql2o.open()) {
             if (counter <= 3) {
-                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'easy'")
+                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'easy' AND already_killed = 'false' ")
                         .executeAndFetch(Enemy.class);
                 return enemies;
             } else if (counter > 3 && counter <= 6) {
-                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'medium'")
+                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'medium' AND already_killed = 'false' ")
                         .executeAndFetch(Enemy.class);
                 return enemies;
             } else if (counter > 6 && counter <= 9) {
-                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'hard'")
+                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'hard' AND already_killed = 'false' ")
                         .executeAndFetch(Enemy.class);
                 return enemies;
             } else if (counter > 9) {
-                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'boss'")
+                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'boss' AND already_killed = 'false' ")
                         .executeAndFetch(Enemy.class);
                 return enemies;
             }
         }
         return null;
+    }
+
+    @Override
+    public void killedEnemy(String enemy_name) {
+        try (Connection conn = sql2o.open()) {
+            conn.createQuery("UPDATE enemies SET already_killed = 'true' WHERE enemy_name = :enemy_name")
+                    .addParameter("enemy_name", enemy_name)
+                    .executeUpdate();
+        }
+    }
+
+    @Override
+    public void revivingEnemies() {
+        try (Connection conn = sql2o.open()) {
+            conn.createQuery("UPDATE enemies SET already_killed = 'false'")
+                    .executeUpdate();
+        }
     }
 }

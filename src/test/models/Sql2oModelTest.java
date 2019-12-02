@@ -31,6 +31,8 @@ class Sql2oModelTest {
     AtomicReference<Player> player = new AtomicReference<>(new Player("AdamR", 100, 10, 20, "true", 100, 0, 1, ""));
     AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 80, 20, 10, "true", 0, 0, 0, ""));
     public Game game = new Game(player, enemy);
+    Model model = new Sql2oModel(sql2o);
+
 
     @BeforeAll
     static void setUpClass() {
@@ -63,7 +65,6 @@ class Sql2oModelTest {
     @org.junit.jupiter.api.Test
     void createUser() {
         Connection conn = sql2o.open();
-        Model model = new Sql2oModel(sql2o);
         boolean result = false;
         List<Players> list_of_players;
         list_of_players = (conn.createQuery("select * from players").executeAndFetch(Players.class));
@@ -79,18 +80,16 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void UsernameExist() {
-        Model model = new Sql2oModel(sql2o);
         assertTrue(model.UsernameExist("example username"));
     }
 
     @org.junit.jupiter.api.Test
     void CorrectPassword(){
-        Model model = new Sql2oModel(sql2o);
         assertTrue(model.CorrectPassword("example username","example password"));
     }
 
     @org.junit.jupiter.api.Test
-    void CreatePlayer() {
+    void CreatePlayerClass() {
         assertEquals("AdamR", player.get().username);
         assertEquals(100, player.get().health);
         assertEquals(10, player.get().damage_limit);
@@ -98,6 +97,26 @@ class Sql2oModelTest {
         assertEquals("true", player.get().is_alive);
         assertEquals(100, player.get().coins);
         assertEquals(0, player.get().healthPotions);
+        assertEquals(1,player.get().poisonPotions);
+        assertEquals("", player.get().gif);
+        assertEquals(0, player.get().battles_won);
+    }
+
+    @org.junit.jupiter.api.Test
+    void CreatePlayerDatabase(){
+        Players player1 = new Players("49921d6e-e210-4f68-ad7a-afac266278cb", player.get().username, "example full name", "example password", 0);
+        model.createPlayer("49921d6e-e210-4f68-ad7a-afac266278cb", player.get().username, "example full name", "example password", 0);
+        List<Players> player;
+        Connection conn = sql2o.open();
+        player = (conn.createQuery("select * from players").executeAndFetch(Players.class));
+        String test = "Players(user_ID=49921d6e-e210-4f68-ad7a-afac266278cb, user_name=example username, name=example full name, password=example password, high_score=0)";
+        boolean result = false;
+        if(player.toString().contains(test)){
+            result = true;
+        } else {
+            result = false;
+        }
+        assertTrue(result);
     }
 
     @org.junit.jupiter.api.Test
@@ -121,7 +140,7 @@ class Sql2oModelTest {
     void attackingEnemy() {
         AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 80, 20, 0, "true", 0, 0, 0, ""));
         Game game = new Game(player , enemy);
-        game.attack(player, enemy);
+        game.enemy_attack(player, enemy);
         assertNotEquals(100 , enemy.get().health);
     }
 
@@ -150,4 +169,103 @@ class Sql2oModelTest {
         assertEquals(115, player.get().coins);
     }
 
+    @org.junit.jupiter.api.Test
+    void createEnemy(){
+        Enemy enemy = new Enemy("Goblin", 50, 15, 10, "goblin.gif");
+        assertEquals("Goblin", enemy.enemy_name);
+        assertEquals(50, enemy.health);
+        assertEquals(15, enemy.damage_limit);
+        assertEquals(10, enemy.defence);
+        assertEquals("goblin.gif", enemy.gif);
+    }
+
+    @org.junit.jupiter.api.Test
+    void addHealthPotion(){
+        player.get().AddHealthPotion();
+        assertEquals(1, player.get().healthPotions);
+        assertEquals(80, player.get().coins);
+    }
+
+    @org.junit.jupiter.api.Test
+    void addPoisonPotion(){
+        player.get().AddPoisonPotion();
+        assertEquals(2, player.get().poisonPotions);
+        assertEquals(80, player.get().coins);
+    }
+
+    @org.junit.jupiter.api.Test
+    void useHealthPotion(){
+        player.get().AddHealthPotion();
+        player.get().UseHealthPotion();
+        assertEquals(0, player.get().healthPotions);
+        assertEquals(115, player.get().health);
+    }
+
+    @org.junit.jupiter.api.Test
+    void newEnemyEasy(){
+        List<Enemy> enemy;
+//        Connection conn = sql2o.open();
+//        conn.createQuery()
+        enemy = model.newEnemy(1);
+        assertEquals("Goblin", enemy.get(0).enemy_name);
+        assertEquals("Sewer Rat", enemy.get(1).enemy_name);
+        assertEquals("Giant Spider", enemy.get(2).enemy_name);
+        assertEquals("Orc", enemy.get(3).enemy_name);
+    }
+
+    @org.junit.jupiter.api.Test
+    void newEnemyMedium(){
+        List<Enemy> enemy;
+//        Connection conn = sql2o.open();
+//        conn.createQuery()
+        enemy = model.newEnemy(4);
+        assertEquals("Blade Smith", enemy.get(0).enemy_name);
+        assertEquals("Forest Bear", enemy.get(1).enemy_name);
+        assertEquals("Corrupt Shaman", enemy.get(2).enemy_name);
+        assertEquals("Shadow Assassin", enemy.get(3).enemy_name);
+    }
+
+    @org.junit.jupiter.api.Test
+    void newEnemyHard(){
+        List<Enemy> enemy;
+//        Connection conn = sql2o.open();
+//        conn.createQuery()
+        enemy = model.newEnemy(7);
+        assertEquals("Elemental Wizard", enemy.get(0).enemy_name);
+        assertEquals("Forgotten Paladin", enemy.get(1).enemy_name);
+        assertEquals("Infernal Drake", enemy.get(2).enemy_name);
+        assertEquals("Tree ent", enemy.get(3).enemy_name);
+    }
+
+    @org.junit.jupiter.api.Test
+    void newEnemyBoss(){
+        model.revivingEnemies();
+        List<Enemy> enemy;
+//        Connection conn = sql2o.open();
+//        conn.createQuery()
+        enemy = model.newEnemy(10);
+        assertEquals("Lich King", enemy.get(1).enemy_name);
+        assertEquals("Titan", enemy.get(0).enemy_name);
+    }
+
+    @org.junit.jupiter.api.Test
+    void killEnemy(){
+        model.killedEnemy("Lich King");
+        Connection conn = sql2o.open();
+        List<String> enemy;
+        enemy = conn.createQuery("select already_killed from enemies where enemy_name = 'Lich King'")
+                .executeAndFetch(String.class);
+        assertEquals("true", enemy.get(0));
+    }
+
+    @org.junit.jupiter.api.Test
+    void reviveEnemy(){
+        model.killedEnemy("Lich King");
+        model.revivingEnemies();
+        List<String> enemy;
+        Connection conn = sql2o.open();
+        enemy = conn.createQuery("select already_killed from enemies where enemy_name = 'Lich King'")
+                .executeAndFetch(String.class);
+        assertEquals("false", enemy.get(0));
+    }
 }
