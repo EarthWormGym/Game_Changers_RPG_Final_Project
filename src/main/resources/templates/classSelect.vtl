@@ -31,6 +31,11 @@
 
   </div>
 <placeholder>-----------------</placeholder>
+                   #if($player.get().pickedClass.equals("true"))
+                       <form action="/newGame" method="GET">
+                          <input class="btn btn-secondary" type="submit" id="new_game2" value="Start">
+                       </form>
+                   #end
                    <form action="/wizzardclass" method="POST">
                      <input type="image" src="Wizard_Character.gif" alt="Submit" width="400" height="300" id="wizzardclass">
                    </form>

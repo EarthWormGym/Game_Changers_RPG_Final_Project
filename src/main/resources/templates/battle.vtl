@@ -57,7 +57,11 @@
               <p>Damage : $player.get().damage_limit | Defence : $player.get().defence</p>
             </div>
       </h3>
-      <nav> test </nav>
+      <nav>
+        #foreach($log in $game.get().log)
+          <p> $log </p>
+        #end
+      </nav>
             <div class="attack_button">
                   #if($enemy.get().is_alive.equals("true") && $player.get().is_alive.equals("true"))
                       <form action="/attack" method="POST">

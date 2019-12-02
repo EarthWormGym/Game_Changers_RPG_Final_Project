@@ -30,11 +30,6 @@
 <div class="wood">
 <img src="logo.gif" alt="logo" width="500" height="100">
 
-                   #if($player.get().is_alive.equals("false"))
-                     <form action="/newGame" method="GET">
-                       <input class="btn btn-secondary" type="submit" id="new_game2" value="New Game">
-                     </form>
-                   #end
                    <form action="/sign_in" method="POST">
                      <input class="btn btn-secondary" type="submit" id="sign_in" value="Sign in">
                    </form>
