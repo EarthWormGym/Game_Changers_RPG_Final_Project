@@ -239,6 +239,46 @@ public class Main {
             return null;
         });
 
+        get("/class", (req, res) ->{
+            String username = req.session().attribute("user");
+            HashMap battle = new HashMap();
+            battle.put("username", username);
+            return new ModelAndView(battle, "templates/classSelect.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("/knightclass", (req, res) ->{
+            player.get().health = 100;
+            player.get().damage_limit = 20;
+            player.get().defence = 0.2;
+            player.get().healthPotions = 1;
+            player.get().poisonPotions = 1;
+            player.get().gif = ("Knight_idle.gif");
+            res.redirect("/battle");
+            return null;
+        });
+
+        post("/archerclass", (req, res) ->{
+            player.get().health = 60;
+            player.get().damage_limit = 50;
+            player.get().defence = 0.1;
+            player.get().healthPotions = 2;
+            player.get().poisonPotions = 0;
+            player.get().gif = ("archer.gif");
+            res.redirect("/battle");
+            return null;
+        });
+
+        post("/wizzardclass", (req, res) ->{
+            player.get().health = 80;
+            player.get().damage_limit = 30;
+            player.get().defence = 0.2;
+            player.get().healthPotions = 0;
+            player.get().poisonPotions = 2;
+            player.get().gif = ("Wizard_Character.gif");
+            res.redirect("/battle");
+            return null;
+        });
+
 
     }
 }
