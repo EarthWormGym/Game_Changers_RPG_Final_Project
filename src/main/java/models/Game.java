@@ -12,28 +12,34 @@ public class Game {
 
 
     public List<AtomicReference<Player>> playersArray;
+    public List<String> log;
 
 
         public Game(AtomicReference<Player> player, AtomicReference<Player> enemy){
             playersArray = new ArrayList<>();
+            log = new ArrayList<>();
             playersArray.add(player);
             playersArray.add(enemy);
         }
 
         public void attack(AtomicReference<Player> player, AtomicReference<Player> enemy){
             if(enemy.get().block_attack().equals("false")){
-                enemy.get().recieve_damage(Math.round(Math.floor(this.random_damage(player))));
+                double damage = this.random_damage(player);
+                log.add(player.get().username + " attacked " + enemy.get().username + " for " + damage);
+                enemy.get().recieve_damage(Math.round(Math.floor(damage)));
                 if(enemy.get().is_alive.equals("false")) {
                     player.get().coins += 15;
                     player.get().battles_won += 1;
                 }
             }else{
+                log.add(enemy.get().username + " blocked the attack");
             }
         }
 
     public void poisonAttack(AtomicReference<Player> player, AtomicReference<Player> enemy){
         if(enemy.get().block_attack().equals("false")){
             enemy.get().recieve_damage(30.0);
+            log.add(player.get().username + " poisoned " + enemy.get().username);
             if(enemy.get().is_alive.equals("false")) {
                 player.get().coins += 15;
                 player.get().battles_won += 1;
@@ -44,7 +50,11 @@ public class Game {
 
         public void enemy_attack(AtomicReference<Player> player, AtomicReference<Player> enemy){
             if(player.get().block_attack().equals("false")) {
-                player.get().recieve_damage(Math.round(Math.floor(this.random_damage(enemy))));
+                double damage = this.random_damage(enemy);
+                log.add(enemy.get().username + " attacked " + player.get().username + " for " + damage);
+                player.get().recieve_damage(Math.round(Math.floor(damage)));
+            }else{
+                log.add(player.get().username + " blocked the attack");
             }
         }
 

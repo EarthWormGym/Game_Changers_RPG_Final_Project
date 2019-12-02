@@ -6,8 +6,10 @@ import org.sql2o.Sql2o;
 import org.sql2o.converters.UUIDConverter;
 import org.sql2o.quirks.PostgresQuirks;
 import spark.ModelAndView;
+import java.util.Collections;
 
 import javax.crypto.spec.PSource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -82,9 +84,11 @@ public class Main {
             HashMap battle = new HashMap();
             battle.put("player", player);
             battle.put("enemy", enemy);
+            Collections.reverse(game.get().log);
+            battle.put("game", game);
             String username = req.session().attribute("user");
             battle.put("username", username);
-            System.out.println(player.get().arrayLog);
+//            System.out.println(player.get().arrayLog);
             if(player.get().battles_won < 11) {
                 return new ModelAndView(battle, "templates/battle.vtl");
             }
@@ -143,7 +147,7 @@ public class Main {
         });
 
         post("/usehealthpotion", (req, res) ->{
-            player.get().UseHealthPotion();
+            player.get().UseHealthPotion(game);
             res.redirect("/battle");
             return null;
         });
