@@ -31,27 +31,28 @@
 
   </div>
 <placeholder>-----------------</placeholder>
+                   #if($player.get().pickedClass.equals("true"))
+                       <form action="/newGame" method="GET">
+                          <input class="btn btn-secondary" type="submit" id="new_game2" value="Start">
+                       </form>
+                   #end
                    <form action="/wizzardclass" method="POST">
-                     <input type="image" src="Wizard_Character.gif" alt="Submit" width="334" height="462" id="wizzardclass">
+                     <input type="image" src="Wizard_Character.gif" alt="Submit" width="400" height="300" id="wizzardclass">
                    </form>
 
                    <wizzardtext> + Poison Potions </wizzardtext>
 
                    <form action="/archerclass" method="POST">
-                     <input type="image" src="archer.gif" alt="Submit" width="500" height="462" id="archerclass">
+                     <input type="image" src="archer.gif" alt="Submit" width="400" height="300" id="archerclass">
                    </form>
 
                     <archertext> + Damage | - Health </archertext>
 
                    <form action="/knightclass" method="POST">
-                     <input type="image" src="Knight_idle.gif" alt="Submit" width="500" height="462" id="knightclass">
+                     <input type="image" src="Knight_idle.gif" alt="Submit" width="400" height="300" id="knightclass">
                    </form>
 
                     <knighttext> + Defence | - Damage </knighttext>
-
-
-
-
     </classpagetext>
   </body>
 

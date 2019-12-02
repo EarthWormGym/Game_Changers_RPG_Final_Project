@@ -30,7 +30,7 @@ class Sql2oModelTest {
     UUID id = UUID.fromString("49921d6e-e210-4f68-ad7a-afac266278cb");
     AtomicReference<Player> player = new AtomicReference<>(new Player("AdamR", 100, 10, 20, "true", 100, 0, 1, ""));
     AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 80, 20, 10, "true", 0, 0, 0, ""));
-    public Game game = new Game(player, enemy);
+    AtomicReference<Game> game = new AtomicReference<>(new Game(player, enemy));
     Model model = new Sql2oModel(sql2o);
 
 
@@ -165,7 +165,7 @@ class Sql2oModelTest {
     @org.junit.jupiter.api.Test
     void enemyDropsCoinsOnDeath() {
         AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 0, 20, 0, "false", 0, 0, 0, ""));
-        game.attack(player, enemy);
+        game.get().attack(player, enemy);
         assertEquals(115, player.get().coins);
     }
 
@@ -196,7 +196,7 @@ class Sql2oModelTest {
     @org.junit.jupiter.api.Test
     void useHealthPotion(){
         player.get().AddHealthPotion();
-        player.get().UseHealthPotion();
+        player.get().UseHealthPotion(game);
         assertEquals(0, player.get().healthPotions);
         assertEquals(115, player.get().health);
     }

@@ -6,7 +6,10 @@ import org.sql2o.Sql2o;
 import org.sql2o.converters.UUIDConverter;
 import org.sql2o.quirks.PostgresQuirks;
 import spark.ModelAndView;
+import java.util.Collections;
 
+import javax.crypto.spec.PSource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -81,8 +84,11 @@ public class Main {
             HashMap battle = new HashMap();
             battle.put("player", player);
             battle.put("enemy", enemy);
+            Collections.reverse(game.get().log);
+            battle.put("game", game);
             String username = req.session().attribute("user");
             battle.put("username", username);
+//            System.out.println(player.get().arrayLog);
             if(player.get().battles_won < 11) {
                 return new ModelAndView(battle, "templates/battle.vtl");
             }
@@ -105,7 +111,7 @@ public class Main {
         }));
 
         get("/newGame", ((request, response) -> {
-            player.set(new Player("Adam", 100, 30, 20, "true", 50, 3, 1, ""));
+            player.set(new Player(player.get().username, player.get().health, player.get().damage_limit, player.get().defence, "true", 50, player.get().healthPotions, player.get().poisonPotions, player.get().gif));
             model.revivingEnemies();
             List<Enemy> new_game_enemies = model.newEnemy(player.get().battles_won);
             int new_game_min = 0;
@@ -141,7 +147,7 @@ public class Main {
         });
 
         post("/usehealthpotion", (req, res) ->{
-            player.get().UseHealthPotion();
+            player.get().UseHealthPotion(game);
             res.redirect("/battle");
             return null;
         });
@@ -268,42 +274,45 @@ public class Main {
             String username = req.session().attribute("user");
             HashMap battle = new HashMap();
             battle.put("username", username);
+            battle.put("player", player);
             return new ModelAndView(battle, "templates/classSelect.vtl");
         }, new VelocityTemplateEngine());
 
         post("/knightclass", (req, res) ->{
             player.get().health = 100;
             player.get().damage_limit = 20;
-            player.get().defence = 0.2;
+            player.get().defence = 20;
             player.get().healthPotions = 1;
             player.get().poisonPotions = 1;
             player.get().gif = ("Knight_idle.gif");
-            res.redirect("/battle");
+            player.get().pickedClass = "true";
+            res.redirect("/class");
             return null;
         });
 
         post("/archerclass", (req, res) ->{
             player.get().health = 60;
             player.get().damage_limit = 50;
-            player.get().defence = 0.1;
+            player.get().defence = 10;
             player.get().healthPotions = 2;
             player.get().poisonPotions = 0;
             player.get().gif = ("archer.gif");
-            res.redirect("/battle");
+            player.get().pickedClass = "true";
+            res.redirect("/class");
             return null;
         });
 
         post("/wizzardclass", (req, res) ->{
-            player.get().health = 80;
-            player.get().damage_limit = 30;
-            player.get().defence = 0.2;
+            player.get().health = 10000;
+            player.get().damage_limit = 10000;
+            player.get().defence = 20;
             player.get().healthPotions = 0;
             player.get().poisonPotions = 2;
             player.get().gif = ("Wizard_Character.gif");
-            res.redirect("/battle");
+            player.get().pickedClass = "true";
+            res.redirect("/class");
             return null;
         });
-
 
     }
 }
