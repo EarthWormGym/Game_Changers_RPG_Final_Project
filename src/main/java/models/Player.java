@@ -39,13 +39,13 @@ public class Player {
 //        this.arrayLog = new ArrayList<String>();
     }
 
-    public void recieve_damage(double damage){
+        public void recieve_damage(double damage, List<String> log){
         health -= damage;
 //        arrayLog.add(username + " took " + damage + " damage");
         if(health <= 0){
             health = 0;
         }
-        is_character_alive();
+        is_character_alive(log);
     }
 
     public String block_attack(){
@@ -57,9 +57,10 @@ public class Player {
         return "false";
     }
 
-    public void is_character_alive() {
+    public void is_character_alive(List<String> log) {
         if (health <= 0) {
             is_alive = "false";
+            log.add(username + " has died");
 //            arrayLog.add(username + " Died");
         }
     }

@@ -99,6 +99,7 @@ public class Main {
         }, new VelocityTemplateEngine());
 
         get("/newbattle", ((req, res) -> {
+            game.get().log.clear();
             model.killedEnemy(enemy.get().username);
             List<Enemy> enemiesBattle = model.newEnemy(player.get().battles_won);
             int min1 = 0;

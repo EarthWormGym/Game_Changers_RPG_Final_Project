@@ -26,7 +26,7 @@ public class Game {
             if(enemy.get().block_attack().equals("false")){
                 double damage = this.random_damage(player);
                 log.add(player.get().username + " attacked " + enemy.get().username + " for " + damage);
-                enemy.get().recieve_damage(Math.round(Math.floor(damage)));
+                enemy.get().recieve_damage(Math.round(Math.floor(damage)), log);
                 if(enemy.get().is_alive.equals("false")) {
                     player.get().coins += 15;
                     player.get().battles_won += 1;
@@ -38,7 +38,7 @@ public class Game {
 
     public void poisonAttack(AtomicReference<Player> player, AtomicReference<Player> enemy){
         if(enemy.get().block_attack().equals("false")){
-            enemy.get().recieve_damage(30.0);
+            enemy.get().recieve_damage(30.0, log);
             log.add(player.get().username + " poisoned " + enemy.get().username);
             if(enemy.get().is_alive.equals("false")) {
                 player.get().coins += 15;
@@ -52,7 +52,7 @@ public class Game {
             if(player.get().block_attack().equals("false")) {
                 double damage = this.random_damage(enemy);
                 log.add(enemy.get().username + " attacked " + player.get().username + " for " + damage);
-                player.get().recieve_damage(Math.round(Math.floor(damage)));
+                player.get().recieve_damage(Math.round(Math.floor(damage)), log);
             }else{
                 log.add(player.get().username + " blocked the attack");
             }
