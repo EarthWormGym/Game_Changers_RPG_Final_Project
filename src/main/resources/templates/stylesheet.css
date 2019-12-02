@@ -225,13 +225,13 @@ background-size: 1500px 850px;
 .playergif{
     position: absolute;
     left: 18%;
-    top: 35%;
+    top: 375%;
 }
 
 .enemygif{
     position: absolute;
     left: 80%;
-    top: 12%;
+    top: 100%;
 }
 
 .shopInfo {
@@ -253,21 +253,24 @@ letter-spacing: -2px;
 
 .enemyInfo{
     position: absolute;
-    width: 400px;
+    width: 500px;
     height: 200px;
-    left: 20%;
+    left: 19%;
+    top: 62%;
 }
 .playerInfo{
     position: absolute;
-    width: 400px;
+    width: 500px;
     height: 200px;
-    left: 85%;
-    top: 300%;
+    left: 64%;
+    top: 700%;
+    font-color: #000000;
 }
 
-#attack_button{
+.attack_button{
     position: absolute;
-    top: 300%;
+    top: 920%;
+}
 
 .class{
 position: fixed;

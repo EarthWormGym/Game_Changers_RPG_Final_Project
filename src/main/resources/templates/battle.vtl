@@ -36,15 +36,13 @@
       <div class="container">
         <div class="clearfix">
                   <img class="enemygif" alt="ork_image" width="400" height="250" src="$enemy.get().gif"/>
-                  <ul>
-                  <div class="enemyInfo">
-                  <h2><u>Enemy</u><h2>
-                  <p id="enemy_name">Enemy: $enemy.get().username</p>
-                  <p>HP: <b id="enemy_hp">$enemy.get().health</b> </p>
-                  <p>Damage: <b id="enemy_damage_limit">$enemy.get().damage_limit</b> </p>
-                  <p>Defence: <b id="enemy_defence">$enemy.get().defence</b></p>
+                  <h2>
+             <div class="enemyInfo">
+                  <p><u>Enemy</u> : $enemy.get().username</p>
+                  <p>HP : <b id="enemy_hp">$enemy.get().health</b> </p>
+                  <p>Damage : $enemy.get().damage_limit | Defence : $enemy.get().defence</p>
                   </div>
-                  </ul>
+                  </h2>
         </div>
       </div>
 
@@ -57,18 +55,14 @@
               <h2>
                 <p2>
                     <img class="playergif" alt="player_image" width="400" height="300" src="$player.get().gif"/>
-                      <ul>
+
                       <div class="playerInfo">
-                      <h2><u>Player</u>
-                      <p id="coins"> Coins: $player.get().coins </p>
-                          <p id="player_name">$player.get().username</p>
-                          <p>HP: <b id="player_hp">$player.get().health</b> </p>
-                          <p>Damage: <b id="player_damage_limit">$player.get().damage_limit</b> </p>
-                          <p>Defence: <b id="player_defence">$player.get().defence</b></p>
-                          <p>Health Potions: <b id="player_hpotions">$player.get().healthPotions</b></p>
+                      <p><u>Player</u> : $player.get().username | Coins : $player.get().coins</p>
+                      <p>HP : $player.get().health| Health Potions : $player.get().healthPotions</p>
+                      <p>Damage : $player.get().damage_limit | Defence : $player.get().defence</p>
                           </div>
                           #if($enemy.get().is_alive.equals("true") && $player.get().is_alive.equals("true"))
-                          <attack_button>
+                          <div class="attack_button">
                               <form action="/attack" method="POST">
                                        <button class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack"> Attack </button>
                               </form>
@@ -78,7 +72,7 @@
                                       </form>
                                   #end
                           #end
-                          </attack_button>
+                          </div>
                           #if($enemy.get().is_alive.equals("false") && $player.get().battles_won < 11)
                               <p>You have defeated the enemy!</p>
                               <form action="/newbattle" method="GET">
@@ -97,7 +91,7 @@
                                   <input class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Home">
                               </form>
                           #end
-                      </ul>
+
                 </p2>
              </div>
       </div>
