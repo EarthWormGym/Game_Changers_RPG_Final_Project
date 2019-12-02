@@ -48,9 +48,9 @@ public class Game {
             }
         }
 
-        public double random_damage(AtomicReference<Player> character){
+        public double random_damage(AtomicReference<Player> character) {
             Random rand = new Random();
-            int random = (int)(Math.random() * character.get().damage_limit + 1);
+            int random = (int) (Math.random() * character.get().damage_limit + 1);
             return (random);
         }
 }

@@ -7,6 +7,7 @@ import org.sql2o.converters.UUIDConverter;
 import org.sql2o.quirks.PostgresQuirks;
 import spark.ModelAndView;
 
+import javax.crypto.spec.PSource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -83,6 +84,7 @@ public class Main {
             battle.put("enemy", enemy);
             String username = req.session().attribute("user");
             battle.put("username", username);
+            System.out.println(player.get().arrayLog);
             if(player.get().battles_won < 11) {
                 return new ModelAndView(battle, "templates/battle.vtl");
             }
@@ -307,7 +309,6 @@ public class Main {
             res.redirect("/class");
             return null;
         });
-
 
     }
 }

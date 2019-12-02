@@ -28,6 +28,13 @@
         * {
            font-family: myFirstFont;
         }
+        nav {
+        	border: 2px solid #e22000;
+        	height: 100px;
+        	width: 100px;
+        	overflow: hidden;
+         overflow-y: scroll;
+        }
     </style>
 
   </head>
@@ -37,10 +44,10 @@
         <div class="clearfix">
             <h2><u>Enemy</u><h2>
             #if($player.get().poisonPotions > 0)
-                                                  <form action="/usepoisonpotion" method="POST">
-                                                       <button class="btn btn-danger btn-lg" type="submit" id="poison_potion" value="Use a Poison potion">Use a Poison Potion</button>
-                                                  </form>
-                                              #end
+                  <form action="/usepoisonpotion" method="POST">
+                       <button class="btn btn-danger btn-lg" type="submit" id="poison_potion" value="Use a Poison potion">Use a Poison Potion</button>
+                  </form>
+              #end
                   <img class="pull-right" alt="ork_image" width="400" height="300" src="$enemy.get().gif"/>
                   <ul>
                   <p class="enemyname" id="enemy_name">Enemy: $enemy.get().username</p>
@@ -50,7 +57,16 @@
                   </ul>
         </div>
       </div>
-
+        <form action="/attack" method="POST">
+                 <button class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Attack"> Attack </button>
+        </form>
+        <div class="container">
+            <nav>
+              #foreach($log in $player.get().arrayLog)
+                <p> $log </p>
+              #end
+            </nav>
+        </div>
       <div class="container">
              <div class="clearfix">
               <h2><u>Player</u>
