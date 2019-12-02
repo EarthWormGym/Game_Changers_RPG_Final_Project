@@ -15,6 +15,7 @@ public class Player {
     public int poisonPotions;
     public String gif;
     public int battles_won;
+    public String pickedClass;
 
 
     public Player(String username, int health, int damage_limit, double defence, String is_alive, int coins, int healthPotions, int poisonPotions, String gif) {
@@ -29,6 +30,7 @@ public class Player {
         this.poisonPotions = poisonPotions;
         this.gif = gif;
         this.battles_won = 0;
+        this.pickedClass = "false";
 
     }
 
