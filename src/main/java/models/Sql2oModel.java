@@ -122,4 +122,14 @@ public class Sql2oModel implements Model {
         }
     }
 
+    @Override
+    public String getUserID(String user_name) {
+        try (Connection conn = sql2o.open()) {
+            List<String> userID = conn.createQuery("select user_id from players where user_name = :user_name")
+                    .addParameter("user_name", user_name)
+                    .executeAndFetch(String.class);
+            return userID.get(0);
+        }
+    }
+
 }

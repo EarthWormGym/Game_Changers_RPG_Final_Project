@@ -14,6 +14,7 @@ public interface Model {
     void revivingEnemies();
     void updateHighscore(int playersHighscore, String playerID);
     int checkHighscore(String playerID);
+    String getUserID(String user_name);
 }
 
 

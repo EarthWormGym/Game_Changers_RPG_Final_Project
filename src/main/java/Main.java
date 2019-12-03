@@ -47,7 +47,6 @@ public class Main {
 
         AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 50, 3, 1, ""));
         AtomicReference<Players> players = new AtomicReference<>(new Players("playerUuid.toString()", "username", "fullname", "password", 0));
-
         List<Enemy> enemies = model.newEnemy(player.get().battles_won);
         int min = 0;
         int max = enemies.size() - 1;
@@ -77,13 +76,6 @@ public class Main {
             battle.put("player", player);
             battle.put("enemy", enemy);
             battle.put("username", username);
-            if(player.get().is_alive.equals("false")){
-                int highscore = model.checkHighscore(players.get().user_ID);
-                int current_score = player.get().calc_score(game);
-                if(current_score > highscore) {
-                    model.updateHighscore(current_score, players.get().user_ID);
-                }
-            }
             return new ModelAndView(battle, "templates/home.vtl");
         }, new VelocityTemplateEngine());
 
@@ -95,15 +87,40 @@ public class Main {
             battle.put("game", game);
             String username = req.session().attribute("user");
             battle.put("username", username);
-            if(player.get().battles_won < 11) {
-                return new ModelAndView(battle, "templates/battle.vtl");
+            if(player.get().is_alive.equals("false")){
+                res.redirect("/died");
             }
             else if(player.get().battles_won == 11){
-                return new ModelAndView(battle, "templates/victory.vtl");
+                res.redirect("/won");
             }
-            return null;
+            return new ModelAndView(battle, "templates/battle.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/won", ((request, response) -> {
+            HashMap scores = new HashMap();
+            int highscore = model.checkHighscore(players.get().user_ID);
+            int current_score = player.get().calc_score(game);
+            if(current_score > highscore) {
+                model.updateHighscore(current_score, players.get().user_ID);
+            }
+            scores.put("current_score", current_score);
+            scores.put("high_score", highscore);
+            scores.put("username", players.get().user_name);
+            return new ModelAndView(scores, "templates/victory.vtl");
+        }), new VelocityTemplateEngine());
+
+        get("/died", ((request, response) -> {
+            HashMap scores = new HashMap();
+            int highscore = model.checkHighscore(players.get().user_ID);
+            int current_score = player.get().calc_score(game);
+            if(current_score > highscore) {
+                model.updateHighscore(current_score, players.get().user_ID);
+            }
+            scores.put("current_score", current_score);
+            scores.put("high_score", highscore);
+            scores.put("username", players.get().user_name);
+            return new ModelAndView(scores, "templates/death.vtl");
+        }), new VelocityTemplateEngine());
 
         get("/newbattle", ((req, res) -> {
             game.get().log.clear();
@@ -208,6 +225,8 @@ public class Main {
             String username = req.queryParams("username");
             String password = req.queryParams("password");
 
+            String userID = model.getUserID(username);
+
             if(model.CorrectPassword(username, password)){
                 res.redirect("/signed_in");
             } else {
@@ -216,6 +235,7 @@ public class Main {
 
             req.session().attribute("user",username);
             req.session().attribute("Signed_In?","true");
+            players.set(new Players(userID, username, "fullname", password, 0));
             player.get().username = username;
             return null;
         });
@@ -299,7 +319,7 @@ public class Main {
         });
 
         post("/archerclass", (req, res) ->{
-            player.get().health = 60;
+            player.get().health = 1;
             player.get().damage_limit = 50;
             player.get().defence = 10;
             player.get().healthPotions = 2;
