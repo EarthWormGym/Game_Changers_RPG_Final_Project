@@ -110,7 +110,7 @@ public class Player {
         if (coins >= 20){
             if(poisonPotions < 3){
                 poisonPotions = poisonPotions + 1;
-                coins = coins - 20;
+                coins = coins - 15;
             }
         }
     }
@@ -121,7 +121,7 @@ public class Player {
                 defence = defence * 100;
                 defence = defence + 5;
                 defence = defence / 100;
-                coins = coins - 10;
+                coins = coins - 15;
             }
         }
     }
@@ -132,12 +132,12 @@ public class Player {
         int poisonPotionsPointsAdd = 0;
         int poisonPotionsPointsSub = 0;
         int healthPoints = health * 137;
-        if(hpPotsUsed <= 3){
+        if(hpPotsUsed <= 2){
             healthPotionsPointsAdd = 316;
         }else{
             healthPotionsPointsSub = hpPotsUsed * 27;
         }
-        if(pPotsUsed <= 3){
+        if(pPotsUsed <= 2){
             poisonPotionsPointsAdd = 321;
         } else {
             poisonPotionsPointsSub = pPotsUsed * 27;
