@@ -274,14 +274,14 @@ letter-spacing: -2px;
 
 .selectClassBackground{
 position: fixed;
-background-image: url("backgrounds/Choose_your_class.png");
+background-image: url("backgrounds/Choose_your_class.gif");
 background-repeat: no-repeat;
-background-size:1500px 850px;
+background-size:1450px 850px;
 }
 
 #wizzardclass{
 position:absolute;
-  left: 575%;
+  left: 600%;
   top: 1450%;
 }
 
@@ -325,7 +325,7 @@ color: white;
 wizzardtext{
 position: absolute;
 top: 2800%;
-left: 625%;
+left: 645%;
 font-size: 25px;
 width: 400px;
 color: white;
