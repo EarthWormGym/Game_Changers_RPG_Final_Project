@@ -316,7 +316,7 @@ public class Main {
         });
 
         post("/chest", (req, res) ->{
-            int random = (int) (Math.random());
+            double random = (double) (Math.random());
             if(random <= 0.33){
                 player.get().health += 50;
                 player.get().chest_reward = "health";
