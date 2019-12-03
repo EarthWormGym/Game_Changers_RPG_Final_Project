@@ -43,6 +43,7 @@ public class Player {
         this.hpPotsUsed = 0;
         this.pPotsUsed = 0;
         this.num_keys = 0;
+
         this.chest_reward = null;
     }
 
