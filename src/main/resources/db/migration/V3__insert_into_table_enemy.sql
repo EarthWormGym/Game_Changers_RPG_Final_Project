@@ -12,4 +12,5 @@ insert into enemies(enemy_id, enemy_name, health, damage_limit, defence, difficu
     ('10', 'Infernal Drake', 160, 30, 20, 'hard', 'enemies/drake_enemy.gif', 'false'),
     ('11', 'Tree ent', 165, 25, 15, 'hard', 'enemies/treeent_enemy.gif', 'false'),
     ('12', 'BOSS : Lich King', 250, 45, 25, 'boss', 'enemies/Lich_King.gif', 'false'),
-    ('13', 'BOSS : Titan', 300, 35, 20, 'boss', 'enemies/Titan_enemy.gif', 'false');
+    ('13', 'BOSS : Bone Master', 300, 35, 20, 'boss', 'enemies/Skeleton_master.gif', 'false'),
+    ('14', 'BOSS : Dragon King', 300, 35, 20, 'boss', 'enemies/Dragon_king.gif', 'false');
