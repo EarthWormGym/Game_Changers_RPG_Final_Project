@@ -490,29 +490,29 @@ top: 100px;
 left: 1030px;
 }
 
-
 .win {
+
 background-image: url("backgrounds/win_background.gif");
 background-repeat: no-repeat;
 background-size: 1470px 875px;
+
 }
 
-.win_center {
-  margin: auto;
-  border-radius: 20px;
-  padding: 365px;
-  width: 200px;
-  height: 100px;
-  text-align: right;
+  .win_center {
+      margin: auto;
+      border-radius: 20px;
+      padding: 365px;
+      width: 200px;
+      height: 100px;
+      text-align: right;
+    }
+  .win_logo {
+  position: absolute;
+  top: 18%;
+  left: 35%;
+  text-align: center;
+  display: block;
   }
-
-.win_logo {
-position: absolute;
-top: 18%;
-left: 35%;
-text-align: center;
-display: block;
-}
 
 
 #new_game{
@@ -529,4 +529,3 @@ top: 10px;
 left: 10px;
 font-size: 40px;
 }
-
