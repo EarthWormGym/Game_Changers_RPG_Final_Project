@@ -119,7 +119,7 @@ public class Main {
             scores.put("current_score", current_score);
             scores.put("high_score", highscore);
             scores.put("username", players.get().user_name);
-            return new ModelAndView(scores, "templates/death.vtl");
+            return new ModelAndView(scores, "templates/lost.vtl");
         }), new VelocityTemplateEngine());
 
         get("/newbattle", ((req, res) -> {
