@@ -112,4 +112,24 @@ public class Sql2oModel implements Model {
         }
     }
 
+    @Override
+    public int checkHighscore(String playerID) {
+        try (Connection conn = sql2o.open()) {
+            List<Integer> score = conn.createQuery("select high_score from players where user_id = :playerID")
+                    .addParameter("playerID", playerID)
+                    .executeAndFetch(Integer.class);
+            return score.get(0);
+        }
+    }
+
+    @Override
+    public String getUserID(String user_name) {
+        try (Connection conn = sql2o.open()) {
+            List<String> userID = conn.createQuery("select user_id from players where user_name = :user_name")
+                    .addParameter("user_name", user_name)
+                    .executeAndFetch(String.class);
+            return userID.get(0);
+        }
+    }
+
 }
