@@ -21,28 +21,22 @@
           }
 
   </style>
-  <body>
+  <body class="lost">
   <shopText>
-    <h1 style="color:transparent">Welcome to Makers and Mortals, $username</h1>
-<div class="wood">
-<img src="images/logo.gif" alt="logo" width="500" height="100">
+<h1 style="text-align: center;">$username, you died!</h1>
+<div class="win_center">
 
-                   <form action="/sign_in" method="POST">
-                     <input class="btn btn-secondary" type="submit" id="sign_in" value="Sign in">
+
+
+                   <form action="/home" method="GET">
+                     <input class="btn btn-secondary" type="submit" id="home" value="Home">
                    </form>
-
-                    <form action="/sign_up" method="POST">
-                      <input class="btn btn-secondary" type="submit" id="sign_up" value="Sign up">
-                    </form>
 
                     <form action="/sign_out" method="POST">
                       <input class="btn btn-secondary" type="submit" id="sign_out" value="Sign out">
                     </form>
 
-                    <form action="/class" method="GET">
-                      <input class="btn btn-secondary" type="submit" id="class" value="Choose your Class">
-                    </form>
-</div>
+                    </div>
      </shopText>
   </body>
 </html>

@@ -529,3 +529,9 @@ top: 10px;
 left: 10px;
 font-size: 40px;
 }
+
+.lost{
+background-image: url("backgrounds/death_background.gif");
+background-repeat: no-repeat;
+background-size: 1450px 850px;
+}
