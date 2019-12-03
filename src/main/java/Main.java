@@ -99,6 +99,7 @@ public class Main {
 
 
         get("/newbattle", ((req, res) -> {
+            player.get().chest_reward = null;
             game.get().log.clear();
             model.killedEnemy(enemy.get().username);
             List<Enemy> enemiesBattle = model.newEnemy(player.get().battles_won);
@@ -288,6 +289,9 @@ public class Main {
 
         get("/class", (req, res) ->{
             String username = req.session().attribute("user");
+            if(username == "Hello There!"){
+                res.redirect("/home");
+            }
             HashMap battle = new HashMap();
             battle.put("username", username);
             battle.put("player", player);
