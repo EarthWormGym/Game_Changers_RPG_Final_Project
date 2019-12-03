@@ -3,6 +3,7 @@
   <head>
 
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="JavaScript/jquery.js"></script>
     <link rel="stylesheet" href="/stylesheet.css" >
@@ -27,6 +28,11 @@
         }
         * {
            font-family: myFirstFont;
+        }
+        .btn-secondary {
+          color: #ffffff;
+          background-color: #611BBD;
+          border-color: #130269;
         }
     </style>
 
@@ -73,12 +79,12 @@
                       </form>
                       #if($player.get().healthPotions > 0)
                         <form action="/usehealthpotion" method="POST">
-                          <button class="btn btn-danger btn-lg" type="submit" id="healing_potion" value="Use a Healing potion">Use a Healing potion</button>
+                          <button class="btn btn-success btn-lg" type="submit" id="healing_potion" value="Use a Healing potion">Use a Healing potion</button>
                         </form>
                       #end
                       #if($player.get().poisonPotions > 0)
                         <form action="/usepoisonpotion" method="POST">
-                          <button class="btn btn-danger btn-lg" type="submit" id="poison_potion" value="Use a Poison potion">Use a Poison Potion</button>
+                          <button class="btn btn-secondary btn-lg" type="submit" id="poison_potion" value="Use a Poison potion">Use a Poison Potion</button>
                         </form>
                       #end
                   #end
@@ -86,7 +92,7 @@
                       <h3>You have defeated the enemy!</h3>
                       <h3>Go to the shop to upgrade and recover.</h3>
                       <form action="/shop" method="GET">
-                          <input class="btn btn-danger btn-lg" type="submit" id="nextEnemy" value="Shop">
+                          <input class="btn btn-primary btn-lg" type="submit" id="nextEnemy" value="Shop">
                       </form>
                   #end
                   #if($enemy.get().is_alive.equals("false") && $player.get().battles_won == 11)
@@ -96,7 +102,7 @@
                        </form>
                   #end
                   #if($player.get().is_alive.equals("false"))
-                      <p>You lost!</p>
+                      <h3>You lost!</h3>
                       <form action="/home" method="GET">
                           <input class="btn btn-danger btn-lg" type="submit" id="playerAttack" value="Home">
                       </form>

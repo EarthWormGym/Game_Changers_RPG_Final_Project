@@ -69,7 +69,7 @@ public class Main {
             if(signedIn == "true"){
                 req.session().attribute("user", username);
             }else{
-                req.session().attribute("user", "Prepare for carnage");
+                req.session().attribute("user", "Hello There!");
                 username = req.session().attribute("user");
             }
             HashMap battle = new HashMap();
@@ -88,7 +88,6 @@ public class Main {
             battle.put("game", game);
             String username = req.session().attribute("user");
             battle.put("username", username);
-//            System.out.println(player.get().arrayLog);
             if(player.get().battles_won < 11) {
                 return new ModelAndView(battle, "templates/battle.vtl");
             }

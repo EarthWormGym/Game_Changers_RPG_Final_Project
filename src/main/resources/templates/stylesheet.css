@@ -349,6 +349,7 @@ position: absolute;
 top: 100px;
 left: 402px;
 text-decoration: underline;
+color: white;
 }
 
 signtitledone{
@@ -357,6 +358,7 @@ position: absolute;
 top: 100px;
 left: 270px;
 text-decoration: underline;
+color: white;
 }
 
 homebutton{
@@ -408,6 +410,7 @@ font-size: 24px;
 position: absolute;
 left: 54px;
 top: -8px;
+color: white;
 }
 
 passwordinput{
@@ -415,6 +418,7 @@ font-size: 24px;
 position: absolute;
 left: 54px;
 top: 56px;
+color: white;
 }
 
 passwordinputup{
@@ -422,6 +426,7 @@ font-size: 24px;
 position: absolute;
 left: 54px;
 top: 122px;
+color: white;
 }
 
 fullnameinput{
@@ -429,6 +434,7 @@ font-size: 24px;
 position: absolute;
 left: 54px;
 top: 56px;
+color: white;
 }
 
 signsubmit{
@@ -468,8 +474,23 @@ left: 68%;
 overflow: hidden;
 overflow-y: scroll;
 font-size: 20px;
-    }
+}
 
+bluebanner{
+
+position: absolute;
+top: 100px;
+left: 10px;
+}
+
+redbanner{
+
+position: absolute;
+top: 100px;
+left: 1030px;
+}
+
+<<<<<<< HEAD
 .win {
 
 background-image: url("backgrounds/win_background.gif");
@@ -494,3 +515,19 @@ background-size: 1470px 875px;
   display: block;
   }
 
+=======
+#new_game{
+position: absolute;
+top: 200px;
+left: 451px;
+ width: 500px;
+ height: 250px;
+}
+
+userssignedin{
+position: absolute;
+top: 10px;
+left: 10px;
+font-size: 40px;
+}
+>>>>>>> 47d594da6f49c85c6eef051d9231389364b073b8
