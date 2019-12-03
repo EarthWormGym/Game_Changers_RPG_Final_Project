@@ -69,7 +69,7 @@ public class Main {
             if(signedIn == "true"){
                 req.session().attribute("user", username);
             }else{
-                req.session().attribute("user", "Prepare for carnage");
+                req.session().attribute("user", "Hello There!");
                 username = req.session().attribute("user");
             }
             HashMap battle = new HashMap();
