@@ -307,8 +307,8 @@ public class Main {
         });
 
         post("/archerclass", (req, res) ->{
-            player.get().health = 60;
-            player.get().damage_limit = 50;
+            player.get().health = 70;
+            player.get().damage_limit = 30;
             player.get().defence = 10;
             player.get().healthPotions = 2;
             player.get().poisonPotions = 0;
@@ -319,9 +319,9 @@ public class Main {
         });
 
         post("/wizzardclass", (req, res) ->{
-            player.get().health = 10000;
-            player.get().damage_limit = 10000;
-            player.get().defence = 20;
+            player.get().health = 80;
+            player.get().damage_limit = 40;
+            player.get().defence = 5;
             player.get().healthPotions = 0;
             player.get().poisonPotions = 2;
             player.get().gif = ("players/Wizard_Character.gif");
