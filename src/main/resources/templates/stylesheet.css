@@ -566,3 +566,21 @@ left: -300px;
 top: 120px;
 }
 
+#current_score {
+position:absolute;
+  left: 25%;
+  top: 50%;
+  width: 50%;
+  text-align: center;
+  font-size: 50px;
+}
+
+#high_score {
+position:absolute;
+  left: 25%;
+  top: 34%;
+  width: 50%;
+  text-align: center;
+  font-size: 50px;
+}
+
