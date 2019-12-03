@@ -325,7 +325,7 @@ public class Main {
         }, new VelocityTemplateEngine());
 
         post("/knightclass", (req, res) ->{
-            player.get().health = 200;
+            player.get().health = 180;
             player.get().damage_limit = 20;
             player.get().defence = 25;
             player.get().healthPotions = 1;
@@ -337,7 +337,7 @@ public class Main {
         });
 
         post("/archerclass", (req, res) ->{
-            player.get().health = 155;
+            player.get().health = 125;
             player.get().damage_limit = 55;
             player.get().defence = 10;
             player.get().healthPotions = 2;
@@ -349,7 +349,7 @@ public class Main {
         });
 
         post("/wizzardclass", (req, res) ->{
-            player.get().health = 160;
+            player.get().health = 140;
             player.get().damage_limit = 40;
             player.get().defence = 10;
             player.get().healthPotions = 1;
