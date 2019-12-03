@@ -12,6 +12,7 @@ public interface Model {
     List newEnemy(Integer counter);
     void killedEnemy(String enemy_name);
     void revivingEnemies();
+    void updateHighscore(int playersHighscore, String playerID);
 }
 
 
