@@ -80,10 +80,10 @@ public class Player {
     }
 
     public void AddHealthPotion(){
-        if (coins >= 20){
+        if (coins >= 15){
             if(healthPotions < 3) {
                 healthPotions= healthPotions + 1;
-                coins = coins - 20;
+                coins = coins - 15;
             }
         }
     }
@@ -107,10 +107,10 @@ public class Player {
     }
 
     public void AddPoisonPotion(){
-        if (coins >= 20){
+        if (coins >= 15){
             if(poisonPotions < 3){
                 poisonPotions = poisonPotions + 1;
-                coins = coins - 20;
+                coins = coins - 15;
             }
         }
     }

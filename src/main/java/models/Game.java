@@ -79,7 +79,6 @@ public class Game {
         }
 
         public double random_damage(AtomicReference<Player> character) {
-        Random rand = new Random();
         int random = (int) (Math.random() * character.get().damage_limit + 1);
         return (random);
     }
@@ -87,9 +86,8 @@ public class Game {
         public boolean drop_key(AtomicReference<Player> player, AtomicReference<Player> enemy){
             boolean key = false;
             double key_drop_chance = 0.1;
-            double random = (double) (Math.random());
+            double random = Math.random();
             if(enemy.get().health == 0){
-                System.out.println(random);
                 if(random <= key_drop_chance){
                     key = true;
                     player.get().num_keys += 1;

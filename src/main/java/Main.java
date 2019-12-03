@@ -361,7 +361,7 @@ public class Main {
         });
 
         post("/chest", (req, res) ->{
-            double random = (double) (Math.random());
+            double random =  Math.random();
             player.get().num_keys -= 1;
             if(random <= 0.33){
                 player.get().health += 50;
