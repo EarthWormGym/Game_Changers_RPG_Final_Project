@@ -121,7 +121,7 @@ public class Player {
                 defence = defence * 100;
                 defence = defence + 5;
                 defence = defence / 100;
-                coins = coins - 15;
+                coins = coins - 10;
             }
         }
     }
