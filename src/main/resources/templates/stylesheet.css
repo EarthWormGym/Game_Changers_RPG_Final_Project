@@ -490,8 +490,6 @@ top: 100px;
 left: 1030px;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 .win {
 
 background-image: url("backgrounds/win_background.gif");
@@ -516,47 +514,6 @@ background-size: 1470px 875px;
   display: block;
   }
 
-=======
-#new_game{
-position: absolute;
-top: 200px;
-left: 451px;
- width: 500px;
- height: 250px;
-}
-
-userssignedin{
-position: absolute;
-top: 10px;
-left: 10px;
-font-size: 40px;
-}
->>>>>>> 47d594da6f49c85c6eef051d9231389364b073b8
-=======
-
-.win {
-background-image: url("backgrounds/win_background.gif");
-background-repeat: no-repeat;
-background-size: 1470px 875px;
-}
-
-.win_center {
-  margin: auto;
-  border-radius: 20px;
-  padding: 365px;
-  width: 200px;
-  height: 100px;
-  text-align: right;
-  }
-
-.win_logo {
-position: absolute;
-top: 18%;
-left: 35%;
-text-align: center;
-display: block;
-}
-
 
 #new_game{
 position: absolute;
@@ -572,5 +529,3 @@ top: 10px;
 left: 10px;
 font-size: 40px;
 }
-
->>>>>>> ce5cdf5f9d7185e71a9c0e5f3f3f651f3de8c872
