@@ -69,7 +69,7 @@ public class Main {
             if(signedIn == "true"){
                 req.session().attribute("user", username);
             }else{
-                req.session().attribute("user", "Prepare for carnage");
+                req.session().attribute("user", "Hello There!");
                 username = req.session().attribute("user");
             }
             HashMap battle = new HashMap();
@@ -119,10 +119,11 @@ public class Main {
             scores.put("current_score", current_score);
             scores.put("high_score", highscore);
             scores.put("username", players.get().user_name);
-            return new ModelAndView(scores, "templates/death.vtl");
+            return new ModelAndView(scores, "templates/lost.vtl");
         }), new VelocityTemplateEngine());
 
         get("/newbattle", ((req, res) -> {
+            player.get().chest_reward = null;
             game.get().log.clear();
             model.killedEnemy(enemy.get().username);
             List<Enemy> enemiesBattle = model.newEnemy(player.get().battles_won);
@@ -200,6 +201,16 @@ public class Main {
             return new ModelAndView(signed, "templates/signed_up.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/lost", (req, res) -> {
+            HashMap signed = new HashMap();
+            return new ModelAndView(signed, "templates/lost.vtl");
+        }, new VelocityTemplateEngine());
+
+        get("/win", (req, res) -> {
+            HashMap signed = new HashMap();
+            return new ModelAndView(signed, "templates/victory.vtl");
+        }, new VelocityTemplateEngine());
+
         post("/signed", (req, res) -> {
             res.redirect("/sign_in");
             return null;
@@ -209,10 +220,14 @@ public class Main {
             String username = req.queryParams("username");
             String fullname = req.queryParams("full_name");
             String password = req.queryParams("password");
-            UUID playerUuid = UUID.randomUUID();
-            players.set(new Players(playerUuid.toString(), username, fullname, password, 0));
-            model.createPlayer(playerUuid.toString(), username, fullname, password, 0);
-            res.redirect("/signed_up");
+            if(model.is_username_used(username)){
+                res.redirect("/sign_up");
+            } else {
+                UUID playerUuid = UUID.randomUUID();
+                players.set(new Players(playerUuid.toString(), username, fullname, password, 0));
+                model.createPlayer(playerUuid.toString(), username, fullname, password, 0);
+                res.redirect("/signed_up");
+            }
             return null;
         });
 
@@ -300,6 +315,9 @@ public class Main {
 
         get("/class", (req, res) ->{
             String username = req.session().attribute("user");
+            if(username == "Hello There!"){
+                res.redirect("/home");
+            }
             HashMap battle = new HashMap();
             battle.put("username", username);
             battle.put("player", player);
@@ -342,5 +360,24 @@ public class Main {
             return null;
         });
 
+        post("/chest", (req, res) ->{
+            double random = (double) (Math.random());
+            player.get().num_keys -= 1;
+            if(random <= 0.33){
+                player.get().health += 50;
+                player.get().chest_reward = "health";
+            } else if (random <= 0.66 && random > 0.33){
+                player.get().damage_limit += 20;
+                player.get().chest_reward = "damage";
+            } else {
+                player.get().defence += 0.2;
+                player.get().chest_reward = "defence";
+            }
+            res.redirect("/shop");
+            return null;
+        });
+
     }
+
+
 }

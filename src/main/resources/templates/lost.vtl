@@ -21,15 +21,19 @@
           }
 
   </style>
-  <body>
+  <body class="lost">
   <shopText>
-<h1 style="text-align: center;">Commiserations $username, you died!</h1>
-<div class="wood">
+<h1 style="text-align: center;">$username, you died!</h1>
+<div class="win_center">
 
-<img src="images/logo.gif" alt="logo" width="500" height="100">
+                   <h2 id="high_score">High Score : $high_score</h2>
+                   <br>
+                   <h2 id="current_score">Your score this journey : $current_score</h2>
+
+
 
                    <form action="/home" method="GET">
-                     <input class="btn btn-secondary" type="submit" id="home" value="Home">
+                     <input class="btn btn-secondary" type="submit" id="sign_out" value="Home">
                    </form>
 
                     </div>

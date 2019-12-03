@@ -23,6 +23,8 @@ public class Player {
     public int poisoned;
     public int hpPotsUsed;
     public int pPotsUsed;
+    public int num_keys;
+    public  String chest_reward;
 
     public Player(String username, int health, int damage_limit, double defence, String is_alive, int coins, int healthPotions, int poisonPotions, String gif) {
 
@@ -40,6 +42,8 @@ public class Player {
         this.poisoned = 0;
         this.hpPotsUsed = 0;
         this.pPotsUsed = 0;
+        this.num_keys = 0;
+        this.chest_reward = null;
     }
 
     public void recieve_damage(double damage, List<String> log){
