@@ -15,6 +15,7 @@ public interface Model {
     void updateHighscore(int playersHighscore, String playerID);
     int checkHighscore(String playerID);
     String getUserID(String user_name);
+    boolean is_username_used(String username);
 }
 
 

@@ -3,9 +3,7 @@ package models;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Sql2oModel implements Model {
 
@@ -132,4 +130,16 @@ public class Sql2oModel implements Model {
         }
     }
 
+    @Override
+    public boolean is_username_used(String username) {
+        boolean check = false;
+        try (Connection conn = sql2o.open()) {
+            List<Players> players = conn.createQuery("select user_name from players ")
+                    .executeAndFetch(Players.class);
+            if(players.toString().contains(username)){
+                check = true;
+            }
+        }
+        return check;
+    }
 }
