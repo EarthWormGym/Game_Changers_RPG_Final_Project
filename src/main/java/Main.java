@@ -100,6 +100,7 @@ public class Main {
             return null;
         }, new VelocityTemplateEngine());
 
+
         get("/newbattle", ((req, res) -> {
             game.get().log.clear();
             model.killedEnemy(enemy.get().username);
@@ -287,7 +288,7 @@ public class Main {
             player.get().defence = 20;
             player.get().healthPotions = 1;
             player.get().poisonPotions = 1;
-            player.get().gif = ("Knight_idle.gif");
+            player.get().gif = ("players/Knight_idle.gif");
             player.get().pickedClass = "true";
             res.redirect("/class");
             return null;
@@ -299,7 +300,7 @@ public class Main {
             player.get().defence = 10;
             player.get().healthPotions = 2;
             player.get().poisonPotions = 0;
-            player.get().gif = ("archer.gif");
+            player.get().gif = ("players/archer.gif");
             player.get().pickedClass = "true";
             res.redirect("/class");
             return null;
@@ -311,7 +312,7 @@ public class Main {
             player.get().defence = 20;
             player.get().healthPotions = 0;
             player.get().poisonPotions = 2;
-            player.get().gif = ("Wizard_Character.gif");
+            player.get().gif = ("players/Wizard_Character.gif");
             player.get().pickedClass = "true";
             res.redirect("/class");
             return null;
