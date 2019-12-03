@@ -46,7 +46,7 @@ public class Main {
         model.revivingEnemies();
 
         AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 50, 3, 1, ""));
-
+        AtomicReference<Players> players = new AtomicReference<>(new Players("playerUuid.toString()", "username", "fullname", "password", 0));
         List<Enemy> enemies = model.newEnemy(player.get().battles_won);
         int min = 0;
         int max = enemies.size() - 1;
@@ -76,7 +76,6 @@ public class Main {
             battle.put("player", player);
             battle.put("enemy", enemy);
             battle.put("username", username);
-
             return new ModelAndView(battle, "templates/home.vtl");
         }, new VelocityTemplateEngine());
 
@@ -88,17 +87,43 @@ public class Main {
             battle.put("game", game);
             String username = req.session().attribute("user");
             battle.put("username", username);
-            if(player.get().battles_won < 11) {
-                return new ModelAndView(battle, "templates/battle.vtl");
+            if(player.get().is_alive.equals("false")){
+                res.redirect("/died");
             }
             else if(player.get().battles_won == 11){
-                return new ModelAndView(battle, "templates/victory.vtl");
+                res.redirect("/won");
             }
-            return null;
+            return new ModelAndView(battle, "templates/battle.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/won", ((request, response) -> {
+            HashMap scores = new HashMap();
+            int highscore = model.checkHighscore(players.get().user_ID);
+            int current_score = player.get().calc_score(game);
+            if(current_score > highscore) {
+                model.updateHighscore(current_score, players.get().user_ID);
+            }
+            scores.put("current_score", current_score);
+            scores.put("high_score", highscore);
+            scores.put("username", players.get().user_name);
+            return new ModelAndView(scores, "templates/victory.vtl");
+        }), new VelocityTemplateEngine());
+
+        get("/died", ((request, response) -> {
+            HashMap scores = new HashMap();
+            int highscore = model.checkHighscore(players.get().user_ID);
+            int current_score = player.get().calc_score(game);
+            if(current_score > highscore) {
+                model.updateHighscore(current_score, players.get().user_ID);
+            }
+            scores.put("current_score", current_score);
+            scores.put("high_score", highscore);
+            scores.put("username", players.get().user_name);
+            return new ModelAndView(scores, "templates/lost.vtl");
+        }), new VelocityTemplateEngine());
 
         get("/newbattle", ((req, res) -> {
+            player.get().chest_reward = null;
             game.get().log.clear();
             model.killedEnemy(enemy.get().username);
             List<Enemy> enemiesBattle = model.newEnemy(player.get().battles_won);
@@ -199,10 +224,10 @@ public class Main {
                 res.redirect("/sign_up");
             } else {
                 UUID playerUuid = UUID.randomUUID();
+                players.set(new Players(playerUuid.toString(), username, fullname, password, 0));
                 model.createPlayer(playerUuid.toString(), username, fullname, password, 0);
                 res.redirect("/signed_up");
             }
-
             return null;
         });
 
@@ -215,6 +240,8 @@ public class Main {
             String username = req.queryParams("username");
             String password = req.queryParams("password");
 
+            String userID = model.getUserID(username);
+
             if(model.CorrectPassword(username, password)){
                 res.redirect("/signed_in");
             } else {
@@ -223,6 +250,7 @@ public class Main {
 
             req.session().attribute("user",username);
             req.session().attribute("Signed_In?","true");
+            players.set(new Players(userID, username, "fullname", password, 0));
             player.get().username = username;
             return null;
         });
@@ -248,7 +276,6 @@ public class Main {
         });
 
         get("/shop", (req, res) ->{
-            //Player player = new Player("Adam", 100,10,20,"true", 0 );
             String username = req.session().attribute("user");
             HashMap battle = new HashMap();
             battle.put("player", player);
@@ -288,6 +315,9 @@ public class Main {
 
         get("/class", (req, res) ->{
             String username = req.session().attribute("user");
+            if(username == "Hello There!"){
+                res.redirect("/home");
+            }
             HashMap battle = new HashMap();
             battle.put("username", username);
             battle.put("player", player);
