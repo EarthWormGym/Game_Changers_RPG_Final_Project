@@ -530,8 +530,37 @@ left: 10px;
 font-size: 40px;
 }
 
+
 .lost{
 background-image: url("backgrounds/death_background.gif");
 background-repeat: no-repeat;
 background-size: 1450px 850px;
 }
+
+.keygif{
+position:absolute;
+left: -250px;
+top: 0px;
+}
+.chest{
+position:absolute;
+left: -400px;
+top: 200px;
+}
+
+.health_chest{
+position:absolute;
+left: -300px;
+top: 120px;
+}
+.damage_chest{
+position:absolute;
+left: -300px;
+top: 120px;
+}
+.defence_chest{
+position:absolute;
+left: -300px;
+top: 120px;
+}
+

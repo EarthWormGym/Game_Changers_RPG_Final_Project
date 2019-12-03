@@ -195,9 +195,14 @@ public class Main {
             String username = req.queryParams("username");
             String fullname = req.queryParams("full_name");
             String password = req.queryParams("password");
-            UUID playerUuid = UUID.randomUUID();
-            model.createPlayer(playerUuid.toString(), username, fullname, password, 0);
-            res.redirect("/signed_up");
+            if(model.is_username_used(username)){
+                res.redirect("/sign_up");
+            } else {
+                UUID playerUuid = UUID.randomUUID();
+                model.createPlayer(playerUuid.toString(), username, fullname, password, 0);
+                res.redirect("/signed_up");
+            }
+
             return null;
         });
 
@@ -325,5 +330,24 @@ public class Main {
             return null;
         });
 
+        post("/chest", (req, res) ->{
+            double random = (double) (Math.random());
+            player.get().num_keys -= 1;
+            if(random <= 0.33){
+                player.get().health += 50;
+                player.get().chest_reward = "health";
+            } else if (random <= 0.66 && random > 0.33){
+                player.get().damage_limit += 20;
+                player.get().chest_reward = "damage";
+            } else {
+                player.get().defence += 0.2;
+                player.get().chest_reward = "defence";
+            }
+            res.redirect("/shop");
+            return null;
+        });
+
     }
+
+
 }

@@ -38,6 +38,9 @@ public class Game {
                 }
                 enemy.get().recieve_damage(Math.round(Math.floor(damage)), log);
                 if(enemy.get().is_alive.equals("false")) {
+                    if(drop_key(player, enemy)){
+                        log.add("Enemy drops key");
+                    }
                     player.get().coins += 15;
                     player.get().battles_won += 1;
                 }
@@ -74,8 +77,22 @@ public class Game {
         }
 
         public double random_damage(AtomicReference<Player> character) {
-            Random rand = new Random();
-            int random = (int) (Math.random() * character.get().damage_limit + 1);
-            return (random);
+        Random rand = new Random();
+        int random = (int) (Math.random() * character.get().damage_limit + 1);
+        return (random);
+    }
+
+        public boolean drop_key(AtomicReference<Player> player, AtomicReference<Player> enemy){
+            boolean key = false;
+            double key_drop_chance = 0.1;
+            double random = (double) (Math.random());
+            if(enemy.get().health == 0){
+                System.out.println(random);
+                if(random <= key_drop_chance){
+                    key = true;
+                    player.get().num_keys += 1;
+                }
+            }
+            return key;
         }
 }
