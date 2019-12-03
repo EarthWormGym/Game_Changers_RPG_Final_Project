@@ -3,5 +3,5 @@ create table players(
  user_name VARCHAR,
  name VARCHAR,
  password VARCHAR,
- high_score INTEGER
+ high_score INT
 )

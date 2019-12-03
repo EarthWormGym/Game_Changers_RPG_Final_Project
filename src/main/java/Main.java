@@ -45,14 +45,14 @@ public class Main {
 
         model.revivingEnemies();
 
-        AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 0, 3, 1, ""));
+        AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 0, 3, 1, "", 0));
         AtomicReference<Players> players = new AtomicReference<>(new Players("playerUuid.toString()", "username", "fullname", "password", 0));
         List<Enemy> enemies = model.newEnemy(player.get().battles_won);
         int min = 0;
         int max = enemies.size() - 1;
         int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
         Enemy randomEnemy = enemies.get(randomNum);
-        AtomicReference<Player> enemy = new AtomicReference<>(new Player(randomEnemy.enemy_name, randomEnemy.health, randomEnemy.damage_limit, randomEnemy.defence, "true", 0, 0, 0, randomEnemy.gif));
+        AtomicReference<Player> enemy = new AtomicReference<>(new Player(randomEnemy.enemy_name, randomEnemy.health, randomEnemy.damage_limit, randomEnemy.defence, "true", 0, 0, 0, randomEnemy.gif, 15));
 
         AtomicReference<Game> game = new AtomicReference<>(new Game(player, enemy));
 
@@ -131,20 +131,20 @@ public class Main {
             int max1 = enemiesBattle.size() - 1;
             int randomNum1 = ThreadLocalRandom.current().nextInt(min1, max1 + 1);
             Enemy randomEnemy2 = enemiesBattle.get(randomNum1);
-            enemy.set(new Player(randomEnemy2.enemy_name, randomEnemy2.health, randomEnemy2.damage_limit, randomEnemy2.defence, "true", 0, 0, 0, randomEnemy2.gif));
+            enemy.set(new Player(randomEnemy2.enemy_name, randomEnemy2.health, randomEnemy2.damage_limit, randomEnemy2.defence, "true", 0, 0, 0, randomEnemy2.gif, randomEnemy2.coin_drop));
             res.redirect("/battle");
             return null;
         }));
 
         get("/newGame", ((request, response) -> {
-            player.set(new Player(player.get().username, player.get().health, player.get().damage_limit, player.get().defence, "true", 0, player.get().healthPotions, player.get().poisonPotions, player.get().gif));
+            player.set(new Player(player.get().username, player.get().health, player.get().damage_limit, player.get().defence, "true", 0, player.get().healthPotions, player.get().poisonPotions, player.get().gif, 0));
             model.revivingEnemies();
             List<Enemy> new_game_enemies = model.newEnemy(player.get().battles_won);
             int new_game_min = 0;
             int new_game_max = new_game_enemies.size() - 1;
             int new_game_randomNum = ThreadLocalRandom.current().nextInt(new_game_min, new_game_max + 1);
             Enemy new_game_randomEnemy = new_game_enemies.get(new_game_randomNum);
-            enemy.set(new Player(new_game_randomEnemy.enemy_name, new_game_randomEnemy.health, new_game_randomEnemy.damage_limit, new_game_randomEnemy.defence, "true", 0, 0, 0, new_game_randomEnemy.gif));
+            enemy.set(new Player(new_game_randomEnemy.enemy_name, new_game_randomEnemy.health, new_game_randomEnemy.damage_limit, new_game_randomEnemy.defence, "true", 0, 0, 0, new_game_randomEnemy.gif, new_game_randomEnemy.coin_drop));
             game.set(new Game(player, enemy));
             response.redirect("/battle");
             return null;
@@ -325,7 +325,7 @@ public class Main {
         }, new VelocityTemplateEngine());
 
         post("/knightclass", (req, res) ->{
-            player.get().health = 145;
+            player.get().health = 200;
             player.get().damage_limit = 20;
             player.get().defence = 25;
             player.get().healthPotions = 1;
@@ -337,7 +337,7 @@ public class Main {
         });
 
         post("/archerclass", (req, res) ->{
-            player.get().health = 105;
+            player.get().health = 155;
             player.get().damage_limit = 55;
             player.get().defence = 10;
             player.get().healthPotions = 2;
@@ -349,7 +349,7 @@ public class Main {
         });
 
         post("/wizzardclass", (req, res) ->{
-            player.get().health = 110;
+            player.get().health = 160;
             player.get().damage_limit = 40;
             player.get().defence = 10;
             player.get().healthPotions = 1;

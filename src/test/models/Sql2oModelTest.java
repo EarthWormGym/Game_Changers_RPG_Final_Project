@@ -28,8 +28,8 @@ class Sql2oModelTest {
     });
 
     UUID id = UUID.fromString("49921d6e-e210-4f68-ad7a-afac266278cb");
-    AtomicReference<Player> player = new AtomicReference<>(new Player("AdamR", 100, 10, 20, "true", 100, 0, 1, ""));
-    AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 80, 20, 10, "true", 0, 0, 0, ""));
+    AtomicReference<Player> player = new AtomicReference<>(new Player("AdamR", 100, 10, 20, "true", 100, 0, 1, "", 0));
+    AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 80, 20, 10, "true", 0, 0, 0, "", 15));
     AtomicReference<Game> game = new AtomicReference<>(new Game(player, enemy));
     Model model = new Sql2oModel(sql2o);
 
@@ -130,7 +130,7 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void attackingPlayer() {
-        AtomicReference<Player> player = new AtomicReference<>(new Player("AdamR", 100, 10, 0, "true", 100, 0, 1, ""));
+        AtomicReference<Player> player = new AtomicReference<>(new Player("AdamR", 100, 10, 0, "true", 100, 0, 1, "", 15));
         Game game = new Game(player , enemy);
         game.attack(enemy, player);
         assertNotEquals(100 , player.get().health);
@@ -138,7 +138,7 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void attackingEnemy() {
-        AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 80, 20, 0, "true", 0, 0, 0, ""));
+        AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 80, 20, 0, "true", 0, 0, 0, "", 15));
         Game game = new Game(player , enemy);
         game.enemy_attack(player, enemy);
         assertNotEquals(100 , enemy.get().health);
@@ -164,14 +164,14 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void enemyDropsCoinsOnDeath() {
-        AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 0, 20, 0, "false", 0, 0, 0, ""));
+        AtomicReference<Player> enemy = new AtomicReference<>(new Player("Ork", 0, 20, 0, "false", 0, 0, 0, "", 15));
         game.get().attack(player, enemy);
         assertEquals(115, player.get().coins);
     }
 
     @org.junit.jupiter.api.Test
     void createEnemy(){
-        Enemy enemy = new Enemy("Goblin", 50, 15, 10, "goblin.gif");
+        Enemy enemy = new Enemy("Goblin", 50, 15, 10, "goblin.gif", 15);
         assertEquals("Goblin", enemy.enemy_name);
         assertEquals(50, enemy.health);
         assertEquals(15, enemy.damage_limit);

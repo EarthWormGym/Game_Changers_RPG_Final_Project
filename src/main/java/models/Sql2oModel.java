@@ -63,19 +63,19 @@ public class Sql2oModel implements Model {
     public List<Enemy> newEnemy(Integer counter) {
         try (Connection conn = sql2o.open()) {
             if (counter <= 3) {
-                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'easy' AND already_killed = 'false' ")
+                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif, coin_drop from enemies where difficulty = 'easy' AND already_killed = 'false' ")
                         .executeAndFetch(Enemy.class);
                 return enemies;
             } else if (counter > 3 && counter <= 6) {
-                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'medium' AND already_killed = 'false' ")
+                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif, coin_drop from enemies where difficulty = 'medium' AND already_killed = 'false' ")
                         .executeAndFetch(Enemy.class);
                 return enemies;
             } else if (counter > 6 && counter <= 9) {
-                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'hard' AND already_killed = 'false' ")
+                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif, coin_drop from enemies where difficulty = 'hard' AND already_killed = 'false' ")
                         .executeAndFetch(Enemy.class);
                 return enemies;
             } else if (counter > 9) {
-                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif from enemies where difficulty = 'boss' AND already_killed = 'false' ")
+                List<Enemy> enemies = conn.createQuery("select enemy_name, health, damage_limit, defence, gif, coin_drop from enemies where difficulty = 'boss' AND already_killed = 'false' ")
                         .executeAndFetch(Enemy.class);
                 return enemies;
             }

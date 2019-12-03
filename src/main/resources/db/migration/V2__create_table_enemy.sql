@@ -1,10 +1,11 @@
 create table enemies(
  enemy_id VARCHAR,
  enemy_name VARCHAR,
- health INTEGER,
- damage_limit INTEGER,
- defence INTEGER,
+ health INT,
+ damage_limit INT,
+ defence INT,
  difficulty VARCHAR,
  gif VARCHAR,
- already_killed VARCHAR
+ already_killed VARCHAR,
+ coin_drop INT
 )
