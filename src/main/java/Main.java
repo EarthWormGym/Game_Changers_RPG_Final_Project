@@ -46,7 +46,7 @@ public class Main {
         model.revivingEnemies();
 
         AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 50, 3, 1, ""));
-
+        AtomicReference<Players> players = new AtomicReference<>(new Players("playerUuid.toString()", "username", "fullname", "password", 0));
         List<Enemy> enemies = model.newEnemy(player.get().battles_won);
         int min = 0;
         int max = enemies.size() - 1;
@@ -76,7 +76,6 @@ public class Main {
             battle.put("player", player);
             battle.put("enemy", enemy);
             battle.put("username", username);
-
             return new ModelAndView(battle, "templates/home.vtl");
         }, new VelocityTemplateEngine());
 
@@ -88,15 +87,40 @@ public class Main {
             battle.put("game", game);
             String username = req.session().attribute("user");
             battle.put("username", username);
-            if(player.get().battles_won < 11) {
-                return new ModelAndView(battle, "templates/battle.vtl");
+            if(player.get().is_alive.equals("false")){
+                res.redirect("/died");
             }
             else if(player.get().battles_won == 11){
-                return new ModelAndView(battle, "templates/victory.vtl");
+                res.redirect("/won");
             }
-            return null;
+            return new ModelAndView(battle, "templates/battle.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/won", ((request, response) -> {
+            HashMap scores = new HashMap();
+            int highscore = model.checkHighscore(players.get().user_ID);
+            int current_score = player.get().calc_score(game);
+            if(current_score > highscore) {
+                model.updateHighscore(current_score, players.get().user_ID);
+            }
+            scores.put("current_score", current_score);
+            scores.put("high_score", highscore);
+            scores.put("username", players.get().user_name);
+            return new ModelAndView(scores, "templates/victory.vtl");
+        }), new VelocityTemplateEngine());
+
+        get("/died", ((request, response) -> {
+            HashMap scores = new HashMap();
+            int highscore = model.checkHighscore(players.get().user_ID);
+            int current_score = player.get().calc_score(game);
+            if(current_score > highscore) {
+                model.updateHighscore(current_score, players.get().user_ID);
+            }
+            scores.put("current_score", current_score);
+            scores.put("high_score", highscore);
+            scores.put("username", players.get().user_name);
+            return new ModelAndView(scores, "templates/lost.vtl");
+        }), new VelocityTemplateEngine());
 
         get("/newbattle", ((req, res) -> {
             player.get().chest_reward = null;
@@ -177,7 +201,12 @@ public class Main {
             return new ModelAndView(signed, "templates/signed_up.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/victory", (req, res) -> {
+        get("/lost", (req, res) -> {
+            HashMap signed = new HashMap();
+            return new ModelAndView(signed, "templates/lost.vtl");
+        }, new VelocityTemplateEngine());
+
+        get("/win", (req, res) -> {
             HashMap signed = new HashMap();
             return new ModelAndView(signed, "templates/victory.vtl");
         }, new VelocityTemplateEngine());
@@ -191,9 +220,14 @@ public class Main {
             String username = req.queryParams("username");
             String fullname = req.queryParams("full_name");
             String password = req.queryParams("password");
-            UUID playerUuid = UUID.randomUUID();
-            model.createPlayer(playerUuid.toString(), username, fullname, password, 0);
-            res.redirect("/signed_up");
+            if(model.is_username_used(username)){
+                res.redirect("/sign_up");
+            } else {
+                UUID playerUuid = UUID.randomUUID();
+                players.set(new Players(playerUuid.toString(), username, fullname, password, 0));
+                model.createPlayer(playerUuid.toString(), username, fullname, password, 0);
+                res.redirect("/signed_up");
+            }
             return null;
         });
 
@@ -206,6 +240,8 @@ public class Main {
             String username = req.queryParams("username");
             String password = req.queryParams("password");
 
+            String userID = model.getUserID(username);
+
             if(model.CorrectPassword(username, password)){
                 res.redirect("/signed_in");
             } else {
@@ -214,6 +250,7 @@ public class Main {
 
             req.session().attribute("user",username);
             req.session().attribute("Signed_In?","true");
+            players.set(new Players(userID, username, "fullname", password, 0));
             player.get().username = username;
             return null;
         });
@@ -239,7 +276,6 @@ public class Main {
         });
 
         get("/shop", (req, res) ->{
-            //Player player = new Player("Adam", 100,10,20,"true", 0 );
             String username = req.session().attribute("user");
             HashMap battle = new HashMap();
             battle.put("player", player);
@@ -301,8 +337,8 @@ public class Main {
         });
 
         post("/archerclass", (req, res) ->{
-            player.get().health = 60;
-            player.get().damage_limit = 50;
+            player.get().health = 70;
+            player.get().damage_limit = 30;
             player.get().defence = 10;
             player.get().healthPotions = 2;
             player.get().poisonPotions = 0;
@@ -313,9 +349,9 @@ public class Main {
         });
 
         post("/wizzardclass", (req, res) ->{
-            player.get().health = 10000;
-            player.get().damage_limit = 10000;
-            player.get().defence = 20;
+            player.get().health = 80;
+            player.get().damage_limit = 40;
+            player.get().defence = 5;
             player.get().healthPotions = 0;
             player.get().poisonPotions = 2;
             player.get().gif = ("players/Wizard_Character.gif");

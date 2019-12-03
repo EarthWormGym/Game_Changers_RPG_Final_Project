@@ -274,14 +274,14 @@ letter-spacing: -2px;
 
 .selectClassBackground{
 position: fixed;
-background-image: url("backgrounds/Choose_your_class.png");
+background-image: url("backgrounds/Choose_your_class.gif");
 background-repeat: no-repeat;
-background-size:1500px 850px;
+background-size:1450px 850px;
 }
 
 #wizzardclass{
 position:absolute;
-  left: 575%;
+  left: 600%;
   top: 1450%;
 }
 
@@ -325,7 +325,7 @@ color: white;
 wizzardtext{
 position: absolute;
 top: 2800%;
-left: 625%;
+left: 645%;
 font-size: 25px;
 width: 400px;
 color: white;
@@ -532,6 +532,13 @@ width: 800px;
 text-align: center;
 }
 
+
+.lost{
+background-image: url("backgrounds/death_background.gif");
+background-repeat: no-repeat;
+background-size: 1450px 850px;
+}
+
 .keygif{
 position:absolute;
 left: -100px;
@@ -566,6 +573,24 @@ top: 120px;
 position:absolute;
 left: -300px;
 top: 120px;
+}
+
+#current_score {
+position:absolute;
+  left: 25%;
+  top: 50%;
+  width: 50%;
+  text-align: center;
+  font-size: 50px;
+}
+
+#high_score {
+position:absolute;
+  left: 25%;
+  top: 34%;
+  width: 50%;
+  text-align: center;
+  font-size: 50px;
 }
 
 

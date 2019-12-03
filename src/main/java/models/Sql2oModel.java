@@ -3,9 +3,7 @@ package models;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Sql2oModel implements Model {
 
@@ -100,5 +98,48 @@ public class Sql2oModel implements Model {
             conn.createQuery("UPDATE enemies SET already_killed = 'false'")
                     .executeUpdate();
         }
+    }
+
+    @Override
+    public void updateHighscore(int playersHighscore, String playerID) {
+        try (Connection conn = sql2o.open()) {
+            conn.createQuery("UPDATE players SET high_score = :playersHighscore WHERE user_id = :playerID")
+                    .addParameter("playersHighscore", playersHighscore)
+                    .addParameter("playerID", playerID)
+                    .executeUpdate();
+        }
+    }
+
+    @Override
+    public int checkHighscore(String playerID) {
+        try (Connection conn = sql2o.open()) {
+            List<Integer> score = conn.createQuery("select high_score from players where user_id = :playerID")
+                    .addParameter("playerID", playerID)
+                    .executeAndFetch(Integer.class);
+            return score.get(0);
+        }
+    }
+
+    @Override
+    public String getUserID(String user_name) {
+        try (Connection conn = sql2o.open()) {
+            List<String> userID = conn.createQuery("select user_id from players where user_name = :user_name")
+                    .addParameter("user_name", user_name)
+                    .executeAndFetch(String.class);
+            return userID.get(0);
+        }
+    }
+
+    @Override
+    public boolean is_username_used(String username) {
+        boolean check = false;
+        try (Connection conn = sql2o.open()) {
+            List<Players> players = conn.createQuery("select user_name from players ")
+                    .executeAndFetch(Players.class);
+            if(players.toString().contains(username)){
+                check = true;
+            }
+        }
+        return check;
     }
 }
