@@ -176,7 +176,12 @@ public class Main {
             return new ModelAndView(signed, "templates/signed_up.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/victory", (req, res) -> {
+        get("/lost", (req, res) -> {
+            HashMap signed = new HashMap();
+            return new ModelAndView(signed, "templates/lost.vtl");
+        }, new VelocityTemplateEngine());
+
+        get("/win", (req, res) -> {
             HashMap signed = new HashMap();
             return new ModelAndView(signed, "templates/victory.vtl");
         }, new VelocityTemplateEngine());
