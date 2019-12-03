@@ -21,6 +21,8 @@ public class Player {
     public int battles_won;
     public String pickedClass;
     public int poisoned;
+    public int hpPotsUsed;
+    public int pPotsUsed;
 
     public Player(String username, int health, int damage_limit, double defence, String is_alive, int coins, int healthPotions, int poisonPotions, String gif) {
 
@@ -36,14 +38,16 @@ public class Player {
         this.battles_won = 0;
         this.pickedClass = "false";
         this.poisoned = 0;
+        this.hpPotsUsed = 0;
+        this.pPotsUsed = 0;
     }
 
-        public void recieve_damage(double damage, List<String> log){
-        health -= damage;
-        if(health <= 0){
-            health = 0;
-        }
-        is_character_alive(log);
+    public void recieve_damage(double damage, List<String> log){
+    health -= damage;
+    if(health <= 0){
+        health = 0;
+    }
+    is_character_alive(log);
     }
 
     public String block_attack(){
@@ -81,6 +85,7 @@ public class Player {
         if (healthPotions > 0){
             healthPotions = healthPotions - 1;
             health = health + 15;
+            hpPotsUsed += 1;
             game.get().log.add(username + " recovered 15 health points");
         }
     }
@@ -112,6 +117,28 @@ public class Player {
                 coins = coins - 10;
             }
         }
+    }
+
+    public int calc_score(AtomicReference<Game> game){
+        int healthPotionsPointsAdd = 0;
+        int healthPotionsPointsSub = 0;
+        int poisonPotionsPointsAdd = 0;
+        int poisonPotionsPointsSub = 0;
+        int healthPoints = health * 137;
+        if(hpPotsUsed <= 3){
+            healthPotionsPointsAdd = 316;
+        }else{
+            healthPotionsPointsSub = hpPotsUsed * 27;
+        }
+        if(pPotsUsed <= 3){
+            poisonPotionsPointsAdd = 321;
+        } else {
+            poisonPotionsPointsSub = pPotsUsed * 27;
+        }
+        int coinPoints = coins * 32;
+        int critPoints = game.get().critCounter * 183;
+        int total_score = healthPoints + coinPoints + healthPotionsPointsAdd - healthPotionsPointsSub + poisonPotionsPointsAdd - poisonPotionsPointsSub + critPoints;
+        return total_score;
     }
 
 }

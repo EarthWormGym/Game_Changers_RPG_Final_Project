@@ -13,6 +13,7 @@ public class Game {
 
     public List<AtomicReference<Player>> playersArray;
     public List<String> log;
+    public int critCounter = 0;
 
 
         public Game(AtomicReference<Player> player, AtomicReference<Player> enemy){
@@ -32,6 +33,7 @@ public class Game {
                 }
                 if(damage == player.get().damage_limit){
                     log.add(player.get().username + " CRITICALLY hit " + enemy.get().username);
+                    critCounter += 1;
                 }else{
                     log.add(player.get().username + " attacked " + enemy.get().username + " for " + damage);
 

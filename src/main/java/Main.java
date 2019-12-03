@@ -78,7 +78,11 @@ public class Main {
             battle.put("enemy", enemy);
             battle.put("username", username);
             if(player.get().is_alive.equals("false")){
-                model.updateHighscore(player.get().battles_won * 150, players.get().user_ID);
+                int highscore = model.checkHighscore(players.get().user_ID);
+                int current_score = player.get().calc_score(game);
+                if(current_score > highscore) {
+                    model.updateHighscore(current_score, players.get().user_ID);
+                }
             }
             return new ModelAndView(battle, "templates/home.vtl");
         }, new VelocityTemplateEngine());
