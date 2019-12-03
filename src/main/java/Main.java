@@ -315,5 +315,23 @@ public class Main {
             return null;
         });
 
+        post("/chest", (req, res) ->{
+            int random = (int) (Math.random());
+            if(random <= 0.33){
+                player.get().health += 50;
+                player.get().chest_reward = "health";
+            } else if (random <= 0.66 && random > 0.33){
+                player.get().damage_limit += 20;
+                player.get().chest_reward = "damage";
+            } else {
+                player.get().defence += 0.2;
+                player.get().chest_reward = "defence";
+            }
+            res.redirect("/shop");
+            return null;
+        });
+
     }
+
+
 }

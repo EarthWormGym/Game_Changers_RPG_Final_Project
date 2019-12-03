@@ -504,3 +504,14 @@ top: 10px;
 left: 10px;
 font-size: 40px;
 }
+
+.keygif{
+position:absolute;
+left: -250px;
+top: 0px;
+}
+.chest{
+position:absolute;
+left: -400px;
+top: 200px;
+}
