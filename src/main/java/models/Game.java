@@ -43,7 +43,7 @@ public class Game {
                     if(drop_key(player, enemy)){
                         log.add("Enemy drops key");
                     }
-                    player.get().coins += 15;
+                    player.get().coins += enemy.get().coin_drop;
                     player.get().battles_won += 1;
                 }
             }else{
@@ -57,7 +57,7 @@ public class Game {
             enemy.get().poisoned += 2;
             log.add(player.get().username + " poisoned " + enemy.get().username + " for 20 damage and it seems to have left an effect");
             if(enemy.get().is_alive.equals("false")) {
-                player.get().coins += 15;
+                player.get().coins += enemy.get().coin_drop;
                 player.get().battles_won += 1;
             }
         }else{

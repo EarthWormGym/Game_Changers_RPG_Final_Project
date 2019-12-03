@@ -24,9 +24,10 @@ public class Player {
     public int hpPotsUsed;
     public int pPotsUsed;
     public int num_keys;
-    public  String chest_reward;
+    public String chest_reward;
+    public int coin_drop;
 
-    public Player(String username, int health, int damage_limit, double defence, String is_alive, int coins, int healthPotions, int poisonPotions, String gif) {
+    public Player(String username, int health, int damage_limit, double defence, String is_alive, int coins, int healthPotions, int poisonPotions, String gif, int coin_drop) {
 
         this.username = username;
         this.health = health;
@@ -43,6 +44,7 @@ public class Player {
         this.hpPotsUsed = 0;
         this.pPotsUsed = 0;
         this.num_keys = 0;
+        this.coin_drop = coin_drop;
 
         this.chest_reward = null;
     }
