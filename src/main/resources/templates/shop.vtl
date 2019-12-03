@@ -71,10 +71,23 @@
                                     <input type="image" src="images/ToBattle.gif" alt="Submit"  width="150" height="150" id="toBattle">
                                 </form>
                             </toBattle>
+                            #if($player.get().num_keys > 0)
+                            <form action="chest" method="POST">
+                               <input class="keygif" alt="Submit" type="image" width="200" height="150" src="items/key.gif">
+                            <form>
+                            #end
+                            <img class="chest" width="400" height="300" src="images/chest.gif"/>
+                            #if($player.get().chest_reward == "health")
+                                <img class="health_chest" width="200" height="150" src="items/heartChest.gif"/>
+                            #end
+                            #if($player.get().chest_reward == "damage")
+                                <img class="damage_chest" width="200" height="150" src="items/swordChest.gif"/>
+                            #end
+                            #if($player.get().chest_reward == "defence")
+                                <img class="defence_chest" width="200" height="150" src="items/defenceChest.gif"/>
+                            #end
+
 </div>
-
-
-
     </shopText>
   </body>
 
