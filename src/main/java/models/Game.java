@@ -84,7 +84,7 @@ public class Game {
 
         public boolean drop_key(AtomicReference<Player> player, AtomicReference<Player> enemy){
             boolean key = false;
-            double key_drop_chance = 1;
+            double key_drop_chance = 0.1;
             double random = (double) (Math.random());
             if(enemy.get().health == 0){
                 System.out.println(random);
