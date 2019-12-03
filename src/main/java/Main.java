@@ -45,7 +45,7 @@ public class Main {
 
         model.revivingEnemies();
 
-        AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 50, 3, 1, ""));
+        AtomicReference<Player> player = new AtomicReference<>(new Player("Adam", 100, 20, 20, "true", 0, 3, 1, ""));
         AtomicReference<Players> players = new AtomicReference<>(new Players("playerUuid.toString()", "username", "fullname", "password", 0));
         List<Enemy> enemies = model.newEnemy(player.get().battles_won);
         int min = 0;
@@ -137,7 +137,7 @@ public class Main {
         }));
 
         get("/newGame", ((request, response) -> {
-            player.set(new Player(player.get().username, player.get().health, player.get().damage_limit, player.get().defence, "true", 50, player.get().healthPotions, player.get().poisonPotions, player.get().gif));
+            player.set(new Player(player.get().username, player.get().health, player.get().damage_limit, player.get().defence, "true", 0, player.get().healthPotions, player.get().poisonPotions, player.get().gif));
             model.revivingEnemies();
             List<Enemy> new_game_enemies = model.newEnemy(player.get().battles_won);
             int new_game_min = 0;
@@ -325,11 +325,11 @@ public class Main {
         }, new VelocityTemplateEngine());
 
         post("/knightclass", (req, res) ->{
-            player.get().health = 100;
+            player.get().health = 145;
             player.get().damage_limit = 20;
-            player.get().defence = 20;
+            player.get().defence = 25;
             player.get().healthPotions = 1;
-            player.get().poisonPotions = 1;
+            player.get().poisonPotions = 0;
             player.get().gif = ("players/Knight_idle.gif");
             player.get().pickedClass = "true";
             res.redirect("/class");
@@ -337,11 +337,11 @@ public class Main {
         });
 
         post("/archerclass", (req, res) ->{
-            player.get().health = 70;
-            player.get().damage_limit = 30;
+            player.get().health = 105;
+            player.get().damage_limit = 55;
             player.get().defence = 10;
             player.get().healthPotions = 2;
-            player.get().poisonPotions = 0;
+            player.get().poisonPotions = 1;
             player.get().gif = ("players/archer.gif");
             player.get().pickedClass = "true";
             res.redirect("/class");
@@ -349,11 +349,11 @@ public class Main {
         });
 
         post("/wizzardclass", (req, res) ->{
-            player.get().health = 80;
+            player.get().health = 110;
             player.get().damage_limit = 40;
-            player.get().defence = 5;
-            player.get().healthPotions = 0;
-            player.get().poisonPotions = 2;
+            player.get().defence = 10;
+            player.get().healthPotions = 1;
+            player.get().poisonPotions = 3;
             player.get().gif = ("players/Wizard_Character.gif");
             player.get().pickedClass = "true";
             res.redirect("/class");

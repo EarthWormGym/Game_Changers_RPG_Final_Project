@@ -71,7 +71,7 @@ public class Player {
 
     public void Heal(){
         if (coins >= 10){
-            health = health + 10;
+            health = health + 15;
             coins = coins - 10;
         }
     }
@@ -88,9 +88,9 @@ public class Player {
     public void UseHealthPotion(AtomicReference<Game> game){
         if (healthPotions > 0){
             healthPotions = healthPotions - 1;
-            health = health + 15;
+            health = health + 25;
             hpPotsUsed += 1;
-            game.get().log.add(username + " recovered 15 health points");
+            game.get().log.add(username + " recovered 25 health points");
         }
     }
 
