@@ -534,8 +534,17 @@ text-align: center;
 
 .keygif{
 position:absolute;
-left: -250px;
-top: 0px;
+left: -100px;
+top: 250px;
+}
+
+keycounttxt{
+color: white;
+position: absolute;
+top: 374px;
+left: -277px;
+font-size: 20px;
+z-index: 1;
 }
 .chest{
 position:absolute;
@@ -558,3 +567,5 @@ position:absolute;
 left: -300px;
 top: 120px;
 }
+
+

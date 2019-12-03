@@ -38,7 +38,7 @@ public class Player {
         this.battles_won = 0;
         this.pickedClass = "false";
         this.poisoned = 0;
-        this.num_keys = 0;
+        this.num_keys = 1;
         this.chest_reward = null;
     }
 
