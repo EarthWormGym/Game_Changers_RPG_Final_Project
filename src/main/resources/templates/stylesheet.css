@@ -540,3 +540,19 @@ position:absolute;
 left: -400px;
 top: 200px;
 }
+
+.health_chest{
+position:absolute;
+left: -300px;
+top: 120px;
+}
+.damage_chest{
+position:absolute;
+left: -300px;
+top: 120px;
+}
+.defence_chest{
+position:absolute;
+left: -300px;
+top: 120px;
+}
