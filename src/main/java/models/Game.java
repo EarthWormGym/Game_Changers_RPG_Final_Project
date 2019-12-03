@@ -51,23 +51,24 @@ public class Game {
             }
         }
 
-    public void poisonAttack(AtomicReference<Player> player, AtomicReference<Player> enemy){
-        if(enemy.get().block_attack().equals("false")){
-            enemy.get().recieve_damage(20.0, log);
-            enemy.get().poisoned += 2;
-            log.add(player.get().username + " poisoned " + enemy.get().username + " for 20 damage and it seems to have left an effect");
-            if(enemy.get().is_alive.equals("false")) {
-                player.get().coins += enemy.get().coin_drop;
-                player.get().battles_won += 1;
+        public void poisonAttack(AtomicReference<Player> player, AtomicReference<Player> enemy){
+            if(enemy.get().block_attack().equals("false")){
+                enemy.get().recieve_damage(20.0, log);
+                enemy.get().poisoned += 2;
+                log.add(player.get().username + " poisoned " + enemy.get().username + " for 20 damage and it seems to have left an effect");
+                if(enemy.get().is_alive.equals("false")) {
+                    player.get().coins += enemy.get().coin_drop;
+                    player.get().battles_won += 1;
+                }
+            }else{
+                log.add(enemy.get().username + " blocked your poison attack");
             }
-        }else{
         }
-    }
 
         public void enemy_attack(AtomicReference<Player> player, AtomicReference<Player> enemy){
             if(player.get().block_attack().equals("false")) {
                 double damage = this.random_damage(enemy);
-                if(damage == player.get().damage_limit){
+                if(damage == enemy.get().damage_limit){
                     log.add(enemy.get().username + " CRITICALLY hit " + player.get().username);
                 }else{
                     log.add(enemy.get().username + " attacked " + player.get().username + " for " + damage);
