@@ -390,6 +390,11 @@ public class Main {
             return new ModelAndView(battle, "templates/leader_board.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/howtoplay", (req, res) ->{
+            HashMap battle = new HashMap();
+            return new ModelAndView(battle, "templates/HowToPlay.vtl");
+        }, new VelocityTemplateEngine());
+
 
     }
 
