@@ -144,7 +144,8 @@ public class Player {
         }
         int coinPoints = coins * 32;
         int critPoints = game.get().critCounter * 183;
-        int total_score = healthPoints + coinPoints + healthPotionsPointsAdd - healthPotionsPointsSub + poisonPotionsPointsAdd - poisonPotionsPointsSub + critPoints;
+        int battlesWonPoints = battles_won * 69;
+        int total_score = healthPoints + coinPoints + healthPotionsPointsAdd - healthPotionsPointsSub + poisonPotionsPointsAdd - poisonPotionsPointsSub + critPoints + battlesWonPoints;
         return total_score;
     }
 
