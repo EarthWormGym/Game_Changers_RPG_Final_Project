@@ -377,7 +377,22 @@ public class Main {
             return null;
         });
 
+
+
+        get("/leader_board", (req, res) ->{
+            List<Players> leader_board = model.get_high_score();
+            System.out.println(leader_board);
+
+            HashMap battle = new HashMap();
+            battle.put("scores", leader_board);
+
+            return new ModelAndView(battle, "templates/leader_board.vtl");
+        }, new VelocityTemplateEngine());
+
+
     }
+
+
 
 
 }

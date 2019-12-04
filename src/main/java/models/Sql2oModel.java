@@ -3,6 +3,7 @@ package models;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sql2oModel implements Model {
@@ -141,5 +142,14 @@ public class Sql2oModel implements Model {
             }
         }
         return check;
+    }
+
+    @Override
+    public List<Players> get_high_score(){
+        try (Connection conn = sql2o.open()) {
+            List<Players> player_high_score = conn.createQuery("select user_name, high_score from players order by high_score DESC")
+                    .executeAndFetch(Players.class);
+            return player_high_score;
+        }
     }
 }

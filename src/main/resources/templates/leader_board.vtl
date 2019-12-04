@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Makers and Mortals</title>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="/stylesheet.css" >
+  </head>
+  <style>
+          @font-face {
+             font-family: myFirstFont;
+             src: url(slkscr.ttf);
+          }
+          * {
+             font-family: myFirstFont;
+          }
+
+  </style>
+  <body>
+  <shopText>
+<h1 style="text-align: center;">leader board!</h1>
+
+<div class="leader_board">
+        #foreach($score in $scores)
+            <p> $score.user_name | $score.high_score </p>
+        #end
+        </div>
+                   <form action="/home" method="GET">
+                     <input class="btn btn-secondary" type="submit" id="sign_out" value="Home">
+                   </form>
+
+     </shopText>
+  </body>
+</html>

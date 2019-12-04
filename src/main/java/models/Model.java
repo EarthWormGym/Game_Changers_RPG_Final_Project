@@ -16,6 +16,7 @@ public interface Model {
     int checkHighscore(String playerID);
     String getUserID(String user_name);
     boolean is_username_used(String username);
+    List<Players> get_high_score();
 }
 
 

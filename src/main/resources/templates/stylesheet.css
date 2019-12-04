@@ -593,4 +593,17 @@ position:absolute;
   font-size: 50px;
 }
 
+.leader_board{
+    position: fixed;
+    font-size: 30px;
+    width: 500px;
+    height: 500px;
+    top: 10%;
+    left: 33%;
+    text-align: center;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-style: solid;
+}
+
 
