@@ -26,10 +26,10 @@ public class Main {
 
 
     public static void main(String[] args) {
+        port(getHerokuAssignedPort());
         BasicConfigurator.configure();
 
         staticFileLocation("/templates");
-
 
         Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://ec2-174-129-255-39.compute-1.amazonaws.com:5432/d3skt4bqgja2e3", "snyyswuszfttjt", "dea49ed6668afa28f043a5189349b4b31c661f40acd4bdd9a91d0593490d39ab").load();
         flyway.migrate();
@@ -55,6 +55,7 @@ public class Main {
         AtomicReference<Player> enemy = new AtomicReference<>(new Player(randomEnemy.enemy_name, randomEnemy.health, randomEnemy.damage_limit, randomEnemy.defence, "true", 0, 0, 0, randomEnemy.gif, 15));
 
         AtomicReference<Game> game = new AtomicReference<>(new Game(player, enemy));
+
 
 
         get("/", (req, res) -> {
@@ -392,7 +393,13 @@ public class Main {
 
     }
 
-
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
 
 
 }
