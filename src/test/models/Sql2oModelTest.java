@@ -147,7 +147,7 @@ class Sql2oModelTest {
     @org.junit.jupiter.api.Test
     void shopHealth() {
         player.get().Heal();
-        assertEquals(110, player.get().health);
+        assertEquals(115, player.get().health);
     }
 
     @org.junit.jupiter.api.Test
@@ -183,14 +183,14 @@ class Sql2oModelTest {
     void addHealthPotion(){
         player.get().AddHealthPotion();
         assertEquals(1, player.get().healthPotions);
-        assertEquals(80, player.get().coins);
+        assertEquals(85, player.get().coins);
     }
 
     @org.junit.jupiter.api.Test
     void addPoisonPotion(){
         player.get().AddPoisonPotion();
         assertEquals(2, player.get().poisonPotions);
-        assertEquals(80, player.get().coins);
+        assertEquals(85, player.get().coins);
     }
 
     @org.junit.jupiter.api.Test
@@ -198,7 +198,7 @@ class Sql2oModelTest {
         player.get().AddHealthPotion();
         player.get().UseHealthPotion(game);
         assertEquals(0, player.get().healthPotions);
-        assertEquals(115, player.get().health);
+        assertEquals(125, player.get().health);
     }
 
     @org.junit.jupiter.api.Test
@@ -244,12 +244,14 @@ class Sql2oModelTest {
 //        Connection conn = sql2o.open();
 //        conn.createQuery()
         enemy = model.newEnemy(10);
-        assertEquals("Lich King", enemy.get(1).enemy_name);
-        assertEquals("Titan", enemy.get(0).enemy_name);
+        assertEquals("BOSS : Bone Master", enemy.get(0).enemy_name);
+        assertEquals("BOSS :Lich King", enemy.get(1).enemy_name);
+        assertEquals("BOSS : Titan", enemy.get(2).enemy_name);
     }
 
     @org.junit.jupiter.api.Test
     void killEnemy(){
+        model.revivingEnemies();
         model.killedEnemy("Lich King");
         Connection conn = sql2o.open();
         List<String> enemy;
