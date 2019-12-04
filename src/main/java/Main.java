@@ -31,10 +31,10 @@ public class Main {
         staticFileLocation("/templates");
 
 
-        Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://localhost:5432/makersandmortals", null, null).load();
+        Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://ec2-174-129-255-39.compute-1.amazonaws.com:5432/d3skt4bqgja2e3", "snyyswuszfttjt", "dea49ed6668afa28f043a5189349b4b31c661f40acd4bdd9a91d0593490d39ab").load();
         flyway.migrate();
 
-        Sql2o sql2o = new Sql2o("jdbc:postgresql://localhost:5432/" + "makersandmortals", null, null, new PostgresQuirks() {
+        Sql2o sql2o = new Sql2o("jdbc:postgresql://ec2-174-129-255-39.compute-1.amazonaws.com:5432/d3skt4bqgja2e3", "snyyswuszfttjt", "dea49ed6668afa28f043a5189349b4b31c661f40acd4bdd9a91d0593490d39ab", new PostgresQuirks() {
             {
                 // make sure we use default UUID converter.
                 converters.put(UUID.class, new UUIDConverter());
