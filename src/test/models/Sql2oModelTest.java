@@ -239,14 +239,11 @@ class Sql2oModelTest {
 
     @org.junit.jupiter.api.Test
     void newEnemyBoss(){
-        model.revivingEnemies();
         List<Enemy> enemy;
-//        Connection conn = sql2o.open();
-//        conn.createQuery()
         enemy = model.newEnemy(10);
-        assertEquals("BOSS : Bone Master", enemy.get(0).enemy_name);
-        assertEquals("BOSS : Dragon King", enemy.get(1).enemy_name);
-        assertEquals("BOSS : Lich King", enemy.get(2).enemy_name);
+        assertEquals("BOSS : Bone Master", enemy.get(1).enemy_name);
+        assertEquals("BOSS : Dragon King", enemy.get(2).enemy_name);
+        assertEquals("BOSS : Lich King", enemy.get(0).enemy_name);
     }
 
     @org.junit.jupiter.api.Test
@@ -297,5 +294,13 @@ class Sql2oModelTest {
         conn.commit();
         boolean check = model.is_username_used("example username");
         assertEquals(false, check);
+    }
+
+    @org.junit.jupiter.api.Test
+    void getHighScore() {
+        model.createPlayer("49921d6e-e210-4f68-ad7a-afac266278cb", player.get().username, "example full name", "example password", 1000);
+        Connection conn = sql2o.open();
+        List<Players> highscores = model.get_high_score();
+        assertEquals(1000,highscores.get(0).high_score);
     }
 }
