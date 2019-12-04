@@ -131,7 +131,7 @@ public class Player {
         int healthPotionsPointsSub = 0;
         int poisonPotionsPointsAdd = 0;
         int poisonPotionsPointsSub = 0;
-        int healthPoints = health * 137;
+        int healthPoints = health * 67;
         if(hpPotsUsed <= 2){
             healthPotionsPointsAdd = 316;
         }else{
