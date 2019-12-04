@@ -245,29 +245,41 @@ class Sql2oModelTest {
 //        conn.createQuery()
         enemy = model.newEnemy(10);
         assertEquals("BOSS : Bone Master", enemy.get(0).enemy_name);
-        assertEquals("BOSS :Lich King", enemy.get(1).enemy_name);
-        assertEquals("BOSS : Titan", enemy.get(2).enemy_name);
+        assertEquals("BOSS : Dragon King", enemy.get(1).enemy_name);
+        assertEquals("BOSS : Lich King", enemy.get(2).enemy_name);
     }
 
     @org.junit.jupiter.api.Test
     void killEnemy(){
         model.revivingEnemies();
-        model.killedEnemy("Lich King");
+        model.killedEnemy("BOSS : Lich King");
         Connection conn = sql2o.open();
         List<String> enemy;
-        enemy = conn.createQuery("select already_killed from enemies where enemy_name = 'Lich King'")
+        enemy = conn.createQuery("select already_killed from enemies where enemy_name = 'BOSS : Lich King'")
                 .executeAndFetch(String.class);
         assertEquals("true", enemy.get(0));
     }
 
     @org.junit.jupiter.api.Test
     void reviveEnemy(){
-        model.killedEnemy("Lich King");
+        model.killedEnemy("BOSS : Lich King");
         model.revivingEnemies();
         List<String> enemy;
         Connection conn = sql2o.open();
-        enemy = conn.createQuery("select already_killed from enemies where enemy_name = 'Lich King'")
+        enemy = conn.createQuery("select already_killed from enemies where enemy_name = 'BOSS : Lich King'")
                 .executeAndFetch(String.class);
         assertEquals("false", enemy.get(0));
+    }
+
+    @org.junit.jupiter.api.Test
+    void updatingHighscores() {
+        model.createPlayer("49921d6e-e210-4f68-ad7a-afac266278cb", player.get().username, "example full name", "example password", 0);
+        model.updateHighscore(1000, "49921d6e-e210-4f68-ad7a-afac266278cb" );
+        List<String> highscore;
+        Connection conn = sql2o.open();
+        highscore = conn.createQuery("select high_score from players where user_name = :username")
+                .addParameter("username", "example username")
+                .executeAndFetch(String.class);
+        assertEquals(1000, model.checkHighscore("49921d6e-e210-4f68-ad7a-afac266278cb"));
     }
 }
