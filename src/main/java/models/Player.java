@@ -147,6 +147,7 @@ public class Player {
         int battlesWonPoints = battles_won * 69;
         int total_score = healthPoints + coinPoints + healthPotionsPointsAdd - healthPotionsPointsSub + poisonPotionsPointsAdd - poisonPotionsPointsSub + critPoints + battlesWonPoints;
         return total_score;
+        //hi
     }
 
 }
