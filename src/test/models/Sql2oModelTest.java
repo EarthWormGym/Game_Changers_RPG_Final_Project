@@ -282,4 +282,20 @@ class Sql2oModelTest {
                 .executeAndFetch(String.class);
         assertEquals(1000, model.checkHighscore("49921d6e-e210-4f68-ad7a-afac266278cb"));
     }
+
+    @org.junit.jupiter.api.Test
+    void checkUsernameDoesExist() {
+        boolean check = model.is_username_used("example username");
+        assertEquals(true, check);
+    }
+
+    @org.junit.jupiter.api.Test
+    void checkUsernameDoesNotExist() {
+        Connection conn = sql2o.beginTransaction();
+        conn.createQuery("TRUNCATE TABLE players")
+                .executeUpdate();
+        conn.commit();
+        boolean check = model.is_username_used("example username");
+        assertEquals(false, check);
+    }
 }
